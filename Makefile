@@ -4,7 +4,7 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
 RM = rm -f
 
-SRCS_PATH = src/
+# SRCS_PATH = src/
 # LIBFT = include/libft/libft.a
 # LIBFT_PATH = include/libft/
 
@@ -13,10 +13,10 @@ PARSING = parsing
 # UTILS = utils logs ops_handling pipes 
 
 SRCS = $(addsuffix .c, $(addprefix src/main/, $(MAIN))) \
-	  $(addsuffix .c, $(addprefix src/parsing/, $(PARSING))) \
-	#   $(addsuffix .c, $(addprefix src/utils/, $(UTILS))) \
+	  $(addsuffix .c, $(addprefix src/parsing/, $(PARSING))) 
+#   $(addsuffix .c, $(addprefix src/utils/, $(UTILS))) \
 
-OBJS = $(SRCS:c=o)
+OBJS = $(SRCS:.c=.o)
 
 
 all: 	$(NAME)
@@ -24,15 +24,15 @@ all: 	$(NAME)
 
 
 $(NAME): $(OBJS)
-	-@$(MAKE) -C $(LIBFT_PATH)
-	-@$(CC) $(CFLAGS)  -o $@  -L. -lmlx -framework OpenGL -framework AppKit
+	-@$(CC) $(CFLAGS)  -o $@  $^ -L. -lmlx -framework OpenGL -framework AppKit
 # $^ $(LIBFT)
+# -@$(MAKE) -C $(LIBFT_PATH)
 	-@echo "$(GREEN)$(NAME) created!$(DEFAULT)"
 
 clean:
 	@$(RM) $(OBJS)
-# @make -C $(LIBFT_PATH)  clean
 	@echo "$(YELLOW)Object files deleted!$(DEFAULT)💯"
+# @make -C $(LIBFT_PATH)  clean
 
 fclean:	clean
 	@$(RM) $(NAME) 
