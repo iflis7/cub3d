@@ -31,7 +31,7 @@ $(NAME): $(OBJS)
 
 clean:
 	@$(RM) $(OBJS)
-	@make -C $(LIBFT_PATH)  clean
+# @make -C $(LIBFT_PATH)  clean
 	@echo "$(YELLOW)Object files deleted!$(DEFAULT)💯"
 
 fclean:	clean
