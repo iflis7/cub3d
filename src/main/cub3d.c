@@ -28,7 +28,6 @@ void hook(void *param)
 bool parsing_map(char *filename)
 {
 	int fd;
-
 	fd = open(filename, O_RDONLY);
 
 	if (fd <= 0)
