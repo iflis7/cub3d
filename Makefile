@@ -4,16 +4,19 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g 
 RM = rm -f
 
+# Minilibx
+MLX = mlx/
+
 # Detect OS and set flags
 UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Linux)
+ifeq ($(UNAME_S), Linux)
 	LINUX = -ldl -lglfw -pthread -lm
 	INC = -I include/
 	LIB_LINUX = mlx/libmlx42.a 
 	CLIBS = $(INC) $(LIB_LINUX) $(LINUX)
 endif
-ifeq ($(UNAME_S),Darwin)
-	CLIBS = -L. -lmlx OpenGL -framework AppKit
+ifeq ($(UNAME_S), Darwin)
+	CLIBS = mlx/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
 endif
 
 # Sources and objects
@@ -29,25 +32,26 @@ OBJS = $(SRCS:.c=.o)
 
 
 # Rules
-all: 	$(NAME)
-	@echo "BOOM 💥💥💥💥💥 $(NAME) Compiled! 💯 $(DEFAULT)"
+all: $(NAME)
+	-@$(MAKE) -C $(MLX)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) -o $@ $^ $(CLIBS)
-	@echo "$(GREEN)$(NAME) created!$(DEFAULT)"
-
-# $^ $(LIBFT)
+	-@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT) $(CLIBS)
 # @$(MAKE) -C $(LIBFT_PATH)
-	-@echo "$(GREEN)$(NAME) created!$(DEFAULT)"
+
+
+%.o: %.c
+	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 clean:
-	@$(RM) $(OBJS)
-	@echo "$(YELLOW)Object files deleted!$(DEFAULT)💯"
+	-@$(RM) $(OBJS)
+	@make -C $(MLX) clean
 # @make -C $(LIBFT_PATH)  clean
 
-fclean:	clean
-	@$(RM) $(NAME) 
-#  $(LIBFT) 
+
+fclean: clean
+	-@$(RM) $(NAME) 
+# $(LIBFT) $(NAME).dSYM
 
 re:		fclean all
 
