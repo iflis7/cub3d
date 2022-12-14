@@ -1,16 +1,25 @@
 NAME = cub3d
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra -g 
 RM = rm -f
 
-# SRCS_PATH = src/
-# LIBFT = include/libft/libft.a
-# LIBFT_PATH = include/libft/
+# Detect OS and set flags
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	LINUX = -ldl -lglfw -pthread -lm
+	INC = -I include/
+	LIB_LINUX = mlx/libmlx42.a 
+	CLIBS = $(INC) $(LIB_LINUX) $(LINUX)
+endif
+ifeq ($(UNAME_S),Darwin)
+	CLIBS = -L. -lmlx OpenGL -framework AppKit
+endif
 
+# Sources and objects
 MAIN = cub3d
 PARSING = parsing
-# UTILS = utils logs ops_handling pipes 
+# UTILS = utils logs
 
 SRCS = $(addsuffix .c, $(addprefix src/main/, $(MAIN))) \
 	  $(addsuffix .c, $(addprefix src/parsing/, $(PARSING))) 
@@ -19,14 +28,16 @@ SRCS = $(addsuffix .c, $(addprefix src/main/, $(MAIN))) \
 OBJS = $(SRCS:.c=.o)
 
 
+# Rules
 all: 	$(NAME)
 	@echo "BOOM 💥💥💥💥💥 $(NAME) Compiled! 💯 $(DEFAULT)"
 
-
 $(NAME): $(OBJS)
-	-@$(CC) $(CFLAGS)  -o $@  $^ -L. -lmlx -framework OpenGL -framework AppKit
+	@$(CC) $(CFLAGS) -o $@ $^ $(CLIBS)
+	@echo "$(GREEN)$(NAME) created!$(DEFAULT)"
+
 # $^ $(LIBFT)
-# -@$(MAKE) -C $(LIBFT_PATH)
+# @$(MAKE) -C $(LIBFT_PATH)
 	-@echo "$(GREEN)$(NAME) created!$(DEFAULT)"
 
 clean:
@@ -54,3 +65,10 @@ YELLOW 	= 	\033[1;33m
 DEFAULT = 	\033[0m
 
 COMMIT = $(shell date "+%d %B %T")
+
+# valgrind
+summary:
+	valgrind --leak-check=summary --trace-children=yes --track-fds=yes ./$(NAME)
+
+valgrind:
+	valgrind --leak-check=full --trace-children=yes --track-fds=yes ./$(NAME)
