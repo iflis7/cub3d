@@ -16,10 +16,13 @@ bool only_one(char *line)
 bool surrondered_by_wall(int fd)
 {
     char *tmp;
+    bool checker = false;
 
     tmp = get_next_line(fd);
     while (tmp)
     {
+        if (only_one(tmp))
+            checker = true;
         tmp = trim_space(tmp);
         if (tmp[0] != '1' || tmp[strlen(tmp) - 1] != '1')
             return (false);
@@ -27,6 +30,9 @@ bool surrondered_by_wall(int fd)
         if (!tmp)
             break;
     }
+    free(tmp);
+    if (!checker)
+        printErr("Map invalid.\n");
     return (true);
 }
 
@@ -53,10 +59,58 @@ bool check_map(int fd)
     return (true);
 }
 
+int number_rows(char *filename)
+{
+    int fd = open(filename, O_RDONLY);
+    char *line;
+    int count = 1;
+
+    line = get_next_line(fd);
+
+    while (line)
+    {
+        line = get_next_line(fd);
+        if (!line)
+            break;
+        count++;
+    }
+    free(line);
+    return (count);
+}
+
+bool check_last_line(char *filename)
+{
+    int fd = open(filename, O_RDONLY);
+    char *line;
+    int count = 0;
+    int rows = number_rows(filename);
+
+    line = get_next_line(fd);
+    while (line)
+    {
+
+        if (count == rows - 1)
+        {
+            line = trim_space(line);
+            while (*line)
+            {
+                if (*line != '1')
+                    printErr("Map invalid.\n");
+                line++;
+            }
+        }
+        count++;
+        line = get_next_line(fd);
+        if (!line)
+            break;
+    }
+    free(line);
+    return (true);
+}
+
 bool parsing_map(char *filename)
 {
     int fd;
-    // char *line;
 
     // check if path end with .cub
     if (strcmp(filename + strlen(filename) - 4, ".cub"))
@@ -68,5 +122,10 @@ bool parsing_map(char *filename)
 
     check_map(fd);
 
+    // check last line wall surrondered
+    check_last_line(filename);
+
     return (true);
 }
+
+// check last line wall surrondered
