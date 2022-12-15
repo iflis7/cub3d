@@ -28,10 +28,20 @@ void hook(void *param)
 bool parsing_map(char *filename)
 {
 	int fd;
-	fd = open(filename, O_RDONLY);
+	char *line;
 
+	// check if path end with .cub
+	if (strcmp(filename + strlen(filename) - 4, ".cub"))
+		printErr("Map invalid.\n");
+
+	fd = open(filename, O_RDONLY);
 	if (fd <= 0)
 		printErr("Map invalid.\n");
+
+	line = get_next_line(fd);
+	printf("%s", line);
+
+	// checking if map is valid
 
 	return (true);
 }

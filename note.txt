@@ -13,3 +13,6 @@
  git add */filename              -> Stages *(All files) or by given file name
  git commit -m "commit message"  -> Commits staged files
  git push                        -> Pushes to your current branch
+
+# Map
+ Must be surrounded by walls
