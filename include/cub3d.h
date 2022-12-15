@@ -32,4 +32,12 @@ typedef struct s_cub3d
 
 } t_cub3d;
 
+bool parsing_map(char *filename);
+bool space(int c);
+char *trim_space(char *str);
+bool only_one(char *line);
+bool surrondered_by_wall(int fd);
+void printErr(char *str);
+bool check_map(int fd);
+
 #endif

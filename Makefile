@@ -22,15 +22,14 @@ endif
 # Sources and objects
 MAIN = cub3d
 PARSING = parsing
-# UTILS = utils logs
+UTILS = utils 
 
 SRCS = $(addsuffix .c, $(addprefix src/main/, $(MAIN))) \
-	  $(addsuffix .c, $(addprefix src/parsing/, $(PARSING))) \
-	  get_next_line/get_next_line.c \
-	  get_next_line/get_next_line_utils.c 
+	   $(addsuffix .c, $(addprefix src/parsing/, $(PARSING))) \
+	   $(addsuffix .c, $(addprefix src/utils/, $(UTILS))) \
+	   get_next_line/get_next_line.c \
+	   get_next_line/get_next_line_utils.c 
 	  
-#   $(addsuffix .c, $(addprefix src/utils/, $(UTILS))) \
-
 OBJS = $(SRCS:.c=.o)
 
 
