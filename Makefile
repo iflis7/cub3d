@@ -4,6 +4,10 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g 
 RM = rm -f
 
+# Libft
+LIBFT = include/libft/libft.a
+LIBFT_PATH = include/libft/
+
 # Minilibx
 MLX = mlx/
 
@@ -22,36 +26,36 @@ endif
 # Sources and objects
 MAIN = cub3d
 PARSING = parsing
-# UTILS = utils logs
+UTILS = utils 
 
 SRCS = $(addsuffix .c, $(addprefix src/main/, $(MAIN))) \
-	  $(addsuffix .c, $(addprefix src/parsing/, $(PARSING))) 
-#   $(addsuffix .c, $(addprefix src/utils/, $(UTILS))) \
+	   $(addsuffix .c, $(addprefix src/parsing/, $(PARSING))) \
+	   $(addsuffix .c, $(addprefix src/utils/, $(UTILS))) \
 
+	  
 OBJS = $(SRCS:.c=.o)
 
 
 # Rules
 all: $(NAME)
-	-@$(MAKE) -C $(MLX)
+	-@$(MAKE) -C $(MLX) 
 
 $(NAME): $(OBJS)
+	-@$(MAKE) -C $(LIBFT_PATH)
 	-@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT) $(CLIBS)
-# @$(MAKE) -C $(LIBFT_PATH)
 
 
 %.o: %.c
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 clean:
-	-@$(RM) $(OBJS)
+	@$(RM) $(OBJS)
+	@make -C $(LIBFT_PATH)  clean
 	@make -C $(MLX) clean
-# @make -C $(LIBFT_PATH)  clean
 
 
 fclean: clean
-	-@$(RM) $(NAME) 
-# $(LIBFT) $(NAME).dSYM
+	-@$(RM) $(NAME) $(LIBFT) $(NAME).dSYM
 
 re:		fclean all
 
