@@ -39,9 +39,9 @@ OBJS = $(SRCS:.c=.o)
 # Rules
 all: $(NAME)
 	-@$(MAKE) -C $(MLX) 
-	-@$(MAKE) -C $(LIBFT_PATH)
 
 $(NAME): $(OBJS)
+	-@$(MAKE) -C $(LIBFT_PATH)
 	-@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT) $(CLIBS)
 
 
