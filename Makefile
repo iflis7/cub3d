@@ -4,6 +4,10 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g 
 RM = rm -f
 
+# Libft
+LIBFT = include/libft/libft.a
+LIBFT_PATH = include/libft/
+
 # Minilibx
 MLX = mlx/
 
@@ -27,33 +31,31 @@ UTILS = utils
 SRCS = $(addsuffix .c, $(addprefix src/main/, $(MAIN))) \
 	   $(addsuffix .c, $(addprefix src/parsing/, $(PARSING))) \
 	   $(addsuffix .c, $(addprefix src/utils/, $(UTILS))) \
-	   get_next_line/get_next_line.c \
-	   get_next_line/get_next_line_utils.c 
+
 	  
 OBJS = $(SRCS:.c=.o)
 
 
 # Rules
 all: $(NAME)
-	-@$(MAKE) -C $(MLX)
+	-@$(MAKE) -C $(MLX) 
+	-@$(MAKE) -C $(LIBFT_PATH)
 
 $(NAME): $(OBJS)
 	-@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT) $(CLIBS)
-# @$(MAKE) -C $(LIBFT_PATH)
 
 
 %.o: %.c
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 clean:
-	-@$(RM) $(OBJS)
+	@$(RM) $(OBJS)
+	@make -C $(LIBFT_PATH)  clean
 	@make -C $(MLX) clean
-# @make -C $(LIBFT_PATH)  clean
 
 
 fclean: clean
-	-@$(RM) $(NAME) 
-# $(LIBFT) $(NAME).dSYM
+	-@$(RM) $(NAME) $(LIBFT) $(NAME).dSYM
 
 re:		fclean all
 
