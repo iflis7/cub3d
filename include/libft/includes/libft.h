@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 17:10:04 by eardingh          #+#    #+#             */
-/*   Updated: 2022/12/21 06:16:13 by hsaadi           ###   ########.fr       */
+/*   Updated: 2022/12/21 12:43:40 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int					ft_intlen(int *arr);
 char				*get_next_line(int fd);
 int					ft_str_chr_num(char *str, int c);
 char				*ft_strjoin_free(char *s1, char *s2);
+int	ft_iswhitespace(int c);
 
 /***		*Functions*		***/
 int					ft_isalpha(int c);

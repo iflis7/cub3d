@@ -28,11 +28,14 @@ int	main(int argc, char **argv)
 		ft_msg_err("No map given.");
 	if (argc > 2)
 		ft_msg_err("Too many arguments.");
-	cub = malloc(sizeof(t_cub));
+	cub = init_cub();
 	// cub->mlx = mlx_init(WIDTH, HEIGHT, "CUB3D", true);
 	// if (!cub->mlx)
 	// 	exit(EXIT_FAILURE);
+	// (void)argv;
+	// (void)cub;
 	parse_map(cub, argv[1]);
+	print_map_lines(cub->map->line);
 	// g_img = mlx_new_image(cub->mlx, 128, 128);
 	// memset(g_img->pixels, 255, g_img->width * g_img->height * sizeof(int));
 	// mlx_image_to_window(cub->mlx, g_img, 0, 0);

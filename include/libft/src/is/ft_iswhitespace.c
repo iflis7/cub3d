@@ -6,14 +6,14 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 08:23:21 by hsaadi            #+#    #+#             */
-/*   Updated: 2022/10/30 09:48:00 by hsaadi           ###   ########.fr       */
+/*   Updated: 2022/12/21 12:46:41 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-int	ft_ismetachar(int c)
+int	ft_iswhitespace(int c)
 {
-	return (c == '|' || c == '&' || c == '(' || c == ')' || c == ';' /  
-        || c == '<' || c == '>' || c == ' ' || c == '\t' || c == '\n');') ;
+	return (c == '\t' || c == '\n' || c == '\v' \
+                || c == '\f' || c == '\r' || c == ' ');
 }

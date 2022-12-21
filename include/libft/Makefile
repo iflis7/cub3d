@@ -8,7 +8,7 @@ HEADER = $(addsuffix .h, $(addprefix includes/, ))
 
 SRCS_PATH = src/
 
-FTIS = alnum alpha ascii digit print metachar \
+FTIS = alnum alpha ascii digit print metachar whitespace \
 
 FTSKIP = space spacenl char chars
 FTLST = add_back add_front clear delone iter last map new size
