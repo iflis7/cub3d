@@ -1,36 +1,53 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+/* *************** ***************           *************** *************** */
+/*                                  INCLUDES                                 */
+/* *************** ***************           *************** *************** */
+# include "../include/utils.h"
 # include "../mlx/include/MLX42/MLX42.h"
+# include "libft/includes/libft.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <unistd.h>
-#include <string.h>
 
 // # include "libft.h"
 // # include "get_next_line.h"
 
-#define WIDTH 1920
-#define HEIGHT 1080
+/* *************** ***************           *************** *************** */
+/*                                   MACROS                                  */
+/* *************** ***************           *************** *************** */
+# define WIDTH 1920
+# define HEIGHT 1080
 
-
-typedef struct s_cub3d
+/* *************** ***************           *************** *************** */
+/*                                   STRUCTS                                 */
+/* *************** ***************           *************** *************** */
+typedef struct s_cub
 {
-	// t_map	*map;
-	void	*mlx;
-	void	*win;
-	mlx_image_t	*g_img;
+	char		*name;
+	mlx_t		*mlx;
+	mlx_image_t	*win;
+	mlx_image_t	*north;
+	mlx_image_t	*east;
+	mlx_image_t	*south;
+	mlx_image_t	*west;
+	// t_map		*map;
 	// t_cam	*cam;
 	// t_mouse	*mouse;
 
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+}				t_cub;
 
-}			t_cub3d;
+/* *************** ***************           *************** *************** */
+/*                                 FUNCTIONS                                 */
+/* *************** ***************           *************** *************** */
+
+/* ***************  INIT  *************** */
+
+/* ***************  PARSING  *************** */
+bool			parse_map(t_cub *cub, char *file);
 
 #endif
