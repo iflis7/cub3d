@@ -1,5 +1,5 @@
 #ifndef UTILS_H
-#define UTILS_H
+# define UTILS_H
 
 /* *************** ***************           *************** *************** */
 /*                                 FUNCTIONS                                 */
@@ -9,6 +9,6 @@
 int	ft_msg_err(char *error);
 
 /* ***************  MAP_UTILS  *************** */
-int access_test(char *file, char *ext);
+int	access_test(char *file, char *ext);
 
 #endif

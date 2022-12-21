@@ -21,10 +21,9 @@ void	hook(void *param)
 
 int	main(int argc, char **argv)
 {
-	(void)argc;
-	// (void)argv;
 	t_cub	*cub;
 
+	// (void)argv;
 	if (argc < 2)
 		ft_msg_err("No map given.");
 	if (argc > 2)
