@@ -35,11 +35,9 @@ bool	first_and_last(char *line)
 	{
 		if (!valid_elements(line[i]) && !ft_iswhitespace(line[i]))
 			return (false);
-		if (ft_iswhitespace(line[i]))
-			i++;
 		else if (ft_isdigit(line[i]) && !flag && line[i] == '1')
 			flag = 1;
-		else if (ft_isdigit(line[len]) && line[len] != '1')
+		else if (i == len && ft_isdigit(line[len]) && line[len] != '1')
 			return (false);
 		i++;
 	}
@@ -59,26 +57,3 @@ bool	only_ones(char *line)
 	}
 	return (true);
 }
-
-// char get_img_path(char *line)
-// {
-// 	int i;
-// 	int j;
-// 	char *path;
-
-// 	i = 0;
-// 	j = 0;
-// 	while (line[i] && line[i] != ' ')
-// 		i++;
-// 	while (line[i] && ft_iswhitespace(line[i]))
-// 		i++;
-// 	path = malloc(sizeof(char) * (strlen(line) - i + 1));
-// 	while (line[i])
-// 	{
-// 		path[j] = line[i];
-// 		i++;
-// 		j++;
-// 	}
-// 	path[j] = '\0';
-// 	return (path);
-// }

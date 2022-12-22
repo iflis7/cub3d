@@ -7,10 +7,9 @@ bool	map_is_valid(t_map *map)
 	line = map->line;
 	while (line)
 	{
-		if ((!line->prev && !only_ones(line->content)) || (!line->next
-				&& !only_ones(line->content)))
+		if ((!line->prev || !line->next) && !only_ones(line->content))
 			return (false);
-		else if (((line->prev || line->next) && !first_and_last(line->content)) )
+		else if (((line->prev && line->next) && !first_and_last(line->content)))
 			return (false);
 		line = line->next;
 	}
