@@ -22,6 +22,8 @@ int					ft_msg_err(char *error);
 int					access_test(char *file, char *ext);
 bool				is_empty_line(char *line);
 int					is_map_line(char *line);
+
+
 void				print_map_lines(t_line *line);
 
 /* ***************  LST_OPS  *************** */

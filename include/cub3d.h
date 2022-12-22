@@ -7,7 +7,7 @@
 # include "../include/utils.h"
 # include "../mlx/include/MLX42/MLX42.h"
 # include "libft/includes/libft.h"
-# include "utils.h"
+// # include "utils.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
@@ -36,7 +36,7 @@ typedef struct s_map
 	char		*west;
 	char		*east;
 	char		*floor;
-	char		*ceiling;
+	char		*ceil;
 }				t_map;
 
 typedef struct s_cub
@@ -60,5 +60,11 @@ typedef struct s_cub
 bool			parse_map(t_cub *cub, char *file);
 
 t_cub			*init_cub(void);
+
+
+bool		manage_settings(t_map *map, char *line); // TODO move to utils.h
+bool	only_ones(char *line);
+
+bool	first_and_last(char *line);
 
 #endif

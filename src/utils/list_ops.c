@@ -28,8 +28,7 @@ void	ft_line_add_back(t_line **lst, char *line)
 	t_line	*last;
 
 	new = ft_linenew(line);
-    last = ft_last_line(*lst);
-
+	last = ft_last_line(*lst);
 	if (!last->content)
 	{
 		*lst = new;
@@ -38,8 +37,7 @@ void	ft_line_add_back(t_line **lst, char *line)
 	else
 	{
 		last->next = new;
-        (*lst)->place++;
+        new->prev = last;
+		(*lst)->place++;
 	}
 }
-
-
