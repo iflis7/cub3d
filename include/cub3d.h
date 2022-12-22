@@ -1,36 +1,70 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+/* *************** ***************           *************** *************** */
+/*                                  INCLUDES                                 */
+/* *************** ***************           *************** *************** */
+# include "../include/utils.h"
 # include "../mlx/include/MLX42/MLX42.h"
+# include "libft/includes/libft.h"
+// # include "utils.h"
 # include <fcntl.h>
 # include <math.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <unistd.h>
-#include <string.h>
 
-// # include "libft.h"
-// # include "get_next_line.h"
+/* *************** ***************           *************** *************** */
+/*                                   MACROS                                  */
+/* *************** ***************           *************** *************** */
+# define WIDTH 1920
+# define HEIGHT 1080
 
-#define WIDTH 1920
-#define HEIGHT 1080
+/* *************** ***************           *************** *************** */
+/*                                   STRUCTS                                 */
+/* *************** ***************           *************** *************** */
 
-
-typedef struct s_cub3d
+typedef struct s_map
 {
-	// t_map	*map;
-	void	*mlx;
-	void	*win;
-	mlx_image_t	*g_img;
+	int			width;
+	int			height;
+	t_line		*line;
+	char 		*north; // TODO change to mlx_image_t once the image is loaded
+	char		*south;
+	char		*west;
+	char		*east;
+	char		*floor;
+	char		*ceil;
+}				t_map;
+
+typedef struct s_cub
+{
+	// char		*name;
+	mlx_t		*mlx;
+	mlx_image_t	*win;
+	t_map		*map;
 	// t_cam	*cam;
 	// t_mouse	*mouse;
 
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+}				t_cub;
 
-}			t_cub3d;
+/* *************** ***************           *************** *************** */
+/*                                 FUNCTIONS                                 */
+/* *************** ***************           *************** *************** */
+
+/* ***************  INIT  *************** */
+
+/* ***************  PARSING  *************** */
+bool			parse_map(t_cub *cub, char *file);
+
+t_cub			*init_cub(void);
+
+
+bool		manage_settings(t_map *map, char *line); // TODO move to utils.h
+bool	only_ones(char *line);
+
+bool	first_and_last(char *line);
 
 #endif
