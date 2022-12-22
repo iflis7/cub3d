@@ -35,11 +35,9 @@ bool	first_and_last(char *line)
 	{
 		if (!valid_elements(line[i]) && !ft_iswhitespace(line[i]))
 			return (false);
-		if (ft_iswhitespace(line[i]))
-			i++;
 		else if (ft_isdigit(line[i]) && !flag && line[i] == '1')
 			flag = 1;
-		else if (ft_isdigit(line[len]) && line[len] != '1')
+		else if (i == len && ft_isdigit(line[len]) && line[len] != '1')
 			return (false);
 		i++;
 	}
