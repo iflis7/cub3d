@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2022/12/22 21:45:34 by hsaadi           ###   ########.fr       */
+/*   Updated: 2022/12/22 23:52:20 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	access_test(char *file, char *ext)
 		free(str);
 		ft_msg_err("Wrong file type: ext <map | texture>");
 	}
-	fd = open(str, O_RDONLY, X_OK);
+	fd = open(str, O_RDONLY);
 	if (fd == -1)
 	{
 		free(str);

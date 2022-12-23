@@ -1,5 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
+/*   Updated: 2022/12/23 00:02:30 by hsaadi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
+/**
+ * @brief Init the line struct
+ * 
+ * @return t_line* The line struct
+ */
 t_line	*init_map_line()
 {
 	t_line	*line;
@@ -14,6 +31,12 @@ t_line	*init_map_line()
 	return (line);
 }
 
+/**
+ * @brief Init the map struct
+ * 
+ * @return t_map* The map struct
+ */
+
 t_map	*init_map(void)
 {
 	t_map	*map;
@@ -26,6 +49,12 @@ t_map	*init_map(void)
 	map->line = init_map_line();
 	return (map);
 }
+
+/**
+ * @brief Init the cub struct
+ * 
+ * @return t_cub* The cub struct
+ */
 
 t_cub	*init_cub(void)
 {
@@ -41,7 +70,11 @@ t_cub	*init_cub(void)
 	return (cub);
 }
 
-
+/**
+ * @brief Init the game with the given cub struct
+ * 
+ * @param cub The cub struct
+ */
 void	init_game(t_cub *cub)
 {
 	cub->fov = (80 * M_PI / 180);

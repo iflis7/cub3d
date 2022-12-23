@@ -1,7 +1,5 @@
 #include "../../include/cub3d.h"
 
-// mlx_image_t	*g_img;
-
 // void	hook(void *param)
 // {
 // 	mlx_t	*mlx;
@@ -27,9 +25,9 @@ void	main_hook(void *param)
 	while (i < WIDTH * HEIGHT)
 	{
 		if (i < WIDTH * (HEIGHT / 2))
-			mlx_put_pixel(cub->win, i, 0, -518127361);
+			mlx_put_pixel(cub->win, i, 0, 148603);
 		else if (i > WIDTH * (HEIGHT / 2))
-			mlx_put_pixel(cub->win, i, 0,  -597425921);
+			mlx_put_pixel(cub->win, i, 0, -597425921);
 		i++;
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
@@ -40,7 +38,6 @@ int	main(int argc, char **argv)
 {
 	t_cub	*cub;
 
-	// (void)argv;
 	if (argc < 2)
 		ft_msg_err("No map given.");
 	if (argc > 2)
@@ -48,16 +45,16 @@ int	main(int argc, char **argv)
 	cub = init_cub();
 	// (void)argv;
 	// (void)cub;
-	parse_map(cub, argv[1]); 
+	parse_map(cub, argv[1]);
 	init_game(cub);
-	// print_map_lines(cub->map->line);
-	// printf("map->north %s\n", cub->map->north);
-	// printf("map->south %s\n", cub->map->south);
-	// printf("map->east %s\n", cub->map->east);
-	// printf("map->west %s\n", cub->map->west);
-	// printf("map->floor %s\n", cub->map->floor);
-	// printf("map->ceil %s\n", cub->map->ceil);
-	mlx_loop_hook(cub->mlx, &main_hook, &cub);
+	print_map_lines(cub->map->line);
+	printf("map->north %s\n", cub->map->north);
+	printf("map->south %s\n", cub->map->south);
+	printf("map->east %s\n", cub->map->east);
+	printf("map->west %s\n", cub->map->west);
+	printf("map->floor %s\n", cub->map->floor);
+	printf("map->ceil %s\n", cub->map->ceil);
+	mlx_loop_hook(cub->mlx, &main_hook, cub);
 	mlx_loop(cub->mlx);
 	mlx_terminate(cub->mlx);
 	return (EXIT_SUCCESS);
