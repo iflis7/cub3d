@@ -34,8 +34,19 @@ t_cub	*init_cub(void)
 	cub = malloc(sizeof(t_cub));
 	if (!cub)
 		ft_msg_err("Error: malloc failed.");
-	cub->mlx = NULL;
-	cub->win = NULL;
+	cub->mlx = mlx_init(WIDTH, HEIGHT, "CUB3D", true);
+	if (!cub->mlx)
+		exit(EXIT_FAILURE);
 	cub->map = init_map();
 	return (cub);
+}
+
+
+void	init_game(t_cub *cub)
+{
+	cub->fov = (80 * M_PI / 180);
+	cub->ray_depth = 30;
+	cub->win = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_HIDDEN);
+	mlx_image_to_window(cub->mlx, cub->win, 0, 0);
 }
