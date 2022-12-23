@@ -23,8 +23,9 @@ int					access_test(char *file, char *ext);
 bool				is_empty_line(char *line);
 int					is_map_line(char *line);
 
-
+/* ***************  PARSE_UTILS  *************** */
 void				print_map_lines(t_line *line);
+char				*get_identifier(char *line, char *str);
 
 /* ***************  LST_OPS  *************** */
 t_line				*ft_linenew(char *content);

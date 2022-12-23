@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO assets/wolftextures.png
+SO assets/wolftextures1.png
+WE assets/wolftextures2.png
+EA assets/wolftextures3.png
 
 F 220,100,0
 C 225,30,0

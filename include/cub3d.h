@@ -25,13 +25,12 @@
 /* *************** ***************           *************** *************** */
 /*                                   STRUCTS                                 */
 /* *************** ***************           *************** *************** */
-
 typedef struct s_map
 {
 	int			width;
 	int			height;
 	t_line		*line;
-	char 		*north; // TODO change to mlx_image_t once the image is loaded
+	char *north; // TODO change to mlx_image_t once the image is loaded
 	char		*south;
 	char		*west;
 	char		*east;
@@ -47,6 +46,9 @@ typedef struct s_cub
 	t_map		*map;
 	// t_cam	*cam;
 	// t_mouse	*mouse;
+	float		player_angle;
+	float		fov;
+	int			ray_depth;
 
 }				t_cub;
 
@@ -55,16 +57,15 @@ typedef struct s_cub
 /* *************** ***************           *************** *************** */
 
 /* ***************  INIT  *************** */
-
+void	init_game(t_cub *cub);
 /* ***************  PARSING  *************** */
 bool			parse_map(t_cub *cub, char *file);
-
 t_cub			*init_cub(void);
 
+bool			manage_settings(t_map *map, char *line);
+// TODO move to utils.h
+bool			only_ones(char *line);
 
-bool		manage_settings(t_map *map, char *line); // TODO move to utils.h
-bool	only_ones(char *line);
-
-bool	first_and_last(char *line);
+bool			first_and_last(char *line);
 
 #endif
