@@ -1,5 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
+/*   Updated: 2022/12/22 21:49:10 by hsaadi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
+/**
+ * @brief Check if the charactere is a valid element
+ * 
+ * @param c The charactere to check. Char must be 1, 0, N, E,
+	W or S. Letter must be unique.
+ * @return true returns true if the charactere is valid
+ * @return false returns false if the charactere is not valid
+ */
 bool	valid_elements(char c)
 {
 	static char	news[4];
@@ -22,6 +42,13 @@ bool	valid_elements(char c)
 		return (false);
 }
 
+/**
+ * @brief Check if the first and last charactere of the line are 1
+ * 
+ * @param line The line to check
+ * @return true Returns true if the first and last charactere are 1
+ * @return false Returns false if the first and last charactere are not 1
+ */
 bool	first_and_last(char *line)
 {
 	int	i;
@@ -44,6 +71,13 @@ bool	first_and_last(char *line)
 	return (true);
 }
 
+/**
+ * @brief Check if the line is composed only of 1
+ * 
+ * @param line The line to check
+ * @return true Returns true if the line is composed only of 1
+ * @return false Returns false if the line is not composed only of 1
+ */
 bool	only_ones(char *line)
 {
 	int	i;
@@ -58,6 +92,14 @@ bool	only_ones(char *line)
 	return (true);
 }
 
+/**
+ * @brief Get the identifier object from the line like : "NO ./path/to/no.xpm"
+ * 
+ * @param line The line to check
+
+	* @return Char*  Returns the path if the line is a valid map line or the RGB value
+ * @return Null Returns NULL if the line is not a valid map line
+ */
 char	*get_identifier(char *line, char *str)
 {
 	int	i;
