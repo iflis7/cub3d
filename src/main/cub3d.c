@@ -36,6 +36,12 @@ int	main(int argc, char **argv)
 	// (void)cub;
 	parse_map(cub, argv[1]);
 	print_map_lines(cub->map->line);
+	printf("map->north %s\n", cub->map->north);
+	printf("map->south %s\n", cub->map->south);
+	printf("map->east %s\n", cub->map->east);
+	printf("map->west %s\n", cub->map->west);
+	// printf("map->floor %s\n", cub->map->floor);
+	// printf("map->ceil %s\n", cub->map->ceil);
 	// g_img = mlx_new_image(cub->mlx, 128, 128);
 	// memset(g_img->pixels, 255, g_img->width * g_img->height * sizeof(int));
 	// mlx_image_to_window(cub->mlx, g_img, 0, 0);

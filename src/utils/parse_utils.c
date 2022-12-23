@@ -57,3 +57,21 @@ bool	only_ones(char *line)
 	}
 	return (true);
 }
+
+char	*get_identifier(char *line, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (line && line[i] && ft_iswhitespace(line[i]))
+		i++;
+	if (!strncmp(&line[i], str, strlen(str)))
+	{
+		i += strlen(str);
+		while (ft_iswhitespace(line[i]))
+			i++;
+		return (&line[i]);
+	}
+	else
+		return (NULL);
+}

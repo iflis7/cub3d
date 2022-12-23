@@ -25,7 +25,6 @@
 /* *************** ***************           *************** *************** */
 /*                                   STRUCTS                                 */
 /* *************** ***************           *************** *************** */
-
 typedef struct s_map
 {
 	int			width;
@@ -58,13 +57,12 @@ typedef struct s_cub
 
 /* ***************  PARSING  *************** */
 bool			parse_map(t_cub *cub, char *file);
-
 t_cub			*init_cub(void);
 
+bool			manage_settings(t_map *map, char *line);
+// TODO move to utils.h
+bool			only_ones(char *line);
 
-bool		manage_settings(t_map *map, char *line); // TODO move to utils.h
-bool	only_ones(char *line);
-
-bool	first_and_last(char *line);
+bool			first_and_last(char *line);
 
 #endif
