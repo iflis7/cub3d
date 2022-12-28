@@ -70,6 +70,6 @@ bool			only_ones(char *line);
 bool			first_and_last(char *line);
 
 /* ***************  COLOR  *************** */
-void			static_load_color(UINT *c, char *line);
+void			load_color(UINT *c, char *line);
 
 #endif
