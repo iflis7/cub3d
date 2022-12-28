@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2022/12/22 21:49:10 by hsaadi           ###   ########.fr       */
+/*   Updated: 2022/12/28 16:21:25 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,12 @@ bool	only_ones(char *line)
 	* @return Char*  Returns the path if the line is a valid map line or the RGB value
  * @return Null Returns NULL if the line is not a valid map line
  */
-char	*get_identifier(char *line, char *str)
+char	*get_identifier(char *line_in, char *str)
 {
 	int	i;
 
 	i = 0;
+	char *line = ft_strtrim(line_in, "\n");
 	while (line && line[i] && ft_iswhitespace(line[i]))
 		i++;
 	if (!strncmp(&line[i], str, strlen(str)))
@@ -115,5 +116,8 @@ char	*get_identifier(char *line, char *str)
 		return (&line[i]);
 	}
 	else
+	{
+		free(line);
 		return (NULL);
+	}
 }

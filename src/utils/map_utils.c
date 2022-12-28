@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2022/12/22 23:52:20 by hsaadi           ###   ########.fr       */
+/*   Updated: 2022/12/28 16:14:20 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,11 @@ bool	manage_settings(t_map *map, char *line)
 	else if (access_test(get_identifier(line, "EA"), ".png"))
 		map->east = get_identifier(line, "EA");
 	else if (get_identifier(line, "F"))         // TODO add color check
-		map->floor = get_identifier(line, "F"); // TODO convert the color to hex
+		// map->floor = (UINT *)get_identifier(line, "F"); // TODO convert the color to hex
+		static_load_color(&map->floor, get_identifier(line, "F"));
 	else if (get_identifier(line, "C"))
-		map->ceil = get_identifier(line, "C"); // TODO convert the color to hex
+	// 	map->ceil = (UINT *)get_identifier(line, "C"); // TODO convert the color to hex
+		static_load_color(&map->ceil, get_identifier(line, "C"));
 	else
 		return (false);
 	return (true);

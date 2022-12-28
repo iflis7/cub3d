@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2022/12/23 00:02:30 by hsaadi           ###   ########.fr       */
+/*   Updated: 2022/12/28 16:05:28 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ t_map	*init_map(void)
 		ft_msg_err("Error: malloc failed.");
 	map->width = 0;
 	map->height = 0;
+	map->ceil = 0;
+	map->floor = 0;
+	map->north = NULL;
+	map->south = NULL;
+	map->west = NULL;
+	map->east = NULL;
 	map->line = init_map_line();
 	return (map);
 }
