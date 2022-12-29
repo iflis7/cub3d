@@ -34,8 +34,8 @@ typedef struct s_map
 	char		*south;
 	char		*west;
 	char		*east;
-	char		*floor;
-	char		*ceil;
+	UINT		floor;
+	UINT		ceil;
 }				t_map;
 
 typedef struct s_cub
@@ -57,7 +57,8 @@ typedef struct s_cub
 /* *************** ***************           *************** *************** */
 
 /* ***************  INIT  *************** */
-void	init_game(t_cub *cub);
+void			init_game(t_cub *cub);
+
 /* ***************  PARSING  *************** */
 bool			parse_map(t_cub *cub, char *file);
 t_cub			*init_cub(void);
@@ -67,5 +68,8 @@ bool			manage_settings(t_map *map, char *line);
 bool			only_ones(char *line);
 
 bool			first_and_last(char *line);
+
+/* ***************  COLOR  *************** */
+void			load_color(UINT *c, char *line);
 
 #endif

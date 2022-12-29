@@ -25,9 +25,9 @@ void	main_hook(void *param)
 	while (i < WIDTH * HEIGHT)
 	{
 		if (i < WIDTH * (HEIGHT / 2))
-			mlx_put_pixel(cub->win, i, 0, 148603);
+			mlx_put_pixel(cub->win, i, 0, cub->map->ceil);
 		else if (i > WIDTH * (HEIGHT / 2))
-			mlx_put_pixel(cub->win, i, 0, -597425921);
+			mlx_put_pixel(cub->win, i, 0, cub->map->floor);
 		i++;
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
@@ -47,13 +47,13 @@ int	main(int argc, char **argv)
 	// (void)cub;
 	parse_map(cub, argv[1]);
 	init_game(cub);
-	print_map_lines(cub->map->line);
-	printf("map->north %s\n", cub->map->north);
-	printf("map->south %s\n", cub->map->south);
-	printf("map->east %s\n", cub->map->east);
-	printf("map->west %s\n", cub->map->west);
-	printf("map->floor %s\n", cub->map->floor);
-	printf("map->ceil %s\n", cub->map->ceil);
+	// print_map_lines(cub->map->line);
+	// printf("map->north %s\n", cub->map->north);
+	// printf("map->south %s\n", cub->map->south);
+	// printf("map->east %s\n", cub->map->east);
+	// printf("map->west %s\n", cub->map->west);
+	printf("map->floor %d\n", cub->map->floor);
+	printf("map->ceil %d\n", cub->map->ceil);
 	mlx_loop_hook(cub->mlx, &main_hook, cub);
 	mlx_loop(cub->mlx);
 	mlx_terminate(cub->mlx);

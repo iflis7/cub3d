@@ -4,6 +4,9 @@
 # include "cub3d.h"
 # include <stdbool.h>
 
+# define UINT unsigned int
+# define UNCH unsigned char
+
 typedef struct s_line
 {
 	char *content; // map line
