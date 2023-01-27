@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2022/12/28 16:32:56 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/01/27 17:01:11 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param ext The extension of the file to check
  * @return int Returns 1 if the file is valid, 0 if not
  */
-int	access_test(char *file, char *ext)
+int	access_test(char *file, char *ext) //TODO make sure nothing passes if not .cub
 {
 	int		fd;
 	char	*str;
