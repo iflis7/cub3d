@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/01/27 17:01:11 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/01/30 11:45:56 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,13 @@ int	is_map_line(char *line)
  * 
  * @param line The first line (node) of the map
  */
-void	print_map_lines(t_line *line)
+void	print_map_lines(t_mini_m *mini_m)
 {
 	printf("\n ----------- Here is the map motherfuckers ----------- \n\n");
-	while (line)
+	while (mini_m)
 	{
-		printf("%s\n", line->content);
-		line = line->next;
+		printf("%s\n", mini_m->line);
+		mini_m = mini_m->next;
 	}
 	printf("\n ----------- No More map motherfuckers ----------- \n\n");
 }

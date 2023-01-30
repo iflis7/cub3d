@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2022/12/22 22:03:43 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/01/30 11:43:24 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,17 @@
  */
 bool	map_is_valid(t_map *map)
 {
-	t_line	*line;
+	t_mini_m	*mini_m;
 
-	line = map->line;
-	while (line)
+	mini_m = map->mini_m;
+	while (mini_m)
 	{
-		if ((!line->prev || !line->next) && !only_ones(line->content))
+		if ((!mini_m->prev || !mini_m->next) && !only_ones(mini_m->line))
 			return (false);
-		else if (((line->prev && line->next) && !first_and_last(line->content)))
+		else if (((mini_m->prev && mini_m->next)
+					&& !first_and_last(mini_m->line)))
 			return (false);
-		line = line->next;
+		mini_m = mini_m->next;
 	}
 	return (true);
 }
@@ -61,8 +62,8 @@ bool	store_map(t_cub *cub, int fd)
 	{
 		if (!is_empty_line(line))
 		{
-			if (is_map_line(line) == 1)
-				ft_line_add_back(&cub->map->line, line);
+			if (is_map_line(line) == 1) // TODO add check for Alpha in case (A1001001)
+				ft_mini_m_add_back(&cub->map->mini_m, line);
 			else if (is_map_line(line) == 2)
 				manage_settings(cub->map, line);
 		}
@@ -84,7 +85,7 @@ bool	parse_map(t_cub *cub, char *file)
 {
 	int	fd;
 
-	if (!access_test(file, ".cub"))
+	if (!access_test(file, ".cub")) // TODO fix the .cub.cub
 		return (ft_msg_err("Map file not found."));
 	fd = open(file, O_RDONLY);
 	if (!store_map(cub, fd))

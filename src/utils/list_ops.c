@@ -1,43 +1,44 @@
 #include "../../include/cub3d.h"
 
-t_line	*ft_linenew(char *content)
+t_mini_m	*ft_mini_mnew(char *line)
 {
-	t_line	*line;
+	t_mini_m	*mini_m;
 
-	line = malloc(sizeof(t_line));
-	if (!line)
+	mini_m = malloc(sizeof(t_mini_m));
+	if (!mini_m)
 		return (NULL);
-	line->content = content;
-	line->next = NULL;
-	line->prev = NULL;
-	return (line);
+	mini_m->line = line;
+	mini_m->next = NULL;
+	mini_m->prev = NULL;
+	return (mini_m);
 }
 
-t_line	*ft_last_line(t_line *lst)
+t_mini_m	*ft_last_mini_m(t_mini_m *mini_m)
 {
-	if (!lst)
+	if (!mini_m)
 		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	while (mini_m->next)
+		mini_m = mini_m->next;
+	return (mini_m);
 }
 
-void	ft_line_add_back(t_line **lst, char *line)
+void	ft_mini_m_add_back(t_mini_m **mini_m, char *line)
 {
-	t_line	*new;
-	t_line	*last;
+	t_mini_m	*new;
+	t_mini_m	*last;
 
-	new = ft_linenew(line);
-	last = ft_last_line(*lst);
-	if (!last->content)
+	new = ft_mini_mnew(line);
+
+	last = ft_last_mini_m(*mini_m);
+	if (!last->line)
 	{
-		*lst = new;
-		(*lst)->place++;
+		*mini_m = new;
+		(*mini_m)->place++;
 	}
 	else
 	{
 		last->next = new;
         new->prev = last;
-		(*lst)->place++;
+		(*mini_m)->place++;
 	}
 }

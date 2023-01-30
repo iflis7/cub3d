@@ -38,24 +38,25 @@ int	main(int argc, char **argv)
 {
 	t_cub	*cub;
 
-	if (argc < 2)
+	if (argc == 2)
+	{
+		cub = init_cub();
+		// (void)argv;
+		// (void)cub;
+		parse_map(cub, argv[1]);
+		init_game(cub);
+		// print_map_lines(cub->map->line);
+		// printf("map->north %s\n", cub->map->north);
+		// printf("map->south %s\n", cub->map->south);
+		// printf("map->east %s\n", cub->map->east);
+		// printf("map->west %s\n", cub->map->west);
+		printf("map->floor %d\n", cub->map->floor);
+		printf("map->ceil %d\n", cub->map->ceil);
+		mlx_loop_hook(cub->mlx, &main_hook, cub);
+		mlx_loop(cub->mlx);
+		mlx_terminate(cub->mlx);
+		return (EXIT_SUCCESS);
+	}
+	else
 		ft_msg_err("No map given.");
-	if (argc > 2)
-		ft_msg_err("Too many arguments.");
-	cub = init_cub();
-	// (void)argv;
-	// (void)cub;
-	parse_map(cub, argv[1]);
-	init_game(cub);
-	// print_map_lines(cub->map->line);
-	// printf("map->north %s\n", cub->map->north);
-	// printf("map->south %s\n", cub->map->south);
-	// printf("map->east %s\n", cub->map->east);
-	// printf("map->west %s\n", cub->map->west);
-	printf("map->floor %d\n", cub->map->floor);
-	printf("map->ceil %d\n", cub->map->ceil);
-	mlx_loop_hook(cub->mlx, &main_hook, cub);
-	mlx_loop(cub->mlx);
-	mlx_terminate(cub->mlx);
-	return (EXIT_SUCCESS);
 }

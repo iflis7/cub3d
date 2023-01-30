@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2022/12/28 16:05:28 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/01/30 11:18:06 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 /**
  * @brief Init the line struct
  * 
- * @return t_line* The line struct
+ * @return t_mini_m* The line struct
  */
-t_line	*init_map_line()
+t_mini_m	*init_map_line()
 {
-	t_line	*line;
+	t_mini_m	*mini_m;
 
-	line = malloc(sizeof(t_line));
-	if (!line)
+	mini_m = malloc(sizeof(t_mini_m));
+	if (!mini_m)
 		ft_msg_err("Error: malloc failed.");
-	line->content = NULL;
-	line->next = NULL;
-	line->prev = NULL;
-	line->place = 0;
-	return (line);
+	mini_m->line = NULL;
+	mini_m->next = NULL;
+	mini_m->prev = NULL;
+	mini_m->place = 0;
+	return (mini_m);
 }
 
 /**
@@ -52,7 +52,7 @@ t_map	*init_map(void)
 	map->south = NULL;
 	map->west = NULL;
 	map->east = NULL;
-	map->line = init_map_line();
+	map->mini_m = init_map_line();
 	return (map);
 }
 

@@ -7,13 +7,14 @@
 # define UINT unsigned int
 # define UNCH unsigned char
 
-typedef struct s_line
+typedef struct s_mini_m
 {
-	char *content; // map line
-	struct s_line	*next;
-	struct s_line	*prev;
+	char *line; // map line
+	struct s_mini_m	*next;
+	struct s_mini_m	*prev;
 	int				place;
-}					t_line;
+}					t_mini_m;
+
 /* *************** ***************           *************** *************** */
 /*                                 FUNCTIONS                                 */
 /* *************** ***************           *************** *************** */
@@ -27,12 +28,12 @@ bool				is_empty_line(char *line);
 int					is_map_line(char *line);
 
 /* ***************  PARSE_UTILS  *************** */
-void				print_map_lines(t_line *line);
+void				print_map_lines(t_mini_m *line);
 char				*get_identifier(char *line, char *str);
 
 /* ***************  LST_OPS  *************** */
-t_line				*ft_linenew(char *content);
-t_line				*ft_last_line(t_line *lst);
-void				ft_line_add_back(t_line **lst, char *line);
+t_mini_m			*ft_mini_mnew(char *line);
+t_mini_m			*ft_last_mini_m(t_mini_m *lst);
+void				ft_mini_m_add_back(t_mini_m **lst, char *line);
 
 #endif

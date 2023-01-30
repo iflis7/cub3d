@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/01/27 16:43:54 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/01/30 11:59:58 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,22 @@
  * @return true returns true if the charactere is valid
  * @return false returns false if the charactere is not valid
  */
-bool	valid_elements(char c)
+bool	valid_elements(char c) // TODO make sure that if no NEWS is avaialable,
+	// it returns invalid!
 {
-	static char	news[4];
+	static char news[1];
 
-	if ((c == '0' || c == '1') || (c == 'N' && news[0] != 'N') || (c == 'E'
-			&& news[1] != 'E') || (c == 'W' && news[2] != 'W') || (c == 'S'
-			&& news[3] != 'S'))
+	if ((c == '0' || c == '1') || ((c == 'N' || c == 'E' || c == 'W'
+				|| c == 'S') && news[0] == 0))
 	{
 		if (c == 'N')
 			news[0] = 'N';
 		else if (c == 'E')
-			news[1] = 'E';
+			news[0] = 'E';
 		else if (c == 'W')
-			news[2] = 'W';
+			news[0] = 'W';
 		else if (c == 'S')
-			news[3] = 'S';
+			news[0] = 'S';
 		return (true);
 	}
 	else
@@ -102,10 +102,11 @@ bool	only_ones(char *line)
  */
 char	*get_identifier(char *line_in, char *str)
 {
-	int	i;
+	int		i;
+	char	*line;
 
 	i = 0;
-	char *line = ft_strtrim(line_in, "\n");
+	line = ft_strtrim(line_in, "\n");
 	while (line && line[i] && ft_iswhitespace(line[i]))
 		i++;
 	if (!strncmp(&line[i], str, strlen(str)))

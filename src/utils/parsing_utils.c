@@ -31,7 +31,7 @@ bool	only_one(char *line)
 // 	bool	checker;
 
 // 	checker = false;
-// 	tmp = get_next_line(fd);
+// 	tmp = get_next_mini_m(fd);
 //     if (!tmp)
 //         printErr("Map invalid.\n");
 // 	while (tmp)
@@ -41,7 +41,7 @@ bool	only_one(char *line)
 // 		tmp = trim_space(tmp);
 // 		if (tmp[0] != '1' || tmp[strlen(tmp) - 1] != '1')
 // 			return (false);
-// 		tmp = get_next_line(fd);
+// 		tmp = get_next_mini_m(fd);
 // 	}
 // 	free(tmp);
 // 	if (!checker)
@@ -59,7 +59,7 @@ bool	only_one(char *line)
 // 	tmp = trim_space(tmp);
 // 	if (tmp[0] != '1' || tmp[strlen(tmp) - 1] != '1')
 // 		return (false);
-// 	tmp = get_next_line(fd);
+// 	tmp = get_next_mini_m(fd);
 
 // 	free(tmp);
 // 	if (!checker)
