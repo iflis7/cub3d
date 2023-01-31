@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/01/30 11:45:56 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/01/31 15:33:22 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 /**
  * @brief Check if the file is valid
- * 
+ *
  * @param file The path to the file to check
  * @param ext The extension of the file to check
  * @return int Returns 1 if the file is valid, 0 if not
  */
-int	access_test(char *file, char *ext) //TODO make sure nothing passes if not .cub
+int access_test(char *file, char *ext) // TODO make sure nothing passes if not .cub
 {
-	int		fd;
-	char	*str;
+	int fd;
+	char *str;
 
 	if (!file)
 		return (0);
@@ -47,14 +47,14 @@ int	access_test(char *file, char *ext) //TODO make sure nothing passes if not .c
 
 /**
  * @brief Check if the line is empty
- * 
+ *
  * @param line The line to check
  * @return bool Returns true if the line is  empty, false if not
  */
 
-bool	is_empty_line(char *line)
+bool is_empty_line(char *line)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (line[i])
@@ -67,21 +67,26 @@ bool	is_empty_line(char *line)
 }
 
 /**
- * @brief Checks if the line is a map line 
- * 
+ * @brief Checks if the line is a map line
+ *
  * @param line The line to check
  * @return int returns 1 if the line is a map line, 2 if it's a setting line
  */
-int	is_map_line(char *line)
+int is_map_line(char *line)
 {
-	int	i;
+	int i;
+	static int check;
+	check = 0;
 
 	i = 0;
 	while (line[i])
 	{
 		if (ft_isdigit(line[i]))
+		{
+			check = 1;
 			return (1);
-		else if (ft_isalpha(line[i]))
+		}
+		else if (ft_isalpha(line[i]) && !check)
 			return (2);
 		i++;
 	}
@@ -90,10 +95,10 @@ int	is_map_line(char *line)
 
 /**
  * @brief print the map lines
- * 
+ *
  * @param line The first line (node) of the map
  */
-void	print_map_lines(t_mini_m *mini_m)
+void print_map_lines(t_mini_m *mini_m)
 {
 	printf("\n ----------- Here is the map motherfuckers ----------- \n\n");
 	while (mini_m)
@@ -106,12 +111,12 @@ void	print_map_lines(t_mini_m *mini_m)
 
 /**
  * @brief Nabage setting lines and store them in the map struct
- * 
-* @param line The line to check and store. Check if it's a setting 
+ *
+* @param line The line to check and store. Check if it's a setting
 	line and if the path is valid then store it in the map struct.
  * @return bool Returns true if the line is a map line, false if not
  */
-bool	manage_settings(t_map *map, char *line)
+bool manage_settings(t_map *map, char *line)
 {
 	// TODO add access_test for the path
 	if (access_test(get_identifier(line, "NO"), ".png"))
@@ -124,11 +129,11 @@ bool	manage_settings(t_map *map, char *line)
 		map->east = get_identifier(line, "EA");
 	else if (get_identifier(line, "F")) // TODO add color check
 		// map->floor = (UINT *)get_identifier(line, "F");
-			// TODO convert the color to hex
+		// TODO convert the color to hex
 		load_color(&map->floor, get_identifier(line, "F"));
 	else if (get_identifier(line, "C"))
 		// 	map->ceil = (UINT *)get_identifier(line, "C");
-				// TODO convert the color to hex
+		// TODO convert the color to hex
 		load_color(&map->ceil, get_identifier(line, "C"));
 	else
 		return (false);
