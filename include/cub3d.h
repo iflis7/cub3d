@@ -35,6 +35,8 @@ typedef struct s_map
 	char		*west;
 	char		*east;
 	UINT		floor;
+	UINT		wall;
+	UINT		player;
 	UINT		ceil;
 }				t_map;
 

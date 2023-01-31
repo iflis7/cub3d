@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2022/12/28 16:05:28 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/01/31 16:00:01 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ t_map	*init_map(void)
 	map->height = 0;
 	map->ceil = 0;
 	map->floor = 0;
+	map->wall = 0;
+	map->player = 0;
 	map->north = NULL;
 	map->south = NULL;
 	map->west = NULL;

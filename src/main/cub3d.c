@@ -16,6 +16,9 @@
 // 		g_img->instances[0].x += 5;
 // }
 
+void	print_small_map(t_cub *cub);
+void	print_sqaure(t_cub *cub, uint32_t x, uint32_t y, uint32_t color);
+
 void	main_hook(void *param)
 {
 	unsigned int	i;
@@ -30,8 +33,55 @@ void	main_hook(void *param)
 			mlx_put_pixel(cub->win, i, 0, cub->map->floor);
 		i++;
 	}
+	print_small_map(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub->mlx);
+}
+
+void	print_sqaure(t_cub *cub, uint32_t x, uint32_t y, uint32_t color)
+{
+	size_t i = x * 64;
+	size_t j = y * 64;
+	while(j <= (y * 64) + 64)
+	{
+		i = x * 64;
+		mlx_put_pixel(cub->win, i, j, color);
+		while(i <= (x * 64) + 64)
+		{
+			mlx_put_pixel(cub->win, i, j, color);
+			i++;
+		}
+		j++;
+	}
+}
+
+void	print_small_map(t_cub *cub)
+{
+	t_line *line = cub->map->line;
+	int i;
+	int j = 0;
+
+	while(line->next)
+	{
+		i = 0;
+		// printf("s: %s", line->content);
+		while(line->content && line->content[i])
+		{
+			// printf("%c ", line->content[i]);
+			if(line->content[i] == '1')
+				print_sqaure(cub, i, j, 0);
+			else if(line->content[i] == '0')
+				print_sqaure(cub, i, j, 0);
+			else if(line->content[i] == 'S')
+				print_sqaure(cub, i, j, 0);
+			else
+				print_sqaure(cub, i, j, 0);
+			i++;
+		}
+		line = line->next;
+		j++;
+
+	}
 }
 
 int	main(int argc, char **argv)
@@ -47,6 +97,7 @@ int	main(int argc, char **argv)
 	// (void)cub;
 	parse_map(cub, argv[1]);
 	init_game(cub);
+	print_small_map(cub);
 	// print_map_lines(cub->map->line);
 	// printf("map->north %s\n", cub->map->north);
 	// printf("map->south %s\n", cub->map->south);
