@@ -1,19 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iswhitespace.c                                  :+:      :+:    :+:   */
+/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/30 08:23:21 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/01/31 17:00:13 by hsaadi           ###   ########.fr       */
+/*   Created: 2022/12/21 06:14:39 by hsaadi            #+#    #+#             */
+/*   Updated: 2022/12/21 06:14:54 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-int	ft_iswhitespace(int c)
+char	*ft_strjoin_free(char *s1, char *s2)
 {
-	return (c == '\t' || c == '\n' || c == '\v' \
-                || c == '\f' || c == '\r' || c == ' ');
+	char	*str;
+	size_t	i;
+
+	if (!s1)
+		s1 = ft_calloc(sizeof(char), 1);
+	if (!s1 || !s2)
+		return (NULL);
+	str = ft_calloc(sizeof(char), (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	i = 0;
+	while (s2[i])
+	{
+		str[ft_strlen(s1) + i] = s2[i];
+		i++;
+	}
+	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	free(s1);
+	return (str);
 }

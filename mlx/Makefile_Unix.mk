@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         ::::::::             #
-#    Makefile_Unix.mk                                   :+:    :+:             #
-#                                                      +:+                     #
-#    By: W2Wizard <w2.wizzard@gmail.com>              +#+                      #
-#                                                    +#+                       #
-#    Created: 2022/02/26 21:36:38 by W2Wizard      #+#    #+#                  #
-#    Updated: 2022/07/05 14:53:23 by jobvan-d      ########   odam.nl          #
+#                                                         :::      ::::::::    #
+#    Makefile_Unix.mk                                   :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/02/26 21:36:38 by W2Wizard          #+#    #+#              #
+#    Updated: 2022/12/21 05:20:26 by hsaadi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,17 +24,17 @@ RESET	:= \033[0m
 
 #//= Make Rules =//#
 $(NAME): $(OBJS)
-	@ar rc $@ $^
-	@echo "$(GREEN)$(BOLD)Done$(RESET)"
+	-@ar rc $@ $^
+	-@echo "$(GREEN)$(BOLD)Done$(RESET)"
 
 %.o: %.c $(HDRS)
-	@echo "$(GREEN)$(BOLD)Compiling:$(RESET) $(notdir $<)"
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
+	-@echo "$(GREEN)$(BOLD)Compiling:$(RESET) $(notdir $<)"
+	-@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 # Convert shaders to .c files
 $(SRC_DIR)/mlx_%_shader.c: $(SHADER_DIR)/default.%
-	@echo "$(GREEN)$(BOLD)Shader to C: $< -> $@$(RESET)"
-	@bash tools/compile_shader.sh $< > $@
+	-@echo "$(GREEN)$(BOLD)Shader to C: $< -> $@$(RESET)"
+	-@bash tools/compile_shader.sh $< > $@
 
 clean:
 	@echo "$(RED)Cleaning$(RESET)"

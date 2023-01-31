@@ -1,37 +1,72 @@
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
-#include "../mlx/include/MLX42/MLX42.h"
+/* *************** ***************           *************** *************** */
+/*                                  INCLUDES                                 */
+/* *************** ***************           *************** *************** */
+# include "../include/utils.h"
+# include "../mlx/include/MLX42/MLX42.h"
 # include "libft/includes/libft.h"
-#include <fcntl.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
+# include <fcntl.h>
+# include <math.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
 
+/* *************** ***************           *************** *************** */
+/*                                   MACROS                                  */
+/* *************** ***************           *************** *************** */
+# define WIDTH 1920
+# define HEIGHT 1080
 
-
-#define WIDTH 1920
-#define HEIGHT 1080
-
-typedef struct s_cub3d
+/* *************** ***************           *************** *************** */
+/*                                   STRUCTS                                 */
+/* *************** ***************           *************** *************** */
+typedef struct s_map
 {
-	// t_map	*map;
-	void *mlx;
-	void *win;
-	mlx_image_t *g_img;
-	// t_cam	*cam;
-	// t_mouse	*mouse;
+	int			width;
+	int			height;
+	t_mini_m	*mini_m;
+	char *north; // TODO change to mlx_image_t once the image is loaded
+	char		*south;
+	char		*west;
+	char		*east;
+	UINT		floor;
+	UINT		ceil;
+}				t_map;
 
-} t_cub3d;
+typedef struct s_cub
+{
+	mlx_t		*mlx;
+	mlx_image_t	*win;
+	t_map		*map;
 
-bool parsing_map(char *filename);
-bool space(int c);
-char *trim_space(char *str);
-bool only_one(char *line);
-bool surrondered_by_wall(int fd);
-void printErr(char *str);
-bool check_map(int fd);
+	float		player_angle;
+	float		fov;
+	int			ray_depth;
+
+}				t_cub;
+
+/* *************** ***************           *************** *************** */
+/*                                 FUNCTIONS                                 */
+/* *************** ***************           *************** *************** */
+
+/* ***************  INIT  *************** */
+void			init_game(t_cub *cub);
+
+/* ***************  PARSING  *************** */
+bool			parse_map(t_cub *cub, char *file);
+t_cub			*init_cub(void);
+
+bool			manage_settings(t_map *map, char *line);
+// TODO move to utils.h
+bool			only_ones(char *line);
+
+bool			first_and_last(char *line);
+
+/* ***************  COLOR  *************** */
+void			load_color(UINT *c, char *line);
 
 #endif

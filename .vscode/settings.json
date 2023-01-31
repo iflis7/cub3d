@@ -1,9 +1,16 @@
 {
+<<<<<<< HEAD
   "files.associations": {
     "__bit_reference": "c",
     "algorithm": "c",
     "bitset": "c",
     "chrono": "c",
     "unordered_map": "c"
+=======
+  "C_Cpp.errorSquiggles": "disabled",
+  "files.associations": {
+    "cub3d.h": "c",
+    "sstream": "c"
+>>>>>>> d5a6701ab1a919799a979c26d3812d47e670aaa2
   }
 }

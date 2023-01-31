@@ -24,9 +24,9 @@ ifeq ($(UNAME_S), Darwin)
 endif
 
 # Sources and objects
-MAIN = cub3d
+MAIN = cub3d init
 PARSING = parsing
-UTILS = utils 
+UTILS = utils logs map_utils list_ops parse_utils color
 
 SRCS = $(addsuffix .c, $(addprefix src/main/, $(MAIN))) \
 	   $(addsuffix .c, $(addprefix src/parsing/, $(PARSING))) \
