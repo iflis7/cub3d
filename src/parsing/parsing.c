@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/01/31 15:51:43 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/01/31 16:37:45 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ bool	store_map(t_cub *cub, int fd)
 	{
 		if (!is_empty_line(line))
 		{
-			if (is_map_line(line) == 1) // TODO add check for Alpha in case (A1001001)
+			if (is_map_line(line) == 1) 
 				ft_mini_m_add_back(&cub->map->mini_m, line);
 			else if (is_map_line(line) == 2)
 				manage_settings(cub->map, line);
-			else 
+			else if (is_map_line(line) == 3)
 			{
 				free(line);
 				return (false);
@@ -89,7 +89,7 @@ bool	parse_map(t_cub *cub, char *file)
 {
 	int	fd;
 
-	if (!access_test(file, ".cub")) // TODO fix the .cub.cub
+	if (!access_test(file, ".cub"))
 		return (ft_msg_err("Map file not found."));
 	fd = open(file, O_RDONLY);
 	if (!store_map(cub, fd))

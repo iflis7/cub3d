@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/01/31 15:33:22 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/01/31 16:37:55 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param ext The extension of the file to check
  * @return int Returns 1 if the file is valid, 0 if not
  */
-int access_test(char *file, char *ext) // TODO make sure nothing passes if not .cub
+int access_test(char *file, char *ext)
 {
 	int fd;
 	char *str;
@@ -75,19 +75,22 @@ bool is_empty_line(char *line)
 int is_map_line(char *line)
 {
 	int i;
-	static int check;
-	check = 0;
+	static int check[1];
 
 	i = 0;
 	while (line[i])
-	{
+	{	
+		while (ft_iswhitespace(line[i]))
+			i++;
 		if (ft_isdigit(line[i]))
 		{
-			check = 1;
+			check[0] = 1;
 			return (1);
 		}
-		else if (ft_isalpha(line[i]) && !check)
+		else if (ft_isalpha(line[i]) && !check[0])
 			return (2);
+		else 
+			return (3);
 		i++;
 	}
 	return (0);

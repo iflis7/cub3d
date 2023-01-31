@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/01/30 11:59:58 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/01/31 16:37:35 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @return true returns true if the charactere is valid
  * @return false returns false if the charactere is not valid
  */
-bool	valid_elements(char c) // TODO make sure that if no NEWS is avaialable,
+bool	valid_elements(char c)
 	// it returns invalid!
 {
 	static char news[1];
