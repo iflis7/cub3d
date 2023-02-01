@@ -26,7 +26,7 @@ endif
 # Sources and objects
 MAIN = cub3d init
 PARSING = parsing
-UTILS = utils logs map_utils list_ops parse_utils color
+UTILS = utils logs map_utils list_ops parse_utils color cast_utils move_utils
 
 SRCS = $(addsuffix .c, $(addprefix src/main/, $(MAIN))) \
 	   $(addsuffix .c, $(addprefix src/parsing/, $(PARSING))) \

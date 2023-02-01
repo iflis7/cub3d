@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/01/31 19:31:46 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/02/01 13:46:37 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,13 @@ bool	store_map(t_cub *cub, int fd)
 	{
 		if (!is_empty_line(line))
 		{
-			if (is_map_line(line) == 1) 
+			if (is_map_line(line) == 1)
+			{
 				ft_mini_m_add_back(&cub->map->mini_m, line);
+				cub->map->nb_lines++;
+				if ((int)strlen(line) > cub->map->max_line_len)
+					cub->map->max_line_len = strlen(line);
+			}
 			else if (is_map_line(line) == 2)
 				manage_settings(cub->map, line);
 			else if (is_map_line(line) == 3)

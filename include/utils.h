@@ -13,6 +13,7 @@ typedef struct s_mini_m
 	struct s_mini_m	*next;
 	struct s_mini_m	*prev;
 	int				place;
+
 }					t_mini_m;
 
 /* *************** ***************           *************** *************** */

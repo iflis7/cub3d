@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/01/30 11:18:06 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/02/01 13:51:33 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ t_map	*init_map(void)
 	map->south = NULL;
 	map->west = NULL;
 	map->east = NULL;
+	map->nb_lines = 1;
+	map->max_line_len = 0;
 	map->mini_m = init_map_line();
 	return (map);
 }
@@ -86,6 +88,7 @@ void	init_game(t_cub *cub)
 	cub->fov = (80 * M_PI / 180);
 	cub->ray_depth = 30;
 	cub->win = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+	// cub->player = mlx_new_image(cub->mlx, 16, 16);
 	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_HIDDEN);
 	mlx_image_to_window(cub->mlx, cub->win, 0, 0);
 }

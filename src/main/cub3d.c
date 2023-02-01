@@ -17,28 +17,37 @@
 // }
 
 
+// void move_hook(void *param)
+// {
+// 	t_cub *const cub = param;
+// 	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
+// 	{
+// 		if (cub->map->mini_m->line[(int)(cub->player->pos_x + cub->player->dir_x * cub->player->move_speed)] != '1')
+// 			cub->player->pos_x += cub->player->dir_x * cub->player->move_speed;
+// 		if (cub->map->mini_m->line[(int)(cub->player->pos_y + cub->player->dir_y * cub->player->move_speed)] != '1')
+// 			cub->player->pos_y += cub->player->dir_y * cub->player->move_speed;
+// 	}
+// 	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
+// 	{
+// 		if (cub->map->mini_m->line[(int)(cub->player->pos_x - cub->player->dir_x * cub->player->move_speed)] != '1')
+// 			cub->player->pos_x -= cub->player->dir_x * cub->player->move_speed;
+// 		if (cub->map->mini_m->line[(int)(cub->player->pos_y - cub->player->dir_y * cub->player->move_speed)] != '1')
+// 			cub->player->pos_y -= cub->player->dir_y * cub->player->move_speed;
+// 	}
+// 	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
+// 	{
+// 		if (cub->map->mini_m->line[(int)(cub->player->pos_x - cub->player->plane_x * cub->player->move_speed)] != '1')
+// 			cub->player->pos_x -= cub->player->plane_x * cub->player->move_speed;
+// 		if (cub->map->mini_m->line[(int)(cub->player->pos_y - cub->player->plane_y * cub->player->move_speed)] != '1')
+// 			cub->player->pos_y -= cub->player->plane_y * cub->player->move_speed;
+// 	}
+// 	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
+// 	{
+// 		if (cub->map->mini_m->line[(int)(cub->player->pos_x + cub->player->plane
+// }
 
 
-void	mini_map_hook(void *param)
-{
-	unsigned int	i;
 
-	t_cub *const cub = param;
-	i = 1200;
-	while (i < WIDTH * HEIGHT)
-	{
-		if (i < HEIGHT * (WIDTH / 2))
-			mlx_put_pixel(cub->win, i, 0, get_rgba(255,0,0,255));
-			// mlx_put_pixel(cub->win, i, 0, cub->map->ceil);
-		else if (i > HEIGHT * (WIDTH / 2))
-			mlx_put_pixel(cub->win, i, 0, get_rgba(255,255,255,255));
-			// mlx_put_pixel(cub->win, i, 0, cub->map->floor);
-		i++;
-	}
-	
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(cub->mlx);
-}
 
 void	main_hook(void *param)
 {
@@ -48,14 +57,17 @@ void	main_hook(void *param)
 	i = 0;
 	while (i < WIDTH * HEIGHT)
 	{
+		// printf("I:: %d\n", i);
 		if (i < HEIGHT * (WIDTH / 2))
-			mlx_put_pixel(cub->win, i, 0, get_rgba(255,255,255,255));
+			mlx_put_pixel(cub->win, i, 0, get_rgba(0,0,255,100));
 			// mlx_put_pixel(cub->win, i, 0, cub->map->ceil);
 		else if (i > HEIGHT * (WIDTH / 2))
-			mlx_put_pixel(cub->win, i, 0, get_rgba(255,0,0,255));
+			mlx_put_pixel(cub->win, i, 0, get_rgba(0,100,100,255));
 			// mlx_put_pixel(cub->win, i, 0, cub->map->floor);
 		i++;
 	}
+
+	print_mini_map(cub);
 	
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub->mlx);
@@ -67,6 +79,7 @@ int	main(int argc, char **argv)
 
 	if (argc == 2)
 	{
+		
 		cub = init_cub();
 		// (void)argv;
 		// (void)cub;
@@ -82,7 +95,8 @@ int	main(int argc, char **argv)
 		// mlx_put_pixel(cub->win, i, 0, get_rgba(255,0,0,255));
 
 		mlx_loop_hook(cub->mlx, &main_hook, cub);
-		mlx_loop_hook(cub->mlx, &mini_map_hook, cub);
+		// mlx_loop_hook(cub->mlx, &move_hook, cub);
+		// mlx_loop_hook(cub->mlx, &mini_map_hook, cub);
 
 		mlx_loop(cub->mlx);
 		mlx_terminate(cub->mlx);
