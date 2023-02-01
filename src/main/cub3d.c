@@ -16,6 +16,30 @@
 // 		g_img->instances[0].x += 5;
 // }
 
+
+
+
+void	mini_map_hook(void *param)
+{
+	unsigned int	i;
+
+	t_cub *const cub = param;
+	i = 1200;
+	while (i < WIDTH * HEIGHT)
+	{
+		if (i < HEIGHT * (WIDTH / 2))
+			mlx_put_pixel(cub->win, i, 0, get_rgba(255,0,0,255));
+			// mlx_put_pixel(cub->win, i, 0, cub->map->ceil);
+		else if (i > HEIGHT * (WIDTH / 2))
+			mlx_put_pixel(cub->win, i, 0, get_rgba(255,255,255,255));
+			// mlx_put_pixel(cub->win, i, 0, cub->map->floor);
+		i++;
+	}
+	
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(cub->mlx);
+}
+
 void	main_hook(void *param)
 {
 	unsigned int	i;
@@ -24,12 +48,15 @@ void	main_hook(void *param)
 	i = 0;
 	while (i < WIDTH * HEIGHT)
 	{
-		if (i < WIDTH * (HEIGHT / 2))
-			mlx_put_pixel(cub->win, i, 0, cub->map->ceil);
-		else if (i > WIDTH * (HEIGHT / 2))
-			mlx_put_pixel(cub->win, i, 0, cub->map->floor);
+		if (i < HEIGHT * (WIDTH / 2))
+			mlx_put_pixel(cub->win, i, 0, get_rgba(255,255,255,255));
+			// mlx_put_pixel(cub->win, i, 0, cub->map->ceil);
+		else if (i > HEIGHT * (WIDTH / 2))
+			mlx_put_pixel(cub->win, i, 0, get_rgba(255,0,0,255));
+			// mlx_put_pixel(cub->win, i, 0, cub->map->floor);
 		i++;
 	}
+	
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub->mlx);
 }
@@ -52,7 +79,11 @@ int	main(int argc, char **argv)
 		// printf("map->west %s\n", cub->map->west);
 		// printf("map->floor %d\n", cub->map->floor);
 		// printf("map->ceil %d\n", cub->map->ceil);
+		// mlx_put_pixel(cub->win, i, 0, get_rgba(255,0,0,255));
+
 		mlx_loop_hook(cub->mlx, &main_hook, cub);
+		mlx_loop_hook(cub->mlx, &mini_map_hook, cub);
+
 		mlx_loop(cub->mlx);
 		mlx_terminate(cub->mlx);
 		return (EXIT_SUCCESS);

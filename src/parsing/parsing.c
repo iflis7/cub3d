@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/01/31 16:37:45 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/01/31 19:31:46 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ bool	parse_map(t_cub *cub, char *file)
 	if (!store_map(cub, fd))
 	{
 		close(fd);
-		ft_msg_err("Invalid map.!");
+		ft_msg_err("Invalid map.");
 	}
 	close(fd);
 	if (!map_is_valid(cub->map))

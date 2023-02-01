@@ -69,4 +69,7 @@ bool			first_and_last(char *line);
 /* ***************  COLOR  *************** */
 void			load_color(UINT *c, char *line);
 
+
+UINT	get_rgba(int r, int g, int b, int a);
+
 #endif
