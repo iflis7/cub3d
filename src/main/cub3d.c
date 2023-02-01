@@ -40,7 +40,7 @@ void	main_hook(void *param)
 
 void	print_sqaure(t_cub *cub, uint32_t x, uint32_t y, uint32_t color)
 {
-	size_t i = x * 64;
+	size_t i = 0;
 	size_t j = y * 64;
 	while(j <= (y * 64) + 64)
 	{
@@ -53,6 +53,7 @@ void	print_sqaure(t_cub *cub, uint32_t x, uint32_t y, uint32_t color)
 		}
 		j++;
 	}
+	mlx_put_string(cub->mlx, "MINI-MAP", 120, 20);
 }
 
 void	print_small_map(t_cub *cub)
@@ -70,12 +71,12 @@ void	print_small_map(t_cub *cub)
 			// printf("%c ", line->content[i]);
 			if(line->content[i] == '1')
 				print_sqaure(cub, i, j, 0);
-			else if(line->content[i] == '0')
-				print_sqaure(cub, i, j, 0);
+			// else if(line->content[i] == '0')
+			// 	print_sqaure(cub, i, j, 0);
 			else if(line->content[i] == 'S')
-				print_sqaure(cub, i, j, 0);
+				print_sqaure(cub, i, j, 168746);
 			else
-				print_sqaure(cub, i, j, 0);
+				print_sqaure(cub, i, j, -167761);
 			i++;
 		}
 		line = line->next;
