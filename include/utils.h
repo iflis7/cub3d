@@ -12,6 +12,7 @@ typedef struct s_mini_m
 	char *line; // map line
 	struct s_mini_m	*next;
 	struct s_mini_m	*prev;
+	int				coord[4];
 	int				place;
 
 }					t_mini_m;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/02/01 13:46:37 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/02/03 11:59:00 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,22 @@
  * @param *map The map to check 
  * @return Bool Returns true if the map is valid, false if not
  */
-bool	map_is_valid(t_map *map)
+bool	map_is_valid(t_cub *cub)
 {
 	t_mini_m	*mini_m;
 
-	mini_m = map->mini_m;
+	mini_m = cub->map->mini_m;
 	while (mini_m)
 	{
 		if ((!mini_m->prev || !mini_m->next) && !only_ones(mini_m->line))
 			return (false);
 		else if (((mini_m->prev && mini_m->next)
-					&& !first_and_last(mini_m->line)))
+					&& !first_and_last(cub, mini_m->line)))
 			return (false);
 		mini_m = mini_m->next;
 	}
+	if(cub->p_dir == 0)
+		ft_msg_err("No Player Bitch!");
 	return (true);
 }
 
@@ -103,7 +105,7 @@ bool	parse_map(t_cub *cub, char *file)
 		ft_msg_err("Invalid map.");
 	}
 	close(fd);
-	if (!map_is_valid(cub->map))
+	if (!map_is_valid(cub))
 		return (ft_msg_err("Invalid map!"));
 	return (true);
 }

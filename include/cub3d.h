@@ -29,15 +29,15 @@ typedef struct s_map
 	int			width;
 	int			height;
 	t_mini_m	*mini_m;
-	char *north; // TODO change to mlx_image_t once the image is loaded
+	char		*north; // TODO change to mlx_image_t once the image is loaded
 	char		*south;
 	char		*west;
 	char		*east;
 	UINT		floor;
 	UINT		ceil;
-	int max_line_len;
-	int chunk_cub;
-	int nb_lines;
+	int			max_line_len;
+	int			chunk_cub;
+	int			nb_lines;
 }				t_map;
 
 typedef struct s_cub
@@ -45,8 +45,11 @@ typedef struct s_cub
 	mlx_t		*mlx;
 	mlx_image_t	*win;
 	t_map		*map;
-
+	
 	mlx_image_t *player;
+	size_t		 p_x;
+	size_t		 p_y;
+	char		p_dir;
 	float		player_angle;
 	float		fov;
 	int			ray_depth;
@@ -68,8 +71,9 @@ bool			manage_settings(t_map *map, char *line);
 // TODO move to utils.h
 bool			only_ones(char *line);
 
-bool			first_and_last(char *line);
-void    print_mini_map(t_cub *cub);
+bool			first_and_last(t_cub *cub, char *line);
+void		    print_mini_map(t_cub *cub);
+void			print_mini_p(mlx_image_t *win, uint32_t x, uint32_t y, uint32_t color);
 
 /* ***************  COLOR  *************** */
 void			load_color(UINT *c, char *line);
@@ -77,5 +81,6 @@ void			load_color(UINT *c, char *line);
 
 UINT	get_rgba(int r, int g, int b, int a);
 void	move_hook(void *param);
+void	moves_hook(void *param);
 
 #endif
