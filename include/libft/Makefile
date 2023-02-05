@@ -21,7 +21,7 @@ FTSUB = ft_substr ft_split
 FTTO = ft_tolower ft_toupper ft_atoi ft_itoa ft_char_to_base
 FTLEN = ft_intlen
 TOOLS = get_next_line
-TEST = play
+# TEST = play
 
 SRCS = $(addsuffix .c, $(addprefix $(SRCS_PATH)is/ft_is, $(FTIS))) \
 	$(addsuffix .c, $(addprefix $(SRCS_PATH)lst/ft_lst, $(FTLST))) \
@@ -32,7 +32,7 @@ SRCS = $(addsuffix .c, $(addprefix $(SRCS_PATH)is/ft_is, $(FTIS))) \
 	$(addsuffix .c, $(addprefix $(SRCS_PATH)to/, $(FTTO))) \
 	$(addsuffix .c, $(addprefix $(SRCS_PATH)len/, $(FTLEN))) \
 	$(addsuffix .c, $(addprefix $(SRCS_PATH)tools/, $(TOOLS))) \
-	$(addsuffix .c, $(addprefix $(/libft), $(TEST))) \
+	# $(addsuffix .c, $(addprefix $(/libft), $(TEST))) \
 
 OBJS		= $(SRCS:.c=.o)
 BONUS_OBJS		= $(BONUS_SRCS:.c=.o)

@@ -45,12 +45,13 @@ typedef struct s_cub
 	mlx_t		*mlx;
 	mlx_image_t	*win;
 	t_map		*map;
-	
 	mlx_image_t *player;
+	mlx_image_t *floor;
+	mlx_image_t *wall;
 	size_t		 p_x;
 	size_t		 p_y;
 	char		p_dir;
-	float		player_angle;
+	float		p_a;
 	float		fov;
 	int			ray_depth;
 
@@ -78,6 +79,11 @@ void			print_mini_p(mlx_image_t *win, uint32_t x, uint32_t y, uint32_t color);
 /* ***************  COLOR  *************** */
 void			load_color(UINT *c, char *line);
 
+/* ***************  MINI_MAP  *************** */
+bool	img_init(t_cub *cub);
+void	moves_hook(void *param);
+void	print_mini_map(t_cub *cub);
+void	print_square(mlx_image_t *win, uint32_t x, uint32_t y, uint32_t color);
 
 UINT	get_rgba(int r, int g, int b, int a);
 void	move_hook(void *param);
