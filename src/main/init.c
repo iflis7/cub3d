@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/02/03 11:56:27 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/02/10 12:54:45 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,10 @@ t_cub	*init_cub(void)
  */
 void	init_game(t_cub *cub)
 {
-	cub->fov = (80 * M_PI / 180);
+	cub->fov = M_PI / 3;
 	cub->ray_depth = 30;
+	get_p_angle(cub);
+	printf("cub->p_a:: %.2f\n", cub->p_a);
 	cub->win = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	// cub->player = mlx_new_image(cub->mlx, 16, 16);
 	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_HIDDEN);

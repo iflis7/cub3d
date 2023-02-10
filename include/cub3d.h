@@ -86,7 +86,9 @@ void	print_mini_map(t_cub *cub);
 void	print_square(mlx_image_t *win, uint32_t x, uint32_t y, uint32_t color);
 
 UINT	get_rgba(int r, int g, int b, int a);
-void	move_hook(void *param);
-void	moves_hook(void *param);
+void	move_p_hook(void *param);
+bool	get_p_angle(t_cub *cub);
+
+/* ***************  RAYCASTING  *************** */
 
 #endif
