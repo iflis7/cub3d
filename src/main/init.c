@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/02/10 12:54:45 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/02/12 22:25:30 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ t_cub	*init_cub(void)
 	cub = malloc(sizeof(t_cub));
 	if (!cub)
 		ft_msg_err("Error: malloc failed.");
+	cub->map = init_map();
 	cub->mlx = mlx_init(WIDTH, HEIGHT, "CUB3D", true);
 	if (!cub->mlx)
 		exit(EXIT_FAILURE);
-	cub->map = init_map();
 	cub->p_dir = 0;
 	return (cub);
 }
@@ -89,9 +89,12 @@ void	init_game(t_cub *cub)
 	cub->fov = M_PI / 3;
 	cub->ray_depth = 30;
 	get_p_angle(cub);
-	printf("cub->p_a:: %.2f\n", cub->p_a);
+	cub->pdx = cos(cub->p_a) * 5;
+	cub->pdy = cos(cub->p_a) * 5;
+	// printf("cub->pdx: %.2f\n", cub->pdx);
+	// printf("cub->p_a:: %.2f\n", cub->p_a);
 	cub->win = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	// cub->player = mlx_new_image(cub->mlx, 16, 16);
-	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_HIDDEN);
+	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_NORMAL);
 	mlx_image_to_window(cub->mlx, cub->win, 0, 0);
 }

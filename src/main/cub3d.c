@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/02/10 13:57:43 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/02/12 22:11:19 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	print_mini_map(t_cub *cub)
 	int			j;
 	int			dep;
 
-	dep = ((WIDTH / 16 / 2) - (cub->map->max_line_len) / 2);
+	dep = ((cub->mlx->width / 16 / 2) - (cub->map->max_line_len) / 2);
 	mini_m = cub->map->mini_m;
-	j = (HEIGHT / 16) - cub->map->nb_lines;
+	j = (cub->mlx->height / 16) - cub->map->nb_lines;
 	while (mini_m)
 	{
 		i = 0;
@@ -50,16 +50,22 @@ void	print_mini_map(t_cub *cub)
 
 void	main_hook(void *param)
 {
-	unsigned int	i;
+	int32_t	i;
+	int32_t	j;
 
-	t_cub *const cub = param;
+	t_cub *cub = param;
 	i = 0;
-	while (i < WIDTH * HEIGHT)
+	while (i < cub->mlx->width)
 	{
-		if (i < HEIGHT * (WIDTH / 2))
-			mlx_put_pixel(cub->win, i, 0, get_rgba(0, 0, 255, 100));
-		else if (i > HEIGHT * (WIDTH / 2))
-			mlx_put_pixel(cub->win, i, 0, get_rgba(0, 100, 100, 255));
+		j = 0;
+		while (j < cub->mlx->height)
+		{
+			if (j < cub->mlx->height / 2)
+				mlx_put_pixel(cub->win, i, j, get_rgba(0, 0, 255, 100));
+			else if (j > cub->mlx->height / 2)
+				mlx_put_pixel(cub->win, i, j, get_rgba(0, 100, 100, 255));
+			j++;
+		}
 		i++;
 	}
 	print_mini_map(cub);
@@ -81,8 +87,10 @@ int	main(int argc, char **argv)
 		cub->player = mlx_new_image(cub->mlx, 6, 6);
 		memset(cub->player->pixels, get_rgba(255, 0, 0, 255), 6 * 6
 				* sizeof(int));
-		mlx_image_to_window(cub->mlx, cub->player, 917, 1000);
+		mlx_image_to_window(cub->mlx, cub->player, cub->p_x, cub->p_y);
+		// mlx_image_to_window(cub->mlx, cub->player, 917, 1000);
 		mlx_loop_hook(cub->mlx, &move_p_hook, cub);
+		
 		mlx_loop(cub->mlx);
 		mlx_terminate(cub->mlx);
 		return (EXIT_SUCCESS);
