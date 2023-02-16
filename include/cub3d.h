@@ -97,4 +97,11 @@ bool			get_p_angle(t_cub *cub);
 
 /* ***************  RAYCASTING  *************** */
 
+
+
+void	get_pcoordinates(t_cub *cub);
+
+void	print_mini_map(t_cub *cub);
+
+
 #endif
