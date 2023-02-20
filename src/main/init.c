@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/02/03 11:56:27 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/02/07 14:47:28 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ t_cub	*init_cub(void)
 		exit(EXIT_FAILURE);
 	cub->map = init_map();
 	cub->p_dir = 0;
+	cub->p_x = -1;
+	cub->p_y = 0;
 	return (cub);
 }
 

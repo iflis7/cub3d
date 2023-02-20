@@ -6,14 +6,14 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:24:08 by loadjou           #+#    #+#             */
-/*   Updated: 2023/02/05 12:50:00 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/02/07 13:39:38 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 #define UTILS_H
 
-#include "../include/cub3d.h"
+#include "cub3d.h"
 #include <stdbool.h>
 
 #define UINT unsigned int
@@ -32,6 +32,9 @@ typedef struct s_mini_m
 /* *************** ***************           *************** *************** */
 /*                                 FUNCTIONS                                 */
 /* *************** ***************           *************** *************** */
+
+/* ***************  CAST_UTILS  *************** */
+// bool	get_p_angle(t_cub *cub, char c);
 
 /* ***************  LOGS  *************** */
 int ft_msg_err(char *error);

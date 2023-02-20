@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:49 by loadjou           #+#    #+#             */
-/*   Updated: 2023/02/05 14:06:17 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/02/09 11:03:37 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,42 @@ void	print_mini_p(mlx_image_t *win, uint32_t x, uint32_t y, uint32_t color)
 	}
 }
 
+bool	get_p_angle(t_cub *cub)
+{
+	t_mini_m	*temp;
+	int			i;
+	size_t		dep;
+	size_t		j;
 
+	dep = ((WIDTH / 16 / 2) - (cub->map->max_line_len) / 2);
+	j = (HEIGHT / 16) - cub->map->nb_lines;
+	temp = cub->map->mini_m;
+	while (temp)
+	{
+		i = 0;
+		while (temp->line[i])
+		{
+			// i = 0;
+			if (temp->line[i] == 'E' || temp->line[i] == 'W'
+				|| temp->line[i] == 'N' || temp->line[i] == 'S')
+			{
+				cub->p_x = (dep + i) * 16 * 4;
+				cub->p_y = j * 64 + 4;
+				if (temp->line[i] == 'E')
+					cub->p_a = 0;
+				else if (temp->line[i] == 'W')
+					cub->p_a = 180;
+				else if (temp->line[i] == 'N')
+					cub->p_a = 90;
+				else if (temp->line[i] == 'S')
+					cub->p_a = 270;
+				// dprintf(2, "p_a: %.1f\n", cub->p_a);
+				return (true);
+			}
+			i++;
+		}
+		temp = temp->next;
+		j++;
+	}
+	return (false);
+}
