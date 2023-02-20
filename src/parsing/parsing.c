@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/02/03 11:59:00 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/02/17 05:03:20 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ bool	map_is_valid(t_cub *cub)
 	{
 		if ((!mini_m->prev || !mini_m->next) && !only_ones(mini_m->line))
 			return (false);
-		else if (((mini_m->prev && mini_m->next)
-					&& !first_and_last(cub, mini_m->line)))
+		else if (((mini_m->prev && mini_m->next) && !first_and_last(cub,
+						mini_m->line)))
 			return (false);
 		mini_m = mini_m->next;
 	}
-	if(cub->p_dir == 0)
+	if (cub->p_dir == 0)
 		ft_msg_err("No Player Bitch!");
 	return (true);
 }
@@ -54,6 +54,7 @@ bool	store_map(t_cub *cub, int fd)
 {
 	char	*line;
 
+	// int		i = 0;
 	line = get_next_line(fd);
 	if (!line)
 	{
@@ -64,15 +65,21 @@ bool	store_map(t_cub *cub, int fd)
 	{
 		if (!is_empty_line(line))
 		{
+			// printf(" -------- Debbug! ----------\n");
 			if (is_map_line(line) == 1)
 			{
 				ft_mini_m_add_back(&cub->map->mini_m, line);
 				cub->map->nb_lines++;
+				// cub->map->mini_map[i++] = ft_strdup(line);
+				// printf("cub->map->nb_lines: %d \n", cub->map->nb_lines);
 				if ((int)strlen(line) > cub->map->max_line_len)
 					cub->map->max_line_len = strlen(line);
 			}
 			else if (is_map_line(line) == 2)
+			{
+				printf("Gheto!\n");
 				manage_settings(cub->map, line);
+			}
 			else if (is_map_line(line) == 3)
 			{
 				free(line);

@@ -30,6 +30,7 @@ typedef struct s_map
 {
 	int			width;
 	int			height;
+	char		**mini_map;
 	t_mini_m	*mini_m;
 	char *north; // TODO change to mlx_image_t once the image is loaded
 	char		*south;
@@ -38,6 +39,7 @@ typedef struct s_map
 	UINT		floor;
 	UINT		ceil;
 	int			max_line_len;
+	size_t		sq_size;
 	// int			chunk_cub;
 	int			nb_lines;
 }				t_map;
@@ -88,7 +90,7 @@ void			load_color(UINT *c, char *line);
 bool			img_init(t_cub *cub);
 void			moves_hook(void *param);
 void			print_mini_map(t_cub *cub);
-void			print_square(mlx_image_t *win, uint32_t x, uint32_t y,
+void			print_square(t_cub *cub, uint32_t x, uint32_t y,
 					uint32_t color);
 
 UINT			get_rgba(int r, int g, int b, int a);
@@ -102,6 +104,6 @@ bool			get_p_angle(t_cub *cub);
 void	get_pcoordinates(t_cub *cub);
 
 void	print_mini_map(t_cub *cub);
-
+void	print_line(mlx_image_t *win, uint32_t x, uint32_t y, uint32_t color);
 
 #endif
