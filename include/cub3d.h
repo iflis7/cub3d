@@ -19,8 +19,9 @@
 /*                                   MACROS                                  */
 /* *************** ***************           *************** *************** */
 # define WIDTH 1920
-# define HEIGHT 1080
-# define PI 3.14159
+// # define HEIGHT 1080
+
+# define HEIGHT 1000
 
 /* *************** ***************           *************** *************** */
 /*                                   STRUCTS                                 */
@@ -37,7 +38,6 @@ typedef struct s_map
 	UINT		floor;
 	UINT		ceil;
 	int			max_line_len;
-	int			chunk_cub;
 	int			nb_lines;
 }				t_map;
 
@@ -47,14 +47,14 @@ typedef struct s_cub
 	mlx_image_t	*win;
 	t_map		*map;
 	mlx_image_t	*player;
-	mlx_image_t	*floor;
-	mlx_image_t	*wall;
+	// mlx_image_t	*floor;
+	// mlx_image_t	*wall;
 	size_t		p_x;
 	size_t		p_y;
-	float		pdx;
-	float		pdy;
 	char		p_dir;
 	float		p_a;
+	float		pdx;
+	float		pdy;
 	float		fov;
 	int			ray_depth;
 
@@ -91,9 +91,16 @@ void			print_square(mlx_image_t *win, uint32_t x, uint32_t y,
 					uint32_t color);
 
 UINT			get_rgba(int r, int g, int b, int a);
-void			move_hook(void *param);
-void			moves_hook(void *param);
-/* ***************  CAST_UTILS  *************** */
+void			move_p_hook(void *param);
 bool			get_p_angle(t_cub *cub);
+
+/* ***************  RAYCASTING  *************** */
+
+
+
+void	get_pcoordinates(t_cub *cub);
+
+void	print_mini_map(t_cub *cub);
+
 
 #endif

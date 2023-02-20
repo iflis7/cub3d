@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:49 by loadjou           #+#    #+#             */
-/*   Updated: 2023/02/09 11:03:37 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/02/20 10:48:25 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	print_mini_p(mlx_image_t *win, uint32_t x, uint32_t y, uint32_t color)
 	}
 }
 
-bool	get_p_angle(t_cub *cub)
+/* bool	get_p_angle(t_cub *cub)
 {
 	t_mini_m	*temp;
 	int			i;
@@ -91,3 +91,4 @@ bool	get_p_angle(t_cub *cub)
 	}
 	return (false);
 }
+ */
