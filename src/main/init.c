@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/02/20 10:43:32 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/02/22 16:56:37 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,11 @@ t_cub	*init_cub(void)
 	cub->mlx = mlx_init(WIDTH, HEIGHT, "CUB3D", false);
 	if (!cub->mlx)
 		exit(EXIT_FAILURE);
+	
+	if(!cub->map->mini_map)
+		return NULL;
 	cub->p_dir = 0;
-	cub->p_x = -1;
-	cub->p_y = 0;
+	printf("One: %i ---  two %i \n", cub->mlx->width, cub->map->max_line_len);
 	return (cub);
 }
 
@@ -90,22 +92,39 @@ t_cub	*init_cub(void)
 void	init_game(t_cub *cub)
 {
 	// mlx_texture_t	*icon;
-
 	// icon = NULL;
+
+	cub->map->sq_size = fmin((0.2 * cub->mlx->width) / cub->map->max_line_len, (0.2 * cub->mlx->height) / cub->map->nb_lines);
+	if(cub->map->sq_size < 1) // TODO do a better check esti!!
+		exit(0);
+	cub->map->mini_map = ft_calloc(cub->map->nb_lines + 1, sizeof(char *));
 	cub->fov = M_PI / 3;
 	cub->ray_depth = 30;
 	get_p_angle(cub);
-	// printf("1Main cub->x:: %ld ---- cub->y:: %ld\n", cub->p_x, cub->p_y);
 	get_pcoordinates(cub);
-	// printf("2Main cub->x:: %ld ---- cub->y:: %ld\n", cub->p_x, cub->p_y);
-	cub->pdx = cos(cub->p_a) * 5;
-	cub->pdy = cos(cub->p_a) * 5;
+	// cub->pdx = cos(cub->p_a) * 5;
+	// cub->pdy = cos(cub->p_a) * 5;
 	cub->win = mlx_new_image(cub->mlx, cub->mlx->width, cub->mlx->height);
-	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_NORMAL);  // show the mouse on the window
+	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_NORMAL);
+	// show the mouse on the window
 	mlx_image_to_window(cub->mlx, cub->win, 0, 0);
+	// Init player
+	cub->player = mlx_new_image(cub->mlx, cub->map->sq_size / 4,
+			cub->map->sq_size / 4);
+	memset(cub->player->pixels, 255, cub->map->sq_size / 4
+			* cub->map->sq_size / 4 * sizeof(int));
+	mlx_image_to_window(cub->mlx, cub->player, cub->p_x, cub->p_y);
+	
+	// mlx_image_t *layer = mlx_new_image(cub->mlx, 500, 500);
+	// memset(layer->pixels, 100, 200 * 200 * sizeof(int));
+	// mlx_image_to_window(cub->mlx, layer, 500, 500);
 	// int fd =  open("assets/iflisen.png", O_RDONLY);
 	// printf("FD: %d\n", fd);
 	// icon = mlx_load_png("assets/iflisen.png");
 	// printf("icon: %p\n", icon);
 	// mlx_set_icon(cub->mlx, icon);
 }
+
+/*
+
+*/

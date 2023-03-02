@@ -6,7 +6,7 @@ int	fix_angle(t_cub *cub, int slice, int key)
 		cub->p_a += 360;
 	else if (cub->p_a > 359)
 		cub->p_a -= 360;
-	else 
+	else
 	// (cub->p_a > 0 && cub->p_a < 359)
 	{
 		if (key == 65)
@@ -37,52 +37,72 @@ void	rotate(t_cub *cub, int slice, int key)
 	cub->pdy = sin(degToRad(cub->p_a));
 }
 
-void adjust(int32_t *val, char flag)
+bool	collision(t_cub *cub)
+{
+	t_mini_m	*mini;
+
+	mini = cub->map->mini_m;
+	cub->p_x = cub->player->instances[0].x;
+	cub->p_y = cub->player->instances[0].y;
+	printf("---------------------%ld\n", cub->p_y);
+	while (mini)
+	{
+		if (cub->map->mini_m->line[cub->p_x / cub->map->sq_size] == '1')
+			return (false);
+	}
+	return (true);
+}
+
+void	adjust(t_cub *cub, int32_t *val, char flag)
 {
 	if (flag == 'a')
 	{
-		*val += 5;
+		*val += cub->map->sq_size / 4;
+		// collision(cub);
 	}
 	if (flag == 's')
 	{
-		*val -= 5;
+		*val -= cub->map->sq_size / 4;
 	}
 }
-
 
 void	move_p_hook(void *param)
 {
 	t_cub	*cub;
 
 	cub = (t_cub *)param;
+	// draw_ray(cub, 5);
+	printf("I get here000000000000000000000000\n");
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_UP))
 	{
-		adjust(&cub->player->instances[0].y, 's');
+		// cub->player->instances[0].y -= cub->map->sq_size / 4;
+		adjust(cub, &cub->player->instances[0].y, 's');
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_DOWN))
 	{
-		adjust(&cub->player->instances[0].y, 'a');
+		adjust(cub, &cub->player->instances[0].y, 'a');
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 	{
-		adjust(&cub->player->instances[0].x, 's');
+		adjust(cub, &cub->player->instances[0].x, 's');
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
 	{
-		adjust(&cub->player->instances[0].x, 'a');
+		adjust(cub, &cub->player->instances[0].x, 'a');
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
 	{
-		cub->p_a = fix_angle(cub, 5, MLX_KEY_A);
+		// cub->p_a = fix_angle(cub, 5, MLX_KEY_A);
 		cub->pdx = cos(degToRad(cub->p_a));
 		cub->pdy = -sin(degToRad(cub->p_a));
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
 	{
 		cub->p_a = fix_angle(cub, 5, MLX_KEY_D);
-		cub->pdx = cos(degToRad(cub->p_a));
-		cub->pdy = -sin(degToRad(cub->p_a));
+		// cub->pdx = cos(degToRad(cub->p_a));
+		// cub->pdy = -sin(degToRad(cub->p_a));
 	}
+	
 }
 
 bool	get_p_angle(t_cub *cub)
@@ -110,11 +130,9 @@ void	get_pcoordinates(t_cub *cub)
 	t_mini_m	*mini_m;
 	int			i;
 	int			j;
-	int			dep;
 
-	dep = ((cub->mlx->width / 16 / 2) - (cub->map->max_line_len) / 2);
 	mini_m = cub->map->mini_m;
-	j = (cub->mlx->height / 16) - cub->map->nb_lines;
+	j = 0;
 	while (mini_m)
 	{
 		i = 0;
@@ -122,10 +140,8 @@ void	get_pcoordinates(t_cub *cub)
 		{
 			if (strchr("NEWS", mini_m->line[i]))
 			{
-				cub->p_x = (dep + i) * 16 + 4;
-				cub->p_y = j * 16 + 4;
-				// printf("Coor:: X::%zu -- Coord:: Y::%zu --> I::%i\n", cub->p_x,
-						// cub->p_y, i);
+				cub->p_x = (i * cub->map->sq_size); // + (cub->map->sq_size
+				cub->p_y = (j * cub->map->sq_size); // + (cub->map->sq_size
 			}
 			i++;
 		}
@@ -134,3 +150,5 @@ void	get_pcoordinates(t_cub *cub)
 	}
 	// printf("Coor:: X::%zu -- Coord:: Y::%zu\n", cub->p_x, cub->p_y);
 }
+
+// bool check_colision()

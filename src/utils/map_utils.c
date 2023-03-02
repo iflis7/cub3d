@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/01/31 16:37:55 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/02/17 05:06:36 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
  * @param ext The extension of the file to check
  * @return int Returns 1 if the file is valid, 0 if not
  */
-int access_test(char *file, char *ext)
+int	access_test(char *file, char *ext)
 {
-	int fd;
-	char *str;
+	int		fd;
+	char	*str;
+	printf(" -------- access_test! ----------\n");
 
 	if (!file)
 		return (0);
@@ -52,9 +53,9 @@ int access_test(char *file, char *ext)
  * @return bool Returns true if the line is  empty, false if not
  */
 
-bool is_empty_line(char *line)
+bool	is_empty_line(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])
@@ -72,14 +73,14 @@ bool is_empty_line(char *line)
  * @param line The line to check
  * @return int returns 1 if the line is a map line, 2 if it's a setting line
  */
-int is_map_line(char *line)
+int	is_map_line(char *line)
 {
-	int i;
-	static int check[1];
+	int			i;
+	static int	check[1];
 
 	i = 0;
-	while (line[i])
-	{	
+	while (line && line[i])
+	{
 		while (ft_iswhitespace(line[i]))
 			i++;
 		if (ft_isdigit(line[i]))
@@ -88,8 +89,12 @@ int is_map_line(char *line)
 			return (1);
 		}
 		else if (ft_isalpha(line[i]) && !check[0])
+		{
+			printf(" -------- line[%i]%c\n", i, line[i]);
+			// i++;
 			return (2);
-		else 
+		}
+		else
 			return (3);
 		i++;
 	}
@@ -101,7 +106,7 @@ int is_map_line(char *line)
  *
  * @param line The first line (node) of the map
  */
-void print_map_lines(t_mini_m *mini_m)
+void	print_map_lines(t_mini_m *mini_m)
 {
 	printf("\n ----------- Here is the map motherfuckers ----------- \n\n");
 	while (mini_m)
@@ -119,26 +124,30 @@ void print_map_lines(t_mini_m *mini_m)
 	line and if the path is valid then store it in the map struct.
  * @return bool Returns true if the line is a map line, false if not
  */
-bool manage_settings(t_map *map, char *line)
+bool	manage_settings(t_map *map, char *line)
 {
 	// TODO add access_test for the path
 	if (access_test(get_identifier(line, "NO"), ".png"))
-		map->north = get_identifier(line, "NO");
-	else if (access_test(get_identifier(line, "SO"), ".png"))
-		map->south = get_identifier(line, "SO");
-	else if (access_test(get_identifier(line, "WE"), ".png"))
-		map->west = get_identifier(line, "WE");
-	else if (access_test(get_identifier(line, "EA"), ".png"))
-		map->east = get_identifier(line, "EA");
-	else if (get_identifier(line, "F")) // TODO add color check
-		// map->floor = (UINT *)get_identifier(line, "F");
-		// TODO convert the color to hex
-		load_color(&map->floor, get_identifier(line, "F"));
-	else if (get_identifier(line, "C"))
-		// 	map->ceil = (UINT *)get_identifier(line, "C");
-		// TODO convert the color to hex
-		load_color(&map->ceil, get_identifier(line, "C"));
-	else
-		return (false);
+	{
+		printf(" -------- Debbug! ----------\n");
+		map->north = "Mabla";
+		// map->north = get_identifier(line, "NO");
+	}
+	// else if (access_test(get_identifier(line, "SO"), ".png"))
+	// 	map->south = get_identifier(line, "SO");
+	// else if (access_test(get_identifier(line, "WE"), ".png"))
+	// 	map->west = get_identifier(line, "WE");
+	// else if (access_test(get_identifier(line, "EA"), ".png"))
+	// 	map->east = get_identifier(line, "EA");
+	// else if (get_identifier(line, "F")) // TODO add color check
+	// 	// map->floor = (UINT *)get_identifier(line, "F");
+	// 	// TODO convert the color to hex
+	// 	load_color(&map->floor, get_identifier(line, "F"));
+	// else if (get_identifier(line, "C"))
+	// 	// 	map->ceil = (UINT *)get_identifier(line, "C");
+	// 	// TODO convert the color to hex
+	// 	load_color(&map->ceil, get_identifier(line, "C"));
+	// else
+	// 	return (false);
 	return (true);
 }
