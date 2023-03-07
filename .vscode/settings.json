@@ -4,6 +4,8 @@
     "cub3d.h": "c",
     "sstream": "c",
     "utils.h": "c",
-    "type_traits": "c"
+    "type_traits": "c",
+    "cstring": "c",
+    "locale": "c"
   }
 }

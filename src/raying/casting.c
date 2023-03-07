@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/03/02 14:56:40 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/03/06 14:05:06 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ typedef struct    s_game
 
  */
 
-
-
 bool draw_dir_ray(t_cub *cub, float angle)
 {
 	// double angle = 0;
@@ -77,8 +75,8 @@ bool draw_dir_ray(t_cub *cub, float angle)
 	cub->ray_x = cub->player->instances[0].x;
 	cub->ray_y = cub->player->instances[0].y;
 	
-	cub->pdx = cos(angle) * 10000 - sin(angle) * 10000;
-	cub->pdy = sin(angle) * 10000 - cos(angle) * 10000;
+	cub->pdx = cos(angle) * 10 - sin(angle) * 10;
+	cub->pdy = sin(angle) * 10 - cos(angle) * 10;
 
 	max_value = fmax(fabs(cub->pdx), fabs(cub->pdy));
 	cub->pdx /= max_value;
@@ -121,6 +119,6 @@ void draw_ray(t_cub *cub, int length)
 	// 	draw_dir_ray(cub, -angle);
 	// 	angle += PI/72;
 	// }
-	// mlx_put_string(cub->mlx, ".", cub->player->instances[0].x, cub->player->instances[0].y);
+	mlx_put_string(cub->mlx, ".", cub->player->instances[0].x, cub->player->instances[0].y);
 }
 

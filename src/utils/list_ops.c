@@ -41,5 +41,4 @@ void	ft_mini_m_add_back(t_mini_m **mini_m, char *line)
         new->prev = last;
 		(*mini_m)->place++;
 	}
-	printf("Prin\n");
 }

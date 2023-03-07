@@ -72,37 +72,39 @@ void	move_p_hook(void *param)
 
 	cub = (t_cub *)param;
 	// draw_ray(cub, 5);
-	printf("I get here000000000000000000000000\n");
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_UP))
+		// mlx_put_string(cub->mlx, ".", cub->player->instances[0].x, cub->player->instances[0].y);
+	if(!is_wall(cub, cub->player->instances[0].x, cub->player->instances[0].y))
 	{
-		// cub->player->instances[0].y -= cub->map->sq_size / 4;
-		adjust(cub, &cub->player->instances[0].y, 's');
-	}
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_DOWN))
-	{
-		adjust(cub, &cub->player->instances[0].y, 'a');
-	}
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
-	{
-		adjust(cub, &cub->player->instances[0].x, 's');
-	}
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
-	{
-		adjust(cub, &cub->player->instances[0].x, 'a');
-	}
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
-	{
-		// cub->p_a = fix_angle(cub, 5, MLX_KEY_A);
-		cub->pdx = cos(degToRad(cub->p_a));
-		cub->pdy = -sin(degToRad(cub->p_a));
-	}
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
-	{
-		cub->p_a = fix_angle(cub, 5, MLX_KEY_D);
-		// cub->pdx = cos(degToRad(cub->p_a));
-		// cub->pdy = -sin(degToRad(cub->p_a));
-	}
+
+		if (mlx_is_key_down(cub->mlx, MLX_KEY_UP))
+		{
+			// cub->player->instances[0].y -= cub->map->sq_size / 4;
+			adjust(cub, &cub->player->instances[0].y, 's');
+		}
+		if (mlx_is_key_down(cub->mlx, MLX_KEY_DOWN))
+		{
+			adjust(cub, &cub->player->instances[0].y, 'a');
+		}
+		if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
+		{
+			adjust(cub, &cub->player->instances[0].x, 's');
+		}
+		if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
+		{
+			adjust(cub, &cub->player->instances[0].x, 'a');
+		}
+		if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
+		{
+			cub->p_a = fix_angle(cub, 5, MLX_KEY_A);
+		}
+		if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
+		{
+			cub->p_a = fix_angle(cub, 5, MLX_KEY_D);
+			// cub->pdx = cos(degToRad(cub->p_a));
+			// cub->pdy = -sin(degToRad(cub->p_a));
+		}
 	
+	}
 }
 
 bool	get_p_angle(t_cub *cub)

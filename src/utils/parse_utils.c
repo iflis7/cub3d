@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/02/17 05:05:57 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/03/06 19:43:18 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ char	*get_identifier(char *line_in, char *str)
 {
 	int		i;
 	char	*line;
-	printf("get shit!!\n");
+	// printf("get shit!!\n");
 
 	i = 0;
 	line = ft_strtrim(line_in, "\n");

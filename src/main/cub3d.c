@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/03/02 17:49:02 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/03/06 20:14:30 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ void	main_hook(void *param)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub->mlx);
 	// NewCastRays(cub);
-	draw_ray(cub, 50);
+	// draw_ray(cub, 50);
 	// access the player position using the cub->player->instances
-	printf("{%.2d, %.2d}\n",cub->player->instances[0].x, cub->player->instances[0].y);
+	// printf("{%.2d, %.2d}\n",cub->player->instances[0].x, cub->player->instances[0].y);
 	// printf("cub->player->instances[0].x %.2d\n: ", cub->player->instances[0].x);
 	
-	printf("pa: %.2f\n", cub->p_a);
+	// printf("pa: %.2f\n", cub->p_a); 
 }
 
 int	main(int argc, char **argv)

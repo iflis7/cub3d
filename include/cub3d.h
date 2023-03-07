@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/03/02 14:50:19 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/03/06 19:34:55 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ typedef struct s_map
 {
 	int			width;
 	int			height;
+	char		**map;
 	char		**mini_map;
 	t_mini_m	*mini_m;
-	char *north; // TODO change to mlx_image_t once the image is loaded
+	char		*north; // TODO change to mlx_image_t once the image is loaded
 	char		*south;
 	char		*west;
 	char		*east;
@@ -115,7 +116,7 @@ bool			get_p_angle(t_cub *cub);
 /* ***************  RAYCASTING  *************** */
 
 
-
+bool    is_wall(t_cub *cub, int32_t destx, int32_t desty);
 void	get_pcoordinates(t_cub *cub);
 void	draw_ray(t_cub *cub, int length);
 void	print_mini_map(t_cub *cub);

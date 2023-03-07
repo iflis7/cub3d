@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/02/17 05:06:36 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/03/06 20:00:20 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	access_test(char *file, char *ext)
 {
 	int		fd;
 	char	*str;
-	printf(" -------- access_test! ----------\n");
 
 	if (!file)
 		return (0);
@@ -89,11 +88,7 @@ int	is_map_line(char *line)
 			return (1);
 		}
 		else if (ft_isalpha(line[i]) && !check[0])
-		{
-			printf(" -------- line[%i]%c\n", i, line[i]);
-			// i++;
 			return (2);
-		}
 		else
 			return (3);
 		i++;
@@ -129,7 +124,6 @@ bool	manage_settings(t_map *map, char *line)
 	// TODO add access_test for the path
 	if (access_test(get_identifier(line, "NO"), ".png"))
 	{
-		printf(" -------- Debbug! ----------\n");
 		map->north = "Mabla";
 		// map->north = get_identifier(line, "NO");
 	}

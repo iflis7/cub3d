@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/02/17 05:03:20 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/03/06 20:03:59 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ bool	store_map(t_cub *cub, int fd)
 			}
 			else if (is_map_line(line) == 2)
 			{
-				printf("Gheto!\n");
 				manage_settings(cub->map, line);
 			}
 			else if (is_map_line(line) == 3)
@@ -90,6 +89,26 @@ bool	store_map(t_cub *cub, int fd)
 	}
 	free(line);
 	return (true);
+}
+
+char	**switch_toarray(t_map *mini_map)
+{
+	t_mini_m	*mini_m;
+	char **map;
+
+	int i = 0;
+
+	map = ft_calloc(mini_map->nb_lines, sizeof(char *));
+	if(!map)
+		return NULL;
+	mini_m = mini_map->mini_m;
+	while(mini_m)
+	{
+		map[i] = ft_strdup(mini_m->line);
+		mini_m = mini_m->next;
+		i++;
+	}
+	return map;
 }
 
 /**
@@ -114,5 +133,8 @@ bool	parse_map(t_cub *cub, char *file)
 	close(fd);
 	if (!map_is_valid(cub))
 		return (ft_msg_err("Invalid map!"));
+	cub->map->map = switch_toarray(cub->map);
+	if(!cub->map->map)
+		return false;
 	return (true);
 }
