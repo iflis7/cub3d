@@ -78,20 +78,23 @@ void	move_p_hook(void *param)
 
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_UP))
 		{
-			// cub->player->instances[0].y -= cub->map->sq_size / 4;
-			adjust(cub, &cub->player->instances[0].y, 's');
+			if(!is_wall(cub, cub->player->instances[0].x, cub->player->instances[0].y - cub->map->sq_size / 4))
+				adjust(cub, &cub->player->instances[0].y, 's');
 		}
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_DOWN))
 		{
-			adjust(cub, &cub->player->instances[0].y, 'a');
+			if(!is_wall(cub, cub->player->instances[0].x, cub->player->instances[0].y + cub->map->sq_size / 4))
+				adjust(cub, &cub->player->instances[0].y, 'a');
 		}
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		{
-			adjust(cub, &cub->player->instances[0].x, 's');
+			if(!is_wall(cub, cub->player->instances[0].x - cub->map->sq_size / 4, cub->player->instances[0].y))
+				adjust(cub, &cub->player->instances[0].x, 's');
 		}
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
 		{
-			adjust(cub, &cub->player->instances[0].x, 'a');
+			if(!is_wall(cub, cub->player->instances[0].x + cub->map->sq_size / 4, cub->player->instances[0].y))
+				adjust(cub, &cub->player->instances[0].x, 'a');
 		}
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
 		{
