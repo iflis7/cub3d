@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/03/06 20:02:39 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/03/08 14:41:02 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,7 @@ t_cub	*init_cub(void)
 	cub->mlx = mlx_init(WIDTH, HEIGHT, "CUB3D", false);
 	if (!cub->mlx)
 		exit(EXIT_FAILURE);
-	
-	if(!cub->map->mini_map)
-		return NULL;
 	cub->p_dir = 0;
-	// printf("One: %i ---  two %i \n", cub->mlx->width, cub->map->max_line_len);
 	return (cub);
 }
 
