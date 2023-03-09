@@ -6,7 +6,7 @@
 /*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/03/09 15:11:07 by bylkus           ###   ########.fr       */
+/*   Updated: 2023/03/09 15:23:52 by bylkus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void cast_ray(t_cub *cub)
 		float t = (float)i / WIDTH;
 		int x = px + t * cub->ray_x * len ;
 		int y = py + t * cub->ray_y * len ;
-		if(x > cub->map->max_line_len * 64 || x <= 0 || y > cub->map->nb_lines * 64 || y <= 0 || is_wall(cub, x, y))
+		if(x > cub->map->max_line_len * (int)cub->map->sq_size || x <= 0 || y > cub->map->nb_lines * (int)cub->map->sq_size || y <= 0 || is_wall(cub, x, y))
 			break;
 		mlx_put_pixel(cub->win, x, y, get_rgba(255, 255, 255, 1));
 		i++;

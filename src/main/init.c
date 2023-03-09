@@ -6,7 +6,7 @@
 /*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/03/09 15:05:16 by bylkus           ###   ########.fr       */
+/*   Updated: 2023/03/09 15:28:49 by bylkus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	init_game(t_cub *cub)
 	// icon = NULL;
 
 	cub->map->sq_size = fmin((0.2 * cub->mlx->width) / cub->map->max_line_len, (0.2 * cub->mlx->height) / cub->map->nb_lines);
-	cub->map->sq_size = 64;
 	if(cub->map->sq_size < 1) // TODO do a better check esti!!
 		exit(0);
 	cub->map->mini_map = ft_calloc(cub->map->nb_lines + 1, sizeof(char *));
