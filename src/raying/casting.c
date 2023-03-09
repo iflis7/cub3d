@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   casting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/03/09 11:28:09 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/03/09 15:11:07 by bylkus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,81 +48,26 @@ void cast_ray(t_cub *cub)
 	int i = 0;
 	float px = cub->player->instances[0].x + cub->map->sq_size / 8;
 	float py = cub->player->instances[0].y + cub->map->sq_size / 8;
-	cub->ray_x = 100 + px;
-	cub->ray_y = 100 + py ;
+	cub->ray_x =  px;
+	cub->ray_y =  py ;
 	len = sqrtf(cub->ray_x * cub->ray_x + cub->ray_y * cub->ray_y);
-	// printf("player angle (%.0f°)\n", cub->p_a);
-	// printf("ray (%.0f, %.0f)\n", cub->ray_x, cub->ray_y);
-	// len = sqrtf(cub->ray_x * cub->ray_x + cub->ray_y * cub->ray_y);
-	cub->ray_x = px  * cos(cub->p_a * M_PI / 180);
-	cub->ray_y = py  * sin(cub->p_a * M_PI / 180);
+	cub->ray_x = px * cos(cub->p_a * M_PI / 180);
+	cub->ray_y = py * -sin(cub->p_a * M_PI / 180);
 	cub->ray_y /= len;
 	cub->ray_x /= len;
 	
 	while (i < WIDTH)
 	{
 		float t = (float)i / WIDTH;
-		int x = px + t * cub->ray_x * len;
-		int y = py + t * cub->ray_y * len;
-		if(x > WIDTH || x <= 0 || y > HEIGHT || y <= 0)
+		int x = px + t * cub->ray_x * len ;
+		int y = py + t * cub->ray_y * len ;
+		if(x > cub->map->max_line_len * 64 || x <= 0 || y > cub->map->nb_lines * 64 || y <= 0 || is_wall(cub, x, y))
 			break;
-		mlx_put_pixel(cub->win, x, y, get_rgba(0, 0, 0, 255));
+		mlx_put_pixel(cub->win, x, y, get_rgba(255, 255, 255, 1));
 		i++;
 	}
 }
 
-/* 
-void	cast_ray(t_cub *cub)
-{
-	float len;
-	int i = 0;
-	cub->ray_x =100 + cub->player->instances[0].x;
-	cub->ray_y = 100 + cub->player->instances[0].y;
-	len = sqrtf(cub->ray_x * cub->ray_x + cub->ray_y * cub->ray_y);
-	printf("player angle (%.0f°)\n", cub->p_a);
-	cub->ray_y /= len;
-	cub->ray_x /= len;
-
-	while(i < WIDTH)
-	{
-		float t = (float)i / WIDTH;
-		int x = cub->player->instances[0].x + t * cub->ray_x * len;
-		int y = cub->player->instances[0].y + t * cub->ray_y * len;
-		mlx_put_pixel(cub->win, x, y, get_rgba(0, 0, 0, 255));
-		i++;
-	}
-} */
-
-
-/* 
-void	draw_fov(t_cub *cub)
-{
-	
-	int num_rays = 60;
-	float ray_spacing = cub->fov / num_rays;
-	float dir_x, dir_y;
-	float len;
-	int x, y, i;
-	
-	cub->fov = 60 * M_PI / 180;
-	i= 0;
-	while(i < num_rays)
-	{
-		cub->ray_a= cub->p_a - cub->fov / 2 + i * ray_spacing;
-		dir_x = cos(cub->ray_a);
-		dir_y = sin(cub->ray_a);
-		len = 0;
-		while(len < WIDTH)
-		{
-			x = cub->player->instances[0].x + len * dir_x;
-			y = cub->player->instances[0].y + len * dir_y;
-			mlx_put_pixel(cub->win, x, y, get_rgba(0, 0, 0, 255));
-			len+=1;
-		}
-		i++;
-	}
-}
-*/
 void	draw_fov(t_cub *cub)
 {
     int num_rays = 60;
@@ -147,7 +92,7 @@ void	draw_fov(t_cub *cub)
                 break;
             if (cub->map->map[y][x] == '1')
                 break;
-            mlx_put_pixel(cub->win, (uint32_t)x, (uint32_t)y, get_rgba(0, 0, 0, 255));
+            mlx_put_pixel(cub->win, (uint32_t)x, (uint32_t)y, get_rgba(255, 255, 71, 1));
             len += 1;
         }
         i++;

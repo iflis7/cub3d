@@ -6,7 +6,7 @@
 /*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/03/08 15:14:50 by bylkus           ###   ########.fr       */
+/*   Updated: 2023/03/09 15:05:16 by bylkus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	init_game(t_cub *cub)
 	// Init player
 	cub->player = mlx_new_image(cub->mlx, cub->map->sq_size / 4,
 			cub->map->sq_size / 4);
-	memset(cub->player->pixels, 255, cub->map->sq_size / 4
+	memset(cub->player->pixels, 200, cub->map->sq_size / 4
 			* cub->map->sq_size / 4 * sizeof(int));
 	mlx_image_to_window(cub->mlx, cub->player, cub->p_x, cub->p_y);
 	

@@ -53,56 +53,74 @@ bool	collision(t_cub *cub)
 	return (true);
 }
 
-void	adjust(t_cub *cub, int32_t *val, char flag)
+static void	adjust(t_cub *cub, float dx, float dy, unsigned char flag)
 {
+	// float a, b;
+	// a = dx * cub->map->sq_size / 10;
+	// b = dy * cub->map->sq_size / 10;
+	// printf("moving by %.2fpx\n", sqrtf(a * a + b * b));
 	if (flag == 'a')
 	{
-		*val += cub->map->sq_size / 4;
-		// collision(cub);
+		cub->player->instances[0].x += dx * cub->map->sq_size / 10;
+		cub->player->instances[0].y += dy * cub->map->sq_size / 10;
 	}
 	if (flag == 's')
 	{
-		*val -= cub->map->sq_size / 4;
+		cub->player->instances[0].x -= dx * cub->map->sq_size / 10;
+		cub->player->instances[0].y -= dy * cub->map->sq_size / 10;
+
 	}
-}
+
+
+
+} 
 
 void	move_p_hook(void *param)
 {
 	t_cub	*cub;
 
 	cub = (t_cub *)param;
-	// draw_ray(cub, 5);
-		// mlx_put_string(cub->mlx, ".", cub->player->instances[0].x, cub->player->instances[0].y);
+	float dx, dy;
+	
 	if(!is_wall(cub, cub->player->instances[0].x, cub->player->instances[0].y))
 	{
 		cast_ray(cub);
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_UP))
 		{
-			if(!is_wall(cub, cub->player->instances[0].x, cub->player->instances[0].y - cub->map->sq_size / 4))
-				adjust(cub, &cub->player->instances[0].y, 's');
+			dx = cosf(cub->p_a * M_PI / 180);
+			dy = -sinf(cub->p_a * M_PI / 180);
+			if(!is_wall(cub, cub->player->instances[0].x + dx * cub->map->sq_size / 4, cub->player->instances[0].y + dy * cub->map->sq_size / 4))
+				adjust(cub, dx, dy, 'a');
 		}
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_DOWN))
 		{
-			if(!is_wall(cub, cub->player->instances[0].x, cub->player->instances[0].y + cub->map->sq_size / 4))
-				adjust(cub, &cub->player->instances[0].y, 'a');
+			dx = cosf(cub->p_a * M_PI / 180);
+			dy = -sinf(cub->p_a * M_PI / 180);
+			if(!is_wall(cub, cub->player->instances[0].x - dx * cub->map->sq_size / 4, cub->player->instances[0].y - dy * cub->map->sq_size / 4))
+				adjust(cub, dx, dy, 's');
 		}
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		{
-			if(!is_wall(cub, cub->player->instances[0].x - cub->map->sq_size / 4, cub->player->instances[0].y))
-				adjust(cub, &cub->player->instances[0].x, 's');
+			dx = -cosf((cub->p_a - 90) * M_PI / 180);
+			dy = sinf((cub->p_a - 90) * M_PI / 180);
+			if(!is_wall(cub, cub->player->instances[0].x + dx * cub->map->sq_size / 4, cub->player->instances[0].y + dy * cub->map->sq_size / 4))
+				adjust(cub, dx, dy, 'a');
+			
 		}
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
 		{
-			if(!is_wall(cub, cub->player->instances[0].x + cub->map->sq_size / 4, cub->player->instances[0].y))
-				adjust(cub, &cub->player->instances[0].x, 'a');
+			dx = -cosf((cub->p_a - 90) * M_PI / 180);
+			dy = sinf((cub->p_a - 90) * M_PI / 180);
+			if(!is_wall(cub, cub->player->instances[0].x - dx * cub->map->sq_size / 4, cub->player->instances[0].y + dy * cub->map->sq_size / 4))
+				adjust(cub, dx, dy, 's');
 		}
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
 		{
-			cub->p_a = fix_angle(cub, 5, MLX_KEY_A);
+			cub->p_a = fix_angle(cub, 2, MLX_KEY_A);
 		}
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
 		{
-			cub->p_a = fix_angle(cub, 5, MLX_KEY_D);
+			cub->p_a = fix_angle(cub, 2, MLX_KEY_D);
 			// cub->pdx = cos(degToRad(cub->p_a));
 			// cub->pdy = -sin(degToRad(cub->p_a));
 		}
