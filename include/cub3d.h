@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/03/06 19:34:55 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/03/09 10:10:57 by bylkus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 /* *************** ***************           *************** *************** */
 # define WIDTH 1920
 # define PI    3.14159265359
+# define X 0
+# define Y 1
 // # define HEIGHT 1080
 
 # define HEIGHT 1000
@@ -66,12 +68,14 @@ typedef struct s_cub
 	mlx_image_t	*player;
 	// mlx_image_t	*floor;
 	// mlx_image_t	*wall;
+	int			dest[2];
 	size_t		p_x;
 	size_t		p_y;
 	char		p_dir;
 	float		p_a;
 	float		ray_x;
 	float		ray_y;
+	float		ray_a;
 	float		pdx;
 	float		pdy;
 	float		fov;
@@ -115,7 +119,8 @@ bool			get_p_angle(t_cub *cub);
 
 /* ***************  RAYCASTING  *************** */
 
-
+void	draw_fov(t_cub *cub);
+void	cast_ray(t_cub *cub);
 bool    is_wall(t_cub *cub, int32_t destx, int32_t desty);
 void	get_pcoordinates(t_cub *cub);
 void	draw_ray(t_cub *cub, int length);

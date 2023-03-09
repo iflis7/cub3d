@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   casting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/03/06 14:05:06 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/03/09 11:11:06 by bylkus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,144 @@ void	print_mini_map(t_cub *cub)
 }
 
 
+void cast_ray(t_cub *cub)
+{
+	float len;
+	int i = 0;
+	float px = cub->player->instances[0].x + cub->map->sq_size / 8;
+	float py = cub->player->instances[0].y + cub->map->sq_size / 8;
+	cub->ray_x = 100 + px;
+	cub->ray_y = 100 + py ;
+	len = sqrtf(cub->ray_x * cub->ray_x + cub->ray_y * cub->ray_y);
+	// printf("player angle (%.0f°)\n", cub->p_a);
+	// printf("ray (%.0f, %.0f)\n", cub->ray_x, cub->ray_y);
+	len = sqrtf(cub->ray_x * cub->ray_x + cub->ray_y * cub->ray_y);
+	cub->ray_x = px + 100 * cos(cub->p_a * M_PI / 180);
+	cub->ray_y = py + 100 * sin(cub->p_a * M_PI / 180);
+	cub->ray_y /= len;
+	cub->ray_x /= len;
+	
+	while (i < WIDTH)
+	{
+		float t = (float)i / WIDTH;
+		int x = px + t * cub->ray_x * len;
+		int y = py + t * cub->ray_y * len;
+		if(x > WIDTH || x <= 0 || y > HEIGHT || y <= 0)
+			break;
+		mlx_put_pixel(cub->win, x, y, get_rgba(0, 0, 0, 255));
+		i++;
+	}
+}
+
+/* 
+void	cast_ray(t_cub *cub)
+{
+	float len;
+	int i = 0;
+	cub->ray_x =100 + cub->player->instances[0].x;
+	cub->ray_y = 100 + cub->player->instances[0].y;
+	len = sqrtf(cub->ray_x * cub->ray_x + cub->ray_y * cub->ray_y);
+	printf("player angle (%.0f°)\n", cub->p_a);
+	cub->ray_y /= len;
+	cub->ray_x /= len;
+
+	while(i < WIDTH)
+	{
+		float t = (float)i / WIDTH;
+		int x = cub->player->instances[0].x + t * cub->ray_x * len;
+		int y = cub->player->instances[0].y + t * cub->ray_y * len;
+		mlx_put_pixel(cub->win, x, y, get_rgba(0, 0, 0, 255));
+		i++;
+	}
+} */
 
 
+/* 
+void	draw_fov(t_cub *cub)
+{
+	
+	int num_rays = 60;
+	float ray_spacing = cub->fov / num_rays;
+	float dir_x, dir_y;
+	float len;
+	int x, y, i;
+	
+	cub->fov = 60 * M_PI / 180;
+	i= 0;
+	while(i < num_rays)
+	{
+		cub->ray_a= cub->p_a - cub->fov / 2 + i * ray_spacing;
+		dir_x = cos(cub->ray_a);
+		dir_y = sin(cub->ray_a);
+		len = 0;
+		while(len < WIDTH)
+		{
+			x = cub->player->instances[0].x + len * dir_x;
+			y = cub->player->instances[0].y + len * dir_y;
+			mlx_put_pixel(cub->win, x, y, get_rgba(0, 0, 0, 255));
+			len+=1;
+		}
+		i++;
+	}
+}
+*/
+void	draw_fov(t_cub *cub)
+{
+    int num_rays = 60;
+    cub->fov = 60 * M_PI / 180;
+    float ray_spacing = cub->fov / num_rays;
+    float dir_x, dir_y;
+    float len;
+    int x, y, i;
+	
+    i = 0;
+    while (i < num_rays)
+    {
+        cub->ray_a = cub->p_a - cub->fov / 2 + i * ray_spacing;
+        dir_x = cos(cub->ray_a);
+        dir_y = sin(cub->ray_a);
+        len = 0;
+        while (len < WIDTH)
+        {
+            x = cub->player->instances[0].x + len * dir_x;
+            y = cub->player->instances[0].y + len * dir_y;
+            if (x < 0 || x >= cub->map->max_line_len || y < 0 || y >= cub->map->nb_lines)
+                break;
+            if (cub->map->map[y][x] == '1')
+                break;
+            mlx_put_pixel(cub->win, (uint32_t)x, (uint32_t)y, get_rgba(0, 0, 0, 255));
+            len += 1;
+        }
+        i++;
+    }
+}
+/* 
+int main()
+{
+    double player_angle = 0;
+    double ray_angle;
+    double fov = FOV_ANGLE * M_PI / 180;
+    double ray_spacing = fov / NUM_RAYS;
+    double dir_x, dir_y;
+    double length;
+    int x, y;
+
+    for (int i = 0; i < NUM_RAYS; i++)
+    {
+        ray_angle = player_angle - fov / 2 + i * ray_spacing;
+        dir_x = cos(ray_angle);
+        dir_y = sin(ray_angle);
+        length = 0;
+
+        while (length < WIDTH)
+        {
+            x = player_x + length * dir_x;
+            y = player_y + length * dir_y;
+            mlx_pixel_put(mlx, win, x, y, 0xffffff);
+            length += 1;
+        }
+	}
+} */
 /* typedef struct    s_img
 {
     void        *img;
@@ -88,37 +224,3 @@ bool draw_dir_ray(t_cub *cub, float angle)
 	}
 	return true;
 }
-
-void draw_ray(t_cub *cub, int length)
-{
-	float angle;
-	int x, y, dx, dy;
-
-	get_p_angle(cub);
-	angle = cub->p_a;
-    // Convert the direction from degrees to radians
-    angle = cub->p_dir;
-
-    // Calculate the change in x and y based on the angle and length
-    dx = length * cos(angle);
-    dy = length * sin(angle);
-
-    // Draw the line
-	x = cub->p_x;
-	y = cub->p_y;
-    while (length > 0)
-	{
-		mlx_put_pixel(cub->win, x, y, get_rgba(255, 0, 0, 255));
-        x += dx;
-        y += dy;
-        length--;
-    }
-	// while(angle < PI / 6)
-	// {
-	// 	draw_dir_ray(cub, angle);
-	// 	draw_dir_ray(cub, -angle);
-	// 	angle += PI/72;
-	// }
-	mlx_put_string(cub->mlx, ".", cub->player->instances[0].x, cub->player->instances[0].y);
-}
-

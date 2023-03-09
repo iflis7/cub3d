@@ -75,7 +75,7 @@ void	move_p_hook(void *param)
 		// mlx_put_string(cub->mlx, ".", cub->player->instances[0].x, cub->player->instances[0].y);
 	if(!is_wall(cub, cub->player->instances[0].x, cub->player->instances[0].y))
 	{
-
+		cast_ray(cub);
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_UP))
 		{
 			if(!is_wall(cub, cub->player->instances[0].x, cub->player->instances[0].y - cub->map->sq_size / 4))
