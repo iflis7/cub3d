@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/03/06 20:14:30 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/03/08 15:35:50 by bylkus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	main_hook(void *param)
 		i++;
 	}
 	print_mini_map(cub);
-	print_line(cub->player, cub->p_x, cub->p_x, 0);
+	// print_line(cub->player, cub->p_x, cub->p_x, 0);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub->mlx);
 	// NewCastRays(cub);
