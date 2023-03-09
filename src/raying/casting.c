@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   casting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/03/09 11:11:06 by bylkus           ###   ########.fr       */
+/*   Updated: 2023/03/09 11:28:09 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void cast_ray(t_cub *cub)
 	len = sqrtf(cub->ray_x * cub->ray_x + cub->ray_y * cub->ray_y);
 	// printf("player angle (%.0f°)\n", cub->p_a);
 	// printf("ray (%.0f, %.0f)\n", cub->ray_x, cub->ray_y);
-	len = sqrtf(cub->ray_x * cub->ray_x + cub->ray_y * cub->ray_y);
-	cub->ray_x = px + 100 * cos(cub->p_a * M_PI / 180);
-	cub->ray_y = py + 100 * sin(cub->p_a * M_PI / 180);
+	// len = sqrtf(cub->ray_x * cub->ray_x + cub->ray_y * cub->ray_y);
+	cub->ray_x = px  * cos(cub->p_a * M_PI / 180);
+	cub->ray_y = py  * sin(cub->p_a * M_PI / 180);
 	cub->ray_y /= len;
 	cub->ray_x /= len;
 	
