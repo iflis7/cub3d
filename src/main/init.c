@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/02/01 13:51:33 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/03/09 15:28:49 by bylkus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_map	*init_map(void)
 	map->south = NULL;
 	map->west = NULL;
 	map->east = NULL;
+	map->map = NULL;
 	map->nb_lines = 1;
 	map->max_line_len = 0;
 	map->mini_m = init_map_line();
@@ -71,10 +72,12 @@ t_cub	*init_cub(void)
 	cub = malloc(sizeof(t_cub));
 	if (!cub)
 		ft_msg_err("Error: malloc failed.");
-	cub->mlx = mlx_init(WIDTH, HEIGHT, "CUB3D", true);
+	cub->map = init_map();
+	// cub->mlx = mlx_init(WIDTH, HEIGHT, "CUB3D", true);
+	cub->mlx = mlx_init(WIDTH, HEIGHT, "CUB3D", false);
 	if (!cub->mlx)
 		exit(EXIT_FAILURE);
-	cub->map = init_map();
+	cub->p_dir = 0;
 	return (cub);
 }
 
@@ -85,10 +88,30 @@ t_cub	*init_cub(void)
  */
 void	init_game(t_cub *cub)
 {
-	cub->fov = (80 * M_PI / 180);
+	// mlx_texture_t	*icon;
+	// icon = NULL;
+
+	cub->map->sq_size = fmin((0.2 * cub->mlx->width) / cub->map->max_line_len, (0.2 * cub->mlx->height) / cub->map->nb_lines);
+	if(cub->map->sq_size < 1) // TODO do a better check esti!!
+		exit(0);
+	cub->map->mini_map = ft_calloc(cub->map->nb_lines + 1, sizeof(char *));
+	cub->fov = M_PI / 3;
 	cub->ray_depth = 30;
-	cub->win = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
-	// cub->player = mlx_new_image(cub->mlx, 16, 16);
-	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_HIDDEN);
+	get_p_angle(cub);
+	get_pcoordinates(cub);
+	cub->win = mlx_new_image(cub->mlx, cub->mlx->width, cub->mlx->height);
+	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_NORMAL);
+	// show the mouse on the window
 	mlx_image_to_window(cub->mlx, cub->win, 0, 0);
+	// Init player
+	cub->player = mlx_new_image(cub->mlx, cub->map->sq_size / 4,
+			cub->map->sq_size / 4);
+	memset(cub->player->pixels, 200, cub->map->sq_size / 4
+			* cub->map->sq_size / 4 * sizeof(int));
+	mlx_image_to_window(cub->mlx, cub->player, cub->p_x, cub->p_y);
+	
 }
+
+/*
+
+*/

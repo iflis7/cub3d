@@ -2,6 +2,10 @@
   "C_Cpp.errorSquiggles": "disabled",
   "files.associations": {
     "cub3d.h": "c",
-    "sstream": "c"
+    "sstream": "c",
+    "utils.h": "c",
+    "type_traits": "c",
+    "cstring": "c",
+    "locale": "c"
   }
 }

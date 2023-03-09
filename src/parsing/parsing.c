@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/02/01 13:46:37 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/03/06 20:03:59 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,22 @@
  * @param *map The map to check 
  * @return Bool Returns true if the map is valid, false if not
  */
-bool	map_is_valid(t_map *map)
+bool	map_is_valid(t_cub *cub)
 {
 	t_mini_m	*mini_m;
 
-	mini_m = map->mini_m;
+	mini_m = cub->map->mini_m;
 	while (mini_m)
 	{
 		if ((!mini_m->prev || !mini_m->next) && !only_ones(mini_m->line))
 			return (false);
-		else if (((mini_m->prev && mini_m->next)
-					&& !first_and_last(mini_m->line)))
+		else if (((mini_m->prev && mini_m->next) && !first_and_last(cub,
+						mini_m->line)))
 			return (false);
 		mini_m = mini_m->next;
 	}
+	if (cub->p_dir == 0)
+		ft_msg_err("No Player Bitch!");
 	return (true);
 }
 
@@ -52,6 +54,7 @@ bool	store_map(t_cub *cub, int fd)
 {
 	char	*line;
 
+	// int		i = 0;
 	line = get_next_line(fd);
 	if (!line)
 	{
@@ -62,15 +65,20 @@ bool	store_map(t_cub *cub, int fd)
 	{
 		if (!is_empty_line(line))
 		{
+			// printf(" -------- Debbug! ----------\n");
 			if (is_map_line(line) == 1)
 			{
 				ft_mini_m_add_back(&cub->map->mini_m, line);
 				cub->map->nb_lines++;
+				// cub->map->mini_map[i++] = ft_strdup(line);
+				// printf("cub->map->nb_lines: %d \n", cub->map->nb_lines);
 				if ((int)strlen(line) > cub->map->max_line_len)
 					cub->map->max_line_len = strlen(line);
 			}
 			else if (is_map_line(line) == 2)
+			{
 				manage_settings(cub->map, line);
+			}
 			else if (is_map_line(line) == 3)
 			{
 				free(line);
@@ -81,6 +89,26 @@ bool	store_map(t_cub *cub, int fd)
 	}
 	free(line);
 	return (true);
+}
+
+char	**switch_toarray(t_map *mini_map)
+{
+	t_mini_m	*mini_m;
+	char **map;
+
+	int i = 0;
+
+	map = ft_calloc(mini_map->nb_lines, sizeof(char *));
+	if(!map)
+		return NULL;
+	mini_m = mini_map->mini_m;
+	while(mini_m)
+	{
+		map[i] = ft_strdup(mini_m->line);
+		mini_m = mini_m->next;
+		i++;
+	}
+	return map;
 }
 
 /**
@@ -103,7 +131,10 @@ bool	parse_map(t_cub *cub, char *file)
 		ft_msg_err("Invalid map.");
 	}
 	close(fd);
-	if (!map_is_valid(cub->map))
+	if (!map_is_valid(cub))
 		return (ft_msg_err("Invalid map!"));
+	cub->map->map = switch_toarray(cub->map);
+	if(!cub->map->map)
+		return false;
 	return (true);
 }

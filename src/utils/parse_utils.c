@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/01/31 16:37:35 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/03/06 19:43:18 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,29 @@
  * @return true returns true if the charactere is valid
  * @return false returns false if the charactere is not valid
  */
-bool	valid_elements(char c)
+bool	valid_elements(t_cub *cub, char c)
 	// it returns invalid!
 {
-	static char news[1];
+	// static char news[1];
+	// cub->p_dir = 
 
 	if ((c == '0' || c == '1') || ((c == 'N' || c == 'E' || c == 'W'
-				|| c == 'S') && news[0] == 0))
+				|| c == 'S') && cub->p_dir == 0))
 	{
 		if (c == 'N')
-			news[0] = 'N';
+			cub->p_dir = 'N';
 		else if (c == 'E')
-			news[0] = 'E';
+			cub->p_dir = 'E';
 		else if (c == 'W')
-			news[0] = 'W';
+			cub->p_dir = 'W';
 		else if (c == 'S')
-			news[0] = 'S';
+			cub->p_dir = 'S';
 		return (true);
 	}
 	else
 		return (false);
 }
+
 
 /**
  * @brief Check if the first and last charactere of the line are 1
@@ -49,7 +51,7 @@ bool	valid_elements(char c)
  * @return true Returns true if the first and last charactere are 1
  * @return false Returns false if the first and last charactere are not 1
  */
-bool	first_and_last(char *line)
+bool	first_and_last(t_cub *cub, char *line)
 {
 	int	i;
 	int	flag;
@@ -60,12 +62,13 @@ bool	first_and_last(char *line)
 	len = strlen(line) - 1;
 	while (line && line[i])
 	{
-		if (!valid_elements(line[i]) && !ft_iswhitespace(line[i]))
+		if (!valid_elements(cub, line[i]) && !ft_iswhitespace(line[i]))
 			return (false);
 		else if (ft_isdigit(line[i]) && !flag && line[i] == '1')
 			flag = 1;
 		else if (i == len && ft_isdigit(line[len]) && line[len] != '1')
 			return (false);
+		
 		i++;
 	}
 	return (true);
@@ -104,6 +107,7 @@ char	*get_identifier(char *line_in, char *str)
 {
 	int		i;
 	char	*line;
+	// printf("get shit!!\n");
 
 	i = 0;
 	line = ft_strtrim(line_in, "\n");
@@ -122,3 +126,5 @@ char	*get_identifier(char *line_in, char *str)
 		return (NULL);
 	}
 }
+
+
