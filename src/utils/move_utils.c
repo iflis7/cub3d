@@ -85,25 +85,25 @@ void	move_p_hook(void *param)
 	if(!is_wall(cub, cub->player->instances[0].x, cub->player->instances[0].y))
 	{
 		cast_ray(cub);
-		if (mlx_is_key_down(cub->mlx, MLX_KEY_UP))
+		if (mlx_is_key_down(cub->mlx, MLX_KEY_UP) || mlx_is_key_down(cub->mlx, MLX_KEY_W))
 		{
 			dx = cosf(cub->p_a * M_PI / 180);
-			dy = -sinf(cub->p_a * M_PI / 180);
-			if(!is_wall(cub, cub->player->instances[0].x + cub->map->sq_size / 8 + dx * cub->map->sq_size / 8, cub->player->instances[0].y + cub->map->sq_size / 8 + dy * cub->map->sq_size / 8))
+			dy = -sinf(cub->p_a * M_PI / 180); 
+			if(!is_wall(cub, cub->player->instances[0].x  + dx * cub->map->sq_size / 8, cub->player->instances[0].y  + dy * cub->map->sq_size / 8))
 				adjust(cub, dx, dy, 'a');
 		}
-		if (mlx_is_key_down(cub->mlx, MLX_KEY_DOWN))
+		if (mlx_is_key_down(cub->mlx, MLX_KEY_DOWN) || mlx_is_key_down(cub->mlx, MLX_KEY_S))
 		{
 			dx = cosf(cub->p_a * M_PI / 180);
 			dy = -sinf(cub->p_a * M_PI / 180);
-			if(!is_wall(cub, cub->player->instances[0].x + cub->map->sq_size / 8 - dx * cub->map->sq_size / 8, cub->player->instances[0].y + cub->map->sq_size / 8 - dy * cub->map->sq_size / 8))
+			if(!is_wall(cub, cub->player->instances[0].x  - dx * cub->map->sq_size / 8, cub->player->instances[0].y  - dy * cub->map->sq_size / 8))
 				adjust(cub, dx, dy, 's');
 		}
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		{
 			dx = -cosf((cub->p_a - 90) * M_PI / 180);
 			dy = sinf((cub->p_a - 90) * M_PI / 180);
-			if(!is_wall(cub, cub->player->instances[0].x + cub->map->sq_size / 8 + dx * cub->map->sq_size / 8, cub->player->instances[0].y + cub->map->sq_size / 8 + dy * cub->map->sq_size / 8))
+			if(!is_wall(cub, cub->player->instances[0].x  + dx * cub->map->sq_size / 8, cub->player->instances[0].y  + dy * cub->map->sq_size / 8))
 				adjust(cub, dx, dy, 'a');
 			
 		}
@@ -111,7 +111,7 @@ void	move_p_hook(void *param)
 		{
 			dx = -cosf((cub->p_a - 90) * M_PI / 180);
 			dy = sinf((cub->p_a - 90) * M_PI / 180);
-			if(!is_wall(cub, cub->player->instances[0].x + cub->map->sq_size / 8 - dx * cub->map->sq_size / 8, cub->player->instances[0].y + cub->map->sq_size / 8 + dy * cub->map->sq_size / 8))
+			if(!is_wall(cub, cub->player->instances[0].x  - dx * cub->map->sq_size / 8, cub->player->instances[0].y  + dy * cub->map->sq_size / 8))
 				adjust(cub, dx, dy, 's');
 		}
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
