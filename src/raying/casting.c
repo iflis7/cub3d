@@ -6,7 +6,7 @@
 /*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/03/09 16:07:11 by bylkus           ###   ########.fr       */
+/*   Updated: 2023/03/10 12:36:48 by bylkus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,39 @@ void	print_mini_map(t_cub *cub)
 	}
 }
 
-
 void cast_ray(t_cub *cub)
+{
+    float len;
+    int i, j;
+    float px = cub->player->instances[0].x + cub->map->sq_size / 8;
+    float py = cub->player->instances[0].y + cub->map->sq_size / 8;
+    float angle_range = 60.0; // 60 degree field of view
+    float angle_increment = angle_range / WIDTH; // divide the field of view equally over the screen width
+    float start_angle = cub->p_a - (angle_range / 2.0); // start angle is the player angle minus half the field of view
+    float angle;
+    
+    for (i = 0; i < WIDTH; i++) {
+        angle = start_angle + i * angle_increment;
+        cub->ray_x = px * cos(angle * M_PI / 180.0) - py * sin(angle * M_PI / 180.0);
+        cub->ray_y = px * sin(angle * M_PI / 180.0) + py * cos(angle * M_PI / 180.0);
+        len = sqrtf(cub->ray_x * cub->ray_x + cub->ray_y * cub->ray_y);
+        cub->ray_x /= len;
+        cub->ray_y /= len;
+
+        j = 0;
+        while (j < WIDTH) {
+            float t = (float)j / WIDTH;
+            int x = px + t * cub->ray_x * len ;
+            int y = py + t * cub->ray_y * len ;
+            if(x > cub->map->max_line_len * (int)cub->map->sq_size || x <= 0 || y > cub->map->nb_lines * (int)cub->map->sq_size || y <= 0 || is_wall(cub, x, y))
+                break;
+            mlx_put_pixel(cub->win, x, y, 255);
+            j++;
+        }
+    }
+}
+
+/* void cast_ray(t_cub *cub)
 {
 	float len;
 	int i = 0;
@@ -67,3 +98,4 @@ void cast_ray(t_cub *cub)
 		i++;
 	}
 }
+ */
