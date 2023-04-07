@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/03/10 12:36:59 by bylkus           ###   ########.fr       */
+/*   Updated: 2023/04/07 11:26:06 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 /*                                   MACROS                                  */
 /* *************** ***************           *************** *************** */
 # define WIDTH 1920
-# define PI    3.14159265359
+# define PI 3.14159265359
 # define X 0
 # define Y 1
 // # define HEIGHT 1080
@@ -119,12 +119,16 @@ bool			get_p_angle(t_cub *cub);
 
 /* ***************  RAYCASTING  *************** */
 
-void	draw_fov(t_cub *cub);
-void	cast_ray(t_cub *cub);
-bool    is_wall(t_cub *cub, int32_t destx, int32_t desty);
-void	get_pcoordinates(t_cub *cub);
-void	draw_ray(t_cub *cub, int length);
-void	print_mini_map(t_cub *cub);
-void	print_line(mlx_image_t *win, uint32_t x, uint32_t y, uint32_t color);
+void			draw_fov(t_cub *cub);
+float			rad_to_deg(float a);
+float			degToRad(float a);
+void			cast_ray(t_cub *cub, float angle);
+void			cast_fov(t_cub *cub);
+bool			is_wall(t_cub *cub, int32_t destx, int32_t desty);
+void			get_pcoordinates(t_cub *cub);
+void			draw_ray(t_cub *cub, int length);
+void			print_mini_map(t_cub *cub);
+void			print_line(mlx_image_t *win, uint32_t x, uint32_t y,
+					uint32_t color);
 
 #endif

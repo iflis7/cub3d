@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/03/13 12:16:00 by bylkus           ###   ########.fr       */
+/*   Updated: 2023/04/04 20:09:07 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	init_game(t_cub *cub)
 	// icon = NULL;
 
 	cub->map->sq_size = fmin((0.2 * cub->mlx->width) / cub->map->max_line_len, (0.2 * cub->mlx->height) / cub->map->nb_lines);
+	cub->map->sq_size = 80;
 	// cub->map->sq_size = 64;
 	if(cub->map->sq_size < 1) // TODO do a better check esti!!
 		exit(0);

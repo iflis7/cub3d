@@ -1,6 +1,6 @@
 #include "../../include/cub3d.h"
 
-int	fix_angle(t_cub *cub, int slice, int key)
+int	fix_angle(t_cub *cub, float slice, int key)
 {
 	if (cub->p_a < 0)
 		cub->p_a += 360;
@@ -17,9 +17,14 @@ int	fix_angle(t_cub *cub, int slice, int key)
 	return (cub->p_a);
 }
 
-float	degToRad(int a)
+float	degToRad(float a)
 {
 	return (a * M_PI / 180.0);
+}
+
+float	rad_to_deg(float a)
+{
+	  return a * (180.0 / M_PI);
 }
 
 void	advance(t_cub *cub)
@@ -84,7 +89,7 @@ void	move_p_hook(void *param)
 	
 	if(!is_wall(cub, cub->player->instances[0].x, cub->player->instances[0].y))
 	{
-		cast_ray(cub);
+		cast_fov(cub);
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_UP) || mlx_is_key_down(cub->mlx, MLX_KEY_W))
 		{
 			dx = cosf(cub->p_a * M_PI / 180);
@@ -99,25 +104,26 @@ void	move_p_hook(void *param)
 			if(!is_wall(cub, cub->player->instances[0].x  - dx * cub->map->sq_size / 8, cub->player->instances[0].y  - dy * cub->map->sq_size / 8))
 				adjust(cub, dx, dy, 's');
 		}
-		if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
-		{
-			dx = -cosf((cub->p_a - 30) * M_PI / 180);
-			dy = sinf((cub->p_a - 30) * M_PI / 180);
-			if(!is_wall(cub, cub->player->instances[0].x  + dx * cub->map->sq_size / 8, cub->player->instances[0].y  + dy * cub->map->sq_size / 8))
-				adjust(cub, dx, dy, 'a');
+		// if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
+		// {
+		// 	dx = cosf((cub->p_a + degToRad(90)) * M_PI / 180);
+		// 	dy = sinf(cub->p_a);
+		// 	if(!is_wall(cub, cub->player->instances[0].x  + dx * cub->map->sq_size / 8, cub->player->instances[0].y  + dy * cub->map->sq_size / 8))
+		// 		adjust(cub, dx, dy, 'a');
 			
-		}
-		if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
-		{
-			dx = -cosf((cub->p_a - 30) * M_PI / 180);
-			dy = sinf((cub->p_a - 30) * M_PI / 180);
-			if(!is_wall(cub, cub->player->instances[0].x  - dx * cub->map->sq_size / 8, cub->player->instances[0].y  + dy * cub->map->sq_size / 8))
-				adjust(cub, dx, dy, 's');
-		}
+		// }
+		// if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
+		// {
+		// 	dx = cosf(cub->p_a);
+		// 	dy = -sinf(cub->p_a - degToRad(90));
+		// 	printf("dx = %.2f dy= %.2f\n", dx, dy);
+		// 	if(!is_wall(cub, cub->player->instances[0].x  - dx * cub->map->sq_size / 8, cub->player->instances[0].y  + dy * cub->map->sq_size / 8))
+		// 		adjust(cub, dx, dy, 's');
+		// }
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
-			cub->p_a = fix_angle(cub, 2, MLX_KEY_A);
+			cub->p_a = fix_angle(cub, 1, MLX_KEY_A);
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
-			cub->p_a = fix_angle(cub, 2, MLX_KEY_D);
+			cub->p_a = fix_angle(cub, 1, MLX_KEY_D);
 	
 	}
 }
@@ -130,13 +136,13 @@ bool	get_p_angle(t_cub *cub)
 	while (temp->next)
 	{
 		if (strchr(temp->line, 'E'))
-			cub->p_a = 0;
+			cub->p_a = degToRad(0);
 		else if (strchr(temp->line, 'W'))
-			cub->p_a = 180;
+			cub->p_a = degToRad(180);
 		else if (strchr(temp->line, 'N'))
-			cub->p_a = 90;
+			cub->p_a = degToRad(90);
 		else if (strchr(temp->line, 'S'))
-			cub->p_a = 270;
+			cub->p_a = degToRad(270);
 		temp = temp->next;
 	}
 	return (true);
