@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/07 11:26:06 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/09 11:53:58 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ bool			get_p_angle(t_cub *cub);
 void			draw_fov(t_cub *cub);
 float			rad_to_deg(float a);
 float			degToRad(float a);
-void			cast_ray(t_cub *cub, float angle);
+bool			cast_ray(t_cub *cub, float angle);
 void			cast_fov(t_cub *cub);
 bool			is_wall(t_cub *cub, int32_t destx, int32_t desty);
 void			get_pcoordinates(t_cub *cub);
