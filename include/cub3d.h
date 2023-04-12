@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/09 11:53:58 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/12 11:45:17 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct s_cub
 	mlx_image_t	*win;
 	t_map		*map;
 	mlx_image_t	*player;
+	mlx_image_t	*lhid;
+	mlx_image_t	*tagnit;
 	// mlx_image_t	*floor;
 	// mlx_image_t	*wall;
 	int			dest[2];
@@ -122,7 +124,7 @@ bool			get_p_angle(t_cub *cub);
 void			draw_fov(t_cub *cub);
 float			rad_to_deg(float a);
 float			degToRad(float a);
-bool			cast_ray(t_cub *cub, float angle);
+bool			cast_ray(t_cub *cub, float angle, int pos_x);
 void			cast_fov(t_cub *cub);
 bool			is_wall(t_cub *cub, int32_t destx, int32_t desty);
 void			get_pcoordinates(t_cub *cub);

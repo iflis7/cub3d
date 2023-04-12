@@ -6,11 +6,13 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:49 by loadjou           #+#    #+#             */
-/*   Updated: 2023/03/06 19:22:31 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/11 13:28:22 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+
 
 void	print_square(t_cub *cub, uint32_t x, uint32_t y, uint32_t color)
 {

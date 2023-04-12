@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/03/08 15:35:50 by bylkus           ###   ########.fr       */
+/*   Updated: 2023/04/12 11:02:05 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,12 @@ int	main(int argc, char **argv)
 		parse_map(cub, argv[1]);
 		
 		init_game(cub);
-		print_map_lines(cub->map->mini_m);
+		// print_map_lines(cub->map->mini_m);
 
 		mlx_loop_hook(cub->mlx, &main_hook, cub);
-		mlx_loop_hook(cub->mlx, &move_p_hook, cub);
+		mlx_loop_hook(cub->mlx, &move_p_hook, cub);	
 		mlx_loop(cub->mlx);
+		// printf("gher dagi\n");
 		// printf("cub->map->nb_lines: %d \n", cub->map->nb_lines);
 		mlx_terminate(cub->mlx);
 		// while(cub->map->mini_map[i])		
