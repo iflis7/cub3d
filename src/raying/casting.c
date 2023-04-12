@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/12 12:07:24 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/12 14:26:05 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ bool	cast_ray(t_cub *cub, float angle, int pos_x)
 	i = 0;
 	px = cub->player->instances[0].x + cub->map->sq_size / 8;
 	py = cub->player->instances[0].y + cub->map->sq_size / 8;
+
 	cub->ray_x = cos(degToRad(angle));
 	cub->ray_y = -sin(degToRad(angle));
 	// printf("pa");
@@ -113,22 +114,23 @@ void	cast_fov(t_cub *cub)
 	float	i;
 	float	incr;
 	float	start;
-	float dest[2];
+	// float dest[2];
 
 	i = 0;
 	start = cub->p_a - cub->fov / 2;
-	// printf("fov = %.2f pa= %.2f\n", cub->fov, cub->p_a);
 	incr = cub->fov / WIDTH;
+	printf("fov = %.2f pa= %.2f INCR= %.2f start = %.2f\n", rad_to_deg(cub->fov), rad_to_deg(cub->p_a), incr, rad_to_deg(start));
 	while (i < WIDTH)
 	{
-				// printf("i = %.2f\n", i);
-		dest[X] = i;
-		dest[Y] = start + (degToRad((float)i + incr));
+		// dest[X] = i;
+		// dest[Y] = start + (degToRad((float)i + incr));
 		cast_ray(cub, start + (degToRad((float)i + incr)), i);
-		// printf("Azul\n");
+		// printf("dest[Y] = %.0f\n", dest[Y]);
 		// draw_wall(cub, dest);
 		// if(cast_ray(cub, start + (degToRad((float) i + incr))))
 		// draw_wall(cub, 200, 600, 700);
+		// incr += incr;
 		i++;
 	}
+	// printf("end = %.2f\n", rad_to_deg(start + (degToRad((float)i + incr))));
 }

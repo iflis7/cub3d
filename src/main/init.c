@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/12 11:50:31 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/12 14:51:24 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 void	init_imgs(t_cub *cub)
 {
-	cub->lhid = mlx_new_image(cub->mlx, WIDTH, HEIGHT / 2);
-	memset(cub->lhid->pixels, 0xffffff, WIDTH * (HEIGHT / 2) * sizeof(int));
-	cub->tagnit = mlx_new_image(cub->mlx, cub->map->sq_size, cub->map->sq_size);
-	memset(cub->tagnit->pixels, 200, cub->map->sq_size * cub->map->sq_size * sizeof(int));
+	// cub->lhid = mlx_new_image(cub->mlx, WIDTH, HEIGHT / 2);
+	// memset(cub->lhid->pixels, 0xffffff, WIDTH * (HEIGHT / 2) * sizeof(int));
+	// cub->tagnit = mlx_new_image(cub->mlx, cub->map->sq_size, cub->map->sq_size);
+	// memset(cub->tagnit->pixels, 200, cub->map->sq_size * cub->map->sq_size * sizeof(int));
 	cub->player = mlx_new_image(cub->mlx, cub->map->sq_size / 4, cub->map->sq_size / 4);
 	memset(cub->player->pixels, 200, cub->map->sq_size / 4 * cub->map->sq_size / 4 * sizeof(int));
 	
@@ -117,9 +117,9 @@ void	init_game(t_cub *cub)
 	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_NORMAL);
 	// show the mouse on the window
 	mlx_image_to_window(cub->mlx, cub->win, 0, 0);
-	init_imgs(cub);
 	// Init player
-	mlx_image_to_window(cub->mlx, cub->player, cub->p_x, cub->p_y);
+	init_imgs(cub);
+	mlx_image_to_window(cub->mlx, cub->player, cub->p_x + cub->map->sq_size / 4, cub->p_y + cub->map->sq_size / 4);
 }
 
 /*

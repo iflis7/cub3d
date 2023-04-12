@@ -60,10 +60,6 @@ bool	collision(t_cub *cub)
 
 static void	adjust(t_cub *cub, float dx, float dy, unsigned char flag)
 {
-	// float a, b;
-	// a = dx * cub->map->sq_size / 10;
-	// b = dy * cub->map->sq_size / 10;
-	// printf("moving by %.2fpx\n", sqrtf(a * a + b * b));
 	if (flag == 'a')
 	{
 		cub->player->instances[0].x += dx * cub->map->sq_size / 10;
@@ -75,9 +71,6 @@ static void	adjust(t_cub *cub, float dx, float dy, unsigned char flag)
 		cub->player->instances[0].y -= dy * cub->map->sq_size / 10;
 
 	}
-
-
-
 } 
 
 void	move_p_hook(void *param)
@@ -121,9 +114,9 @@ void	move_p_hook(void *param)
 		// 		adjust(cub, dx, dy, 's');
 		// }
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
-			cub->p_a = fix_angle(cub, 1, MLX_KEY_A);
+			cub->p_a = fix_angle(cub, 2, MLX_KEY_A);
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
-			cub->p_a = fix_angle(cub, 1, MLX_KEY_D);
+			cub->p_a = fix_angle(cub, 2, MLX_KEY_D);
 	
 	}
 }
