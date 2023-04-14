@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/12 14:26:05 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/14 14:20:18 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	cast_fov(t_cub *cub)
 	i = 0;
 	start = cub->p_a - cub->fov / 2;
 	incr = cub->fov / WIDTH;
-	printf("fov = %.2f pa= %.2f INCR= %.2f start = %.2f\n", rad_to_deg(cub->fov), rad_to_deg(cub->p_a), incr, rad_to_deg(start));
+	// printf("fov = %.2f pa= %.2f INCR= %.2f start = %.2f\n", rad_to_deg(cub->fov), rad_to_deg(cub->p_a), incr, rad_to_deg(start));
 	while (i < WIDTH)
 	{
 		// dest[X] = i;
