@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/12 14:51:24 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/14 16:44:21 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,13 @@ t_cub	*init_cub(void)
  */
 void	init_game(t_cub *cub)
 {
-	// mlx_texture_t	*icon;
+	// mlx_texture_t	*icon
 	// icon = NULL;
 
 	cub->map->sq_size = fmin((0.2 * cub->mlx->width) / cub->map->max_line_len, (0.2 * cub->mlx->height) / cub->map->nb_lines);
 	// cub->map->sq_size = 60;
-	// cub->map->sq_size = 64;
+	cub->map->sq_size = 64;
+	// cub->map->sq_size = 30;
 	if(cub->map->sq_size < 1) // TODO do a better check esti!!
 		exit(0);
 	cub->map->mini_map = ft_calloc(cub->map->nb_lines + 1, sizeof(char *));
