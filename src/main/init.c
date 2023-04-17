@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/14 16:44:21 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/17 16:37:21 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	init_imgs(t_cub *cub)
 	// memset(cub->lhid->pixels, 0xffffff, WIDTH * (HEIGHT / 2) * sizeof(int));
 	// cub->tagnit = mlx_new_image(cub->mlx, cub->map->sq_size, cub->map->sq_size);
 	// memset(cub->tagnit->pixels, 200, cub->map->sq_size * cub->map->sq_size * sizeof(int));
-	cub->player = mlx_new_image(cub->mlx, cub->map->sq_size / 4, cub->map->sq_size / 4);
-	memset(cub->player->pixels, 200, cub->map->sq_size / 4 * cub->map->sq_size / 4 * sizeof(int));
+	cub->player = mlx_new_image(cub->mlx, 1, 1);
+	memset(cub->player->pixels, 0, 1 * sizeof(int));
 	
 }
 
@@ -103,9 +103,9 @@ void	init_game(t_cub *cub)
 	// mlx_texture_t	*icon
 	// icon = NULL;
 
-	cub->map->sq_size = fmin((0.2 * cub->mlx->width) / cub->map->max_line_len, (0.2 * cub->mlx->height) / cub->map->nb_lines);
+	cub->map->sq_size = fminf((0.2 * cub->mlx->width) / cub->map->max_line_len, (0.2 * cub->mlx->height) / cub->map->nb_lines);
 	// cub->map->sq_size = 60;
-	cub->map->sq_size = 64;
+	// cub->map->sq_size = 64;
 	// cub->map->sq_size = 30;
 	if(cub->map->sq_size < 1) // TODO do a better check esti!!
 		exit(0);

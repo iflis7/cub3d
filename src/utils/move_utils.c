@@ -63,17 +63,18 @@ bool	collision(t_cub *cub)
 
  static void	adjust(t_cub *cub, float dx, float dy, unsigned char flag)
 {
+	// printf("dx = %.2f dy = %.2f\n", dx, dy);
 	if (flag == 'a')
 	{
-		cub->player->instances[0].x += dx * cub->map->sq_size / 10;
-		cub->player->instances[0].y += dy * cub->map->sq_size / 10;
+		cub->player->instances[0].x += (int)(dx * 2);
+		cub->player->instances[0].y += (int)(dy * 2);
 	}
 	if (flag == 's')
 	{
-		cub->player->instances[0].x -= dx * cub->map->sq_size / 10;
-		cub->player->instances[0].y -= dy * cub->map->sq_size / 10;
-
+		cub->player->instances[0].x -= (int)(dx * 2);
+		cub->player->instances[0].y -= (int)(dy * 2);
 	}
+	// printf("%d %d\n", cub->player->instances[0].x, cub->player->instances[0].y);
 }
  
 
@@ -88,11 +89,11 @@ void	move_p_hook(void *param)
 	// {
 		dy = 0;
 		dy = 0;
-		cast_fov(cub);
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_UP) || mlx_is_key_down(cub->mlx, MLX_KEY_W))
 		{
 			dx = cosf(cub->p_a );
 			dy = -sinf(cub->p_a ); 
+			// printf("UP : %f  \n ", cub->p_a);
 			// if(!is_wall(cub, cub->player->instances[0].x  + dx * cub->map->sq_size / 8, cub->player->instances[0].y  + dy * cub->map->sq_size / 8))
 				adjust(cub, dx, dy, 'a');
 		}
@@ -100,6 +101,7 @@ void	move_p_hook(void *param)
 		{
 			dx = cosf(cub->p_a);
 			dy = -sinf(cub->p_a);
+			// printf("DOWN : %f \n  ", cub->p_a);
 			// if(!is_wall(cub, cub->player->instances[0].x  - dx * cub->map->sq_size / 8, cub->player->instances[0].y  - dy * cub->map->sq_size / 8))
 				adjust(cub, dx, dy, 's');
 		}
@@ -116,7 +118,6 @@ void	move_p_hook(void *param)
 			dx = -cosf((cub->p_a - degToRad(90)));
 			dy = sinf((cub->p_a - degToRad(90)));
 
-			printf("%f\n", dx);
 			// if(!is_wall(cub, cub->player->instances[0].x  + dx * cub->map->sq_size / 8, cub->player->instances[0].y  + dy * cub->map->sq_size / 8))
 				adjust(cub, dx, dy, 's');
 			
@@ -135,6 +136,8 @@ void	move_p_hook(void *param)
 			cub->p_a = fix_angle(cub, 0.1, MLX_KEY_LEFT);
 	
 	// }
+		cast_fov(cub);
+		// printf("after: %d %d\n", cub->player->instances[0].x, cub->player->instances[0].y);
 }
 
 bool	get_p_angle(t_cub *cub)

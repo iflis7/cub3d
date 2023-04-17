@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/14 16:54:25 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/17 17:13:50 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	print_mini_map(t_cub *cub)
 
 
 
-// // Function to calculate the distance between two points
+// Function to calculate the distance between two points
 // float get_dist(point_t point1, point_t point2) {
 //     int dx = point2.x - point1.x;
 //     int dy = point2.y - point1.y;
@@ -55,23 +55,24 @@ float	distance(ax, ay, bx, by, ang)
 	return (cos(degToRad(ang)) * (bx - ax) - sin(degToRad(ang)) * (by - ay));
 }
 
-void	draw_wall(t_cub *cub, float dest[2], int pos_x)
+void	draw_wall(t_cub *cub, float ray_a, float dest[2], int pos_x)
 {
 	int j;
-	float dist = (5 / distance(cub->player->instances[0].x, cub->player->instances[0].y, dest[X], dest[Y], cub->p_a)) * HEIGHT;
 	
+	float dist = sqrtf((dest[X] - cub->player->instances[0].x) * (dest[X] - cub->player->instances[0].x) + (dest[Y] - cub->player->instances[0].y) * (dest[Y] - cub->player->instances[0].y));
+	dist = dist * cosf(ray_a - cub->p_a);
+
+	dist= (cub->map->sq_size * HEIGHT / dist) - 100;
 	if (dist > HEIGHT)
 		dist = HEIGHT;
-	// dist = (5 / dist) * HEIGHT;
+		(void) ray_a;
 	j = HEIGHT / 2 - (dist / 2);
 
-	// j = (HEIGHT / 2) - dist;
-	// printf("dist = %.0f   j = %d   dest[X] = %.0f    dest[Y] = %.0f\n", dist, j, dest[X], dest[Y] );
-	// printf("dist = %.0f   j = %d\n", dist, j);
-	while(j <= (HEIGHT / 2) + dist / 2)
+	while(j < (HEIGHT / 2) + dist / 2)
 	{
 		// printf(" j = %d\n",  j);
-		mlx_put_pixel(cub->win, pos_x, j, 0x3b3101);
+		if (j < HEIGHT)
+			mlx_put_pixel(cub->win, pos_x, j, 0xF0F246);
 		j++;
 	}
 }
@@ -89,12 +90,13 @@ bool	cast_ray(t_cub *cub, float angle, int pos_x)
 	px = cub->player->instances[0].x + cub->map->sq_size / 8;
 	py = cub->player->instances[0].y + cub->map->sq_size / 8;
 
-	printf("%f\n", cub->p_a);
+	// printf("%f\n", cub->p_a);
 	cub->ray_x = cos((angle));
 	cub->ray_y = -sin((angle));
 	// printf("pa");
 	while (1)
 	{
+		// pos_x += 5;
 		x = (int)(px + cub->ray_x * i);
 		y = (int)(py + cub->ray_y * i);
 		if (is_wall(cub, x, y))
@@ -104,8 +106,9 @@ bool	cast_ray(t_cub *cub, float angle, int pos_x)
 			// float d = sqrtf(((x - cub->player->instances[0].x) * (x - cub->player->instances[0].x)) + (y - cub->player->instances[0].y) * (y - cub->player->instances[0].y));
 			// draw_wall(cub, dest);
 			// printf("distance: %.0f\n", distance(cub->player->instances[0].x, cub->player->instances[0].y, dest[X], dest[Y], cub->p_a));
-			draw_wall(cub, dest, pos_x);
-			// (void)pos_x;
+			draw_wall(cub, angle, dest, pos_x);
+
+			(void)pos_x;
 			return (false);
 		}
 		mlx_put_pixel(cub->win, x, y, 0xffffffff);
@@ -130,14 +133,14 @@ void	cast_fov(t_cub *cub)
 	{
 		// dest[X] = i;
 		// dest[Y] = start + (degToRad((float)i + incr));
-		cast_ray(cub,  start, i);
-		// printf("%f\n", cub->p_a);
+		cast_ray(cub, start, i);
+		start = normalize_angle(start -= incr);
 		// printf("dest[Y] = %.0f\n", dest[Y]);
 		// draw_wall(cub, dest);
 		// if(cast_ray(cub, start + (degToRad((float) i + incr))))
 		// draw_wall(cub, 200, 600, 700);
 		// incr += incr;
-		start -= incr;
+		// start -= incr;
 		i++;
 	}
 	// printf("end = %.2f\n", rad_to_deg(start + (degToRad((float)i + incr))));
