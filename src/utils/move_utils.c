@@ -66,13 +66,17 @@ bool	collision(t_cub *cub)
 	// printf("dx = %.2f dy = %.2f\n", dx, dy);
 	if (flag == 'a')
 	{
-		cub->player->instances[0].x += (int)(dx * 2);
-		cub->player->instances[0].y += (int)(dy * 2);
+		// cub->player->instances[0].x += (int)(dx * 2);
+		// cub->player->instances[0].y += (int)(dy * 2);
+		cub->coord[X] += dx;
+		cub->coord[Y] += dy;
 	}
 	if (flag == 's')
 	{
-		cub->player->instances[0].x -= (int)(dx * 2);
-		cub->player->instances[0].y -= (int)(dy * 2);
+		// cub->player->instances[0].x -= (int)(dx * 2);
+		// cub->player->instances[0].y -= (int)(dy * 2);
+		cub->coord[X] -= dx;
+		cub->coord[Y] -= dy;
 	}
 	// printf("%d %d\n", cub->player->instances[0].x, cub->player->instances[0].y);
 }
@@ -131,12 +135,14 @@ void	move_p_hook(void *param)
 		// 		adjust(cub, dx, dy, 's');
 		// }
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
-			cub->p_a = fix_angle(cub, 0.1, MLX_KEY_RIGHT);
+			cub->p_a = fix_angle(cub, 0.05, MLX_KEY_RIGHT);
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
-			cub->p_a = fix_angle(cub, 0.1, MLX_KEY_LEFT);
+			cub->p_a = fix_angle(cub, 0.05, MLX_KEY_LEFT);
 	
 	// }
+		print_mini_map(cub);
 		cast_fov(cub);
+		// printf("p_a = %.0f\n", cub->p_a);
 		// printf("after: %d %d\n", cub->player->instances[0].x, cub->player->instances[0].y);
 }
 
@@ -175,8 +181,10 @@ void	get_pcoordinates(t_cub *cub)
 		{
 			if (strchr("NEWS", mini_m->line[i]))
 			{
-				cub->p_x = (i * cub->map->sq_size); // + (cub->map->sq_size
-				cub->p_y = (j * cub->map->sq_size); // + (cub->map->sq_size
+				// cub->p_x = (i * cub->map->sq_size); // + (cub->map->sq_size
+				// cub->p_y = (j * cub->map->sq_size); // + (cub->map->sq_size
+				cub->coord[X] = i * cub->map->sq_size;
+				cub->coord[Y] = j * cub->map->sq_size;
 			}
 			i++;
 		}

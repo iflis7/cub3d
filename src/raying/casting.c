@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/17 17:13:50 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/18 18:00:43 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,9 @@ void	draw_wall(t_cub *cub, float ray_a, float dest[2], int pos_x)
 {
 	int j;
 	
-	float dist = sqrtf((dest[X] - cub->player->instances[0].x) * (dest[X] - cub->player->instances[0].x) + (dest[Y] - cub->player->instances[0].y) * (dest[Y] - cub->player->instances[0].y));
+	float dist = sqrtf((dest[X] - cub->coord[X]) * (dest[X] - cub->coord[X]) + (dest[Y] - cub->coord[Y]) * (dest[Y] - cub->coord[Y]));
 	dist = dist * cosf(ray_a - cub->p_a);
-
-	dist= (cub->map->sq_size * HEIGHT / dist) - 100;
+	dist= (cub->map->sq_size * HEIGHT / dist) ;
 	if (dist > HEIGHT)
 		dist = HEIGHT;
 		(void) ray_a;
@@ -82,13 +81,14 @@ bool	cast_ray(t_cub *cub, float angle, int pos_x)
 	int		i;
 	float	px;
 	float	py;
-	int		x;
-	int		y;
+	float	x;
+	float	y;
 	float dest[2];
 
 	i = 0;
-	px = cub->player->instances[0].x + cub->map->sq_size / 8;
-	py = cub->player->instances[0].y + cub->map->sq_size / 8;
+	px = cub->coord[X] + cub->map->sq_size / 8;
+	py = cub->coord[Y] + cub->map->sq_size / 8;
+	
 
 	// printf("%f\n", cub->p_a);
 	cub->ray_x = cos((angle));
@@ -97,9 +97,9 @@ bool	cast_ray(t_cub *cub, float angle, int pos_x)
 	while (1)
 	{
 		// pos_x += 5;
-		x = (int)(px + cub->ray_x * i);
-		y = (int)(py + cub->ray_y * i);
-		if (is_wall(cub, x, y))
+		x = px + cub->ray_x * i;
+		y = py + cub->ray_y * i;
+		if (is_wall(cub, x, y) || is_wall(cub, x + 1, y + 1) || is_wall(cub, x - 1, y - 1))
 		{
 			dest[X] = x /* * 2 */;
 			dest[Y] = y /* +100 */ ;
@@ -135,7 +135,7 @@ void	cast_fov(t_cub *cub)
 		// dest[Y] = start + (degToRad((float)i + incr));
 		cast_ray(cub, start, i);
 		start = normalize_angle(start -= incr);
-		// printf("dest[Y] = %.0f\n", dest[Y]);
+		// printf("p_a = %.0f\n", cub->p_a);
 		// draw_wall(cub, dest);
 		// if(cast_ray(cub, start + (degToRad((float) i + incr))))
 		// draw_wall(cub, 200, 600, 700);

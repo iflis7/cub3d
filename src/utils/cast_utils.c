@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:49 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/12 13:25:54 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/18 17:31:17 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	print_square(t_cub *cub, uint32_t x, uint32_t y, uint32_t color)
 	i = 0;
 	// printf("dep (%d, %d)\n",x, y);
 	// printf("sq_size: (%ld)\n",cub->map->sq_size);
-	j = y * cub->map->sq_size + 1;
-	while (j <= (y * cub->map->sq_size) + cub->map->sq_size - 1)
+	j = y * cub->map->sq_size;
+	while (j <= (y * cub->map->sq_size) + cub->map->sq_size)
 	{
-		i = x * cub->map->sq_size + 1;
+		i = x * cub->map->sq_size;
 		mlx_put_pixel(cub->win, i, j, color);
-		while (i <= (x * cub->map->sq_size) + cub->map->sq_size - 1)
+		while (i <= (x * cub->map->sq_size) + cub->map->sq_size)
 		{
 			mlx_put_pixel(cub->win, i, j, color);
 			i++;

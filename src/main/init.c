@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/17 16:37:21 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/18 17:34:59 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ void	init_game(t_cub *cub)
 	cub->fov = M_PI / 3;
 	cub->ray_depth = 30;
 	get_p_angle(cub);
+	cub->coord[X] = 0;
+	cub->coord[Y] = 0;
 	get_pcoordinates(cub);
 	cub->win = mlx_new_image(cub->mlx, cub->mlx->width, cub->mlx->height);
 	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_NORMAL);

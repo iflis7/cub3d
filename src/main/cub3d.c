@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/12 11:02:05 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/18 18:01:01 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	main_hook(void *param)
 		}
 		i++;
 	}
-	print_mini_map(cub);
+	// print_mini_map(cub);
 	// print_line(cub->player, cub->p_x, cub->p_x, 0);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub->mlx);
