@@ -6,70 +6,27 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/18 18:00:43 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/19 12:41:54 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	print_mini_map(t_cub *cub)
-{
-	t_mini_m	*mini_m;
-	int			i;
-	int			j;
-	int			dep;
-
-	dep = 0;
-	mini_m = cub->map->mini_m;
-	j = 0;
-	while (mini_m)
-	{
-		i = 0;
-		while (mini_m->line[i])
-		{
-			if (mini_m->line[i] == '1')
-				print_square(cub, i + dep, j, 0);
-				// mlx_image_to_window(cub->mlx, cub->lhid, i + dep, j);
-			else if (mini_m->line[i] != '\n')
-				// mlx_image_to_window(cub->mlx, cub->tagnit, i + dep, j);
-				print_square(cub, i + dep, j, get_rgba(155, 055, 55, 255));
-			i++;
-		}
-		mini_m = mini_m->next;
-		j++;
-	}
-}
-
-
-
-// Function to calculate the distance between two points
-// float get_dist(point_t point1, point_t point2) {
-//     int dx = point2.x - point1.x;
-//     int dy = point2.y - point1.y;
-//     float distance = sqrt(dx * dx + dy * dy);
-//     return distance;
-// }
-
-float	distance(ax, ay, bx, by, ang)
-{
-	return (cos(degToRad(ang)) * (bx - ax) - sin(degToRad(ang)) * (by - ay));
-}
-
 void	draw_wall(t_cub *cub, float ray_a, float dest[2], int pos_x)
 {
-	int j;
-	
-	float dist = sqrtf((dest[X] - cub->coord[X]) * (dest[X] - cub->coord[X]) + (dest[Y] - cub->coord[Y]) * (dest[Y] - cub->coord[Y]));
-	dist = dist * cosf(ray_a - cub->p_a);
-	dist= (cub->map->sq_size * HEIGHT / dist) ;
-	if (dist > HEIGHT)
-		dist = HEIGHT;
-		(void) ray_a;
-	j = HEIGHT / 2 - (dist / 2);
+	int		j;
+	float	dist;
 
-	while(j < (HEIGHT / 2) + dist / 2)
+	dist = sqrtf((dest[X] - cub->coord[X]) * (dest[X] - cub->coord[X])
+			+ (dest[Y] - cub->coord[Y]) * (dest[Y] - cub->coord[Y]));
+	dist = dist * cosf(ray_a - cub->p_a);
+	dist = (cub->map->sq_size * HEIGHT / dist);
+	if (dist >= HEIGHT)
+		dist = HEIGHT;
+	(void)ray_a;
+	j = HEIGHT / 2 - (dist / 2);
+	while (j < (HEIGHT / 2) + dist / 2)
 	{
-		// printf(" j = %d\n",  j);
 		if (j < HEIGHT)
 			mlx_put_pixel(cub->win, pos_x, j, 0xF0F246);
 		j++;
@@ -79,69 +36,27 @@ void	draw_wall(t_cub *cub, float ray_a, float dest[2], int pos_x)
 bool	cast_ray(t_cub *cub, float angle, int pos_x)
 {
 	int		i;
-	float	px;
-	float	py;
 	float	x;
 	float	y;
-	float dest[2];
+	float	dest[2];
 
 	i = 0;
-	px = cub->coord[X] + cub->map->sq_size / 8;
-	py = cub->coord[Y] + cub->map->sq_size / 8;
-	
-
-	// printf("%f\n", cub->p_a);
 	cub->ray_x = cos((angle));
 	cub->ray_y = -sin((angle));
-	// printf("pa");
 	while (1)
 	{
-		// pos_x += 5;
-		x = px + cub->ray_x * i;
-		y = py + cub->ray_y * i;
-		if (is_wall(cub, x, y) || is_wall(cub, x + 1, y + 1) || is_wall(cub, x - 1, y - 1))
+		x = cub->coord[X] + cub->ray_x * i;
+		y = cub->coord[Y] + cub->ray_y * i;
+		if (is_wall(cub, x, y) || is_wall(cub, x + 1, y + 1) || is_wall(cub, x
+				- 1, y - 1))
 		{
-			dest[X] = x /* * 2 */;
-			dest[Y] = y /* +100 */ ;
-			// float d = sqrtf(((x - cub->player->instances[0].x) * (x - cub->player->instances[0].x)) + (y - cub->player->instances[0].y) * (y - cub->player->instances[0].y));
-			// draw_wall(cub, dest);
-			// printf("distance: %.0f\n", distance(cub->player->instances[0].x, cub->player->instances[0].y, dest[X], dest[Y], cub->p_a));
+			dest[X] = x;
+			dest[Y] = y;
 			draw_wall(cub, angle, dest, pos_x);
-
-			(void)pos_x;
 			return (false);
 		}
 		mlx_put_pixel(cub->win, x, y, 0xffffffff);
 		i++;
 	}
 	return (true);
-}
-
-void	cast_fov(t_cub *cub)
-{
-	float	i;
-	float	incr;
-	float	start;
-	// float dest[2];
-
-	i = 0;
-	incr = 0;
-	start = cub->p_a + cub->fov / 2;
-	incr = cub->fov / WIDTH;
-	// printf("fov = %.2f pa= %.2f INCR= %.2f start = %.2f\n", rad_to_deg(cub->fov), rad_to_deg(cub->p_a), incr, rad_to_deg(start));
-	while (i < WIDTH)
-	{
-		// dest[X] = i;
-		// dest[Y] = start + (degToRad((float)i + incr));
-		cast_ray(cub, start, i);
-		start = normalize_angle(start -= incr);
-		// printf("p_a = %.0f\n", cub->p_a);
-		// draw_wall(cub, dest);
-		// if(cast_ray(cub, start + (degToRad((float) i + incr))))
-		// draw_wall(cub, 200, 600, 700);
-		// incr += incr;
-		// start -= incr;
-		i++;
-	}
-	// printf("end = %.2f\n", rad_to_deg(start + (degToRad((float)i + incr))));
 }

@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/18 17:05:59 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/19 12:47:58 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct s_map
 	UINT		ceil;
 	int			max_line_len;
 	size_t		sq_size;
-	// int			chunk_cub;
 	int			nb_lines;
 }				t_map;
 
@@ -68,13 +67,12 @@ typedef struct s_cub
 	mlx_image_t	*player;
 	mlx_image_t	*lhid;
 	mlx_image_t	*tagnit;
-	// mlx_image_t	*floor;
-	// mlx_image_t	*wall;
 	int			dest[2];
 	size_t		p_x;
 	size_t		p_y;
 	float		coord[2];
 	char		p_dir;
+	float		odo;
 	float		p_a;
 	float		ray_x;
 	float		ray_y;
@@ -82,7 +80,6 @@ typedef struct s_cub
 	float		pdx;
 	float		pdy;
 	float		fov;
-	int			ray_depth;
 
 }				t_cub;
 
@@ -100,17 +97,13 @@ t_cub			*init_cub(void);
 bool			manage_settings(t_map *map, char *line);
 // TODO move to utils.h
 bool			only_ones(char *line);
-
 bool			first_and_last(t_cub *cub, char *line);
 void			print_mini_map(t_cub *cub);
-void			print_mini_p(mlx_image_t *win, uint32_t x, uint32_t y,
-					uint32_t color);
-
 /* ***************  COLOR  *************** */
 void			load_color(UINT *c, char *line);
 
 /* ***************  MINI_MAP  *************** */
-bool			img_init(t_cub *cub);
+// bool			img_init(t_cub *cub);
 void			moves_hook(void *param);
 void			print_mini_map(t_cub *cub);
 void			print_square(t_cub *cub, uint32_t x, uint32_t y,
@@ -120,19 +113,16 @@ UINT			get_rgba(int r, int g, int b, int a);
 void			move_p_hook(void *param);
 bool			get_p_angle(t_cub *cub);
 
+/* ***************  MOVE_UTILS  *************** */
+void			rotate(t_cub *cub);
 /* ***************  RAYCASTING  *************** */
 
 void			draw_fov(t_cub *cub);
-float			rad_to_deg(float a);
 float			normalize_angle(float angle);
-float			degToRad(float a);
+float			deg_to_rad(float a);
 bool			cast_ray(t_cub *cub, float angle, int pos_x);
 void			cast_fov(t_cub *cub);
 bool			is_wall(t_cub *cub, int32_t destx, int32_t desty);
 void			get_pcoordinates(t_cub *cub);
-void			draw_ray(t_cub *cub, int length);
 void			print_mini_map(t_cub *cub);
-void			print_line(mlx_image_t *win, uint32_t x, uint32_t y,
-					uint32_t color);
-
 #endif
