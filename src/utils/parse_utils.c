@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/20 19:39:54 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/20 19:54:16 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,12 +139,10 @@ bool	flood_fill_check(t_cub *cub)
 }
 
 /**
-
-	* @brief Check if the srrounding elements are walls using the flood fill algo recursively
+ * @brief Check if the srrounding elements are walls using the flood fill algo recursively
  * 
  * @param cub The cub structure
-
-	* @param new_map  The map where the old map is copied (to be able to change elements)
+ * @param new_map  The map where the old map is copied (to be able to change elements)
  * @param i The x coordinates of the player
  * @param j The y coordinates of the player
  * @return true if everything is surrounded by walls
