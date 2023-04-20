@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/20 12:57:01 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/20 12:59:16 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ bool	flood_fill_check(t_cub *cub)
 		new_map[i] = ft_calloc(cub->map->width, sizeof(bool));
 		if (!new_map[i])
 		{
-			// free_ptrarr((void**)new_map);
+			// free_ptrarr((void**)new_map); // TODO check libft free 2D array funct
 			return (ft_msg_err("Map isn't surrounded by wall"));
 		}
 		i++;
