@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/20 12:49:04 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/20 19:41:19 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,7 @@ typedef struct s_map
 	char		*east;
 	UINT		floor;
 	UINT		ceil;
-	int			max_line_len;
 	size_t		sq_size;
-	int			nb_lines;
 }				t_map;
 
 typedef struct s_cub
@@ -94,14 +92,12 @@ void			init_game(t_cub *cub);
 bool			parse_map(t_cub *cub, char *file);
 t_cub			*init_cub(void);
 
-bool	flood_fill_check(t_cub *cub);
-// bool flood_fill(t_map *map, char **new_map, int row, int col);
-bool	floodfill(t_cub *cub, bool **filled_map, int i, int j);
-
+bool			flood_fill_check(t_cub *cub);
+bool			floodfill(t_cub *cub, bool **filled_map, int i, int j);
+void			print_map(char **mini_m);
 bool			manage_settings(t_map *map, char *line);
+
 // TODO move to utils.h
-bool			only_ones(char *line);
-bool			first_and_last(t_cub *cub, char *line);
 void			print_mini_map(t_cub *cub);
 /* ***************  COLOR  *************** */
 void			load_color(UINT *c, char *line);
@@ -129,4 +125,6 @@ void			cast_fov(t_cub *cub);
 bool			is_wall(t_cub *cub, int32_t destx, int32_t desty);
 void			get_pcoordinates(t_cub *cub);
 void			print_mini_map(t_cub *cub);
+int				ft_msg_err_close(char *error, int *fd);
+bool			valid_elements(t_cub *cub, char c);
 #endif

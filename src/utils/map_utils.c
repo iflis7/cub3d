@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/03/06 20:00:20 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/20 18:33:29 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,17 @@ void	print_map_lines(t_mini_m *mini_m)
 	{
 		printf("%s\n", mini_m->line);
 		mini_m = mini_m->next;
+	}
+	printf("\n ----------- No More map motherfuckers ----------- \n\n");
+}
+
+void	print_map(char **mini_m)
+{
+	printf("\n ----------- Here is the map motherfuckers ----------- \n\n");
+	int i = 0;
+	while (mini_m && mini_m[i])
+	{
+		printf("%s\n", mini_m[i++]);
 	}
 	printf("\n ----------- No More map motherfuckers ----------- \n\n");
 }

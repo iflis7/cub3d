@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/20 12:59:16 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/20 19:39:54 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,7 @@
  * @return false returns false if the charactere is not valid
  */
 bool	valid_elements(t_cub *cub, char c)
-// it returns invalid!
 {
-	// static char news[1];
-	// cub->p_dir =
-
 	if ((c == '0' || c == '1') || ((c == 'N' || c == 'E' || c == 'W'
 				|| c == 'S') && cub->p_dir == 0))
 	{
@@ -41,57 +37,6 @@ bool	valid_elements(t_cub *cub, char c)
 	}
 	else
 		return (false);
-}
-
-/**
- * @brief Check if the first and last charactere of the line are 1
- * 
- * @param line The line to check
- * @return true Returns true if the first and last charactere are 1
- * @return false Returns false if the first and last charactere are not 1
- */
-bool	first_and_last(t_cub *cub, char *line)
-{
-	int	i;
-	// int	flag;
-	// int	len;
-
-	i = 0;
-	// flag = 0;
-	// len = strlen(line) - 1;
-	while (line && line[i])
-	{
-		if (!valid_elements(cub, line[i]) && !ft_iswhitespace(line[i]))
-		// if (!valid_elements(cub, line[i]))
-			return (false);
-		// else if (ft_isdigit(line[i]) && !flag && line[i] == '1')
-		// 	flag = 1;
-		// else if (i == len && ft_isdigit(line[len]) && line[len] != '1')
-		// 	return (false);
-		i++;
-	}
-	return (true);
-}
-
-/**
- * @brief Check if the line is composed only of 1
- * 
- * @param line The line to check
- * @return true Returns true if the line is composed only of 1
- * @return false Returns false if the line is not composed only of 1
- */
-bool	only_ones(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (!ft_iswhitespace(line[i]) && line[i] != '1')
-			return (false);
-		i++;
-	}
-	return (true);
 }
 
 /**
@@ -126,39 +71,88 @@ char	*get_identifier(char *line_in, char *str)
 	}
 }
 
-bool	flood_fill_check(t_cub *cub) 
+/**
+ * @brief Get the player pos object
+ * 
+ * @param map the map to check
+ * @param pos te array where to store the X and Y positions
+ * @return true if ther are player positions
+ * @return false if no player positions
+ */
+bool	get_player_pos(char **map, size_t *pos)
 {
-	size_t		x;
-	size_t		y;
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map && map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'N' || map[i][j] == 'E' || map[i][j] == 'W'
+				|| map[i][j] == 'S')
+			{
+				pos[0] = i;
+				pos[1] = j;
+				return (true);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (false);
+}
+
+/**
+ * @brief Check if the srrounding elements are walls using the flood fill algo 
+ *  Copy the map to new one, get the initial position of the player
+ * @param cub the cub structure
+ * @return true if everything is surrounded by walls
+ * @return false if not everything is surrounded by walls
+ */
+bool	flood_fill_check(t_cub *cub)
+{
+	size_t	pos[2];
 	int		i;
 	bool	**new_map;
 	bool	is_surrounded;
 
-	x = cub->p_x;
-	y = cub->p_x;
-	new_map = ft_calloc(cub->map->height + 1, sizeof(bool*));
+	get_player_pos(cub->map->map, pos);
+	new_map = ft_calloc(cub->map->height + 1, sizeof(bool *));
 	i = 0;
 	while (i < cub->map->height)
 	{
 		new_map[i] = ft_calloc(cub->map->width, sizeof(bool));
 		if (!new_map[i])
-		{
-			// free_ptrarr((void**)new_map); // TODO check libft free 2D array funct
-			return (ft_msg_err("Map isn't surrounded by wall"));
+		{ // free_ptrarr((void**)new_map);
+			// TODO check libft free 2D array funct
+			return (ft_msg_err("Map isn't surrounded by wall!"));
 		}
 		i++;
 	}
-	is_surrounded = floodfill(cub, new_map, y, x);
+	is_surrounded = floodfill(cub, new_map, pos[0], pos[1]);
 	// free_ptrarr((void**)new_map);
 	if (!is_surrounded)
 		return (ft_msg_err("Map isn't surrounded by wall"));
-	return (0);
+	return (true);
 }
 
+/**
+
+	* @brief Check if the srrounding elements are walls using the flood fill algo recursively
+ * 
+ * @param cub The cub structure
+
+	* @param new_map  The map where the old map is copied (to be able to change elements)
+ * @param i The x coordinates of the player
+ * @param j The y coordinates of the player
+ * @return true if everything is surrounded by walls
+ * @return false if not everything is surrounded by walls
+ */
 bool	floodfill(t_cub *cub, bool **new_map, int i, int j)
 {
-	bool	is_surrounded;
-
+	bool is_surrounded;
 	if (i < 0 || i >= cub->map->height || j < 0 || j >= cub->map->width)
 		return (false);
 	if (cub->map->map[i][j] == '1' || new_map[i][j] == true)
@@ -170,5 +164,6 @@ bool	floodfill(t_cub *cub, bool **new_map, int i, int j)
 	is_surrounded &= floodfill(cub, new_map, i + 1, j);
 	is_surrounded &= floodfill(cub, new_map, i, j - 1);
 	is_surrounded &= floodfill(cub, new_map, i, j + 1);
+	// printf("is_surrounded: %d\n", is_surrounded);
 	return (is_surrounded);
 }
