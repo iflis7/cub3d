@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/20 19:34:20 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/20 19:46:35 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ bool	map_is_valid(t_cub *cub)
 	mini_m = cub->map->mini_m;
 	while (mini_m)
 	{
-		// mini_m->line)))
-		// 	return (false);
 		if (mini_m->prev && mini_m->next)
 		{
 			i = 0;
