@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/03/06 20:03:59 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/20 12:52:11 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ bool	map_is_valid(t_cub *cub)
 	mini_m = cub->map->mini_m;
 	while (mini_m)
 	{
-		if ((!mini_m->prev || !mini_m->next) && !only_ones(mini_m->line))
-			return (false);
-		else if (((mini_m->prev && mini_m->next) && !first_and_last(cub,
+		// if ((!mini_m->prev || !mini_m->next) && !only_ones(mini_m->line))
+		// 	return (false);
+		if (((mini_m->prev && mini_m->next) && !first_and_last(cub,
 						mini_m->line)))
 			return (false);
 		mini_m = mini_m->next;
@@ -135,6 +135,8 @@ bool	parse_map(t_cub *cub, char *file)
 		return (ft_msg_err("Invalid map!"));
 	cub->map->map = switch_toarray(cub->map);
 	if(!cub->map->map)
+		return false;
+	if(!flood_fill_check(cub))
 		return false;
 	return (true);
 }

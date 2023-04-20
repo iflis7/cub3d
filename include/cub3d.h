@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/19 12:47:58 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/20 12:49:04 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_map
 	char		**map;
 	char		**mini_map;
 	t_mini_m	*mini_m;
-	char		*north; // TODO change to mlx_image_t once the image is loaded
+	char *north; // TODO change to mlx_image_t once the image is loaded
 	char		*south;
 	char		*west;
 	char		*east;
@@ -93,6 +93,10 @@ void			init_game(t_cub *cub);
 /* ***************  PARSING  *************** */
 bool			parse_map(t_cub *cub, char *file);
 t_cub			*init_cub(void);
+
+bool	flood_fill_check(t_cub *cub);
+// bool flood_fill(t_map *map, char **new_map, int row, int col);
+bool	floodfill(t_cub *cub, bool **filled_map, int i, int j);
 
 bool			manage_settings(t_map *map, char *line);
 // TODO move to utils.h
