@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/20 19:46:35 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/20 20:08:02 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ bool	map_is_valid(t_cub *cub)
  * @param cub The cub structure
  * @param line The line to check and add
  */
-static void	incerement(t_cub *cub, char *line)
+static void	increment(t_cub *cub, char *line)
 {
 	ft_mini_m_add_back(&cub->map->mini_m, line);
 	cub->map->height++;
@@ -82,7 +82,7 @@ bool	store_map(t_cub *cub, int fd)
 		if (!is_empty_line(line))
 		{
 			if (is_map_line(line) == 1)
-				incerement(cub, line);
+				increment(cub, line);
 			else if (is_map_line(line) == 2)
 				manage_settings(cub->map, line);
 			else if (is_map_line(line) == 3)

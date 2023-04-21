@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/20 18:33:29 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/20 22:31:45 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,10 @@ void	print_map_lines(t_mini_m *mini_m)
 
 void	print_map(char **mini_m)
 {
+	int	i;
+
 	printf("\n ----------- Here is the map motherfuckers ----------- \n\n");
-	int i = 0;
+	i = 0;
 	while (mini_m && mini_m[i])
 	{
 		printf("%s\n", mini_m[i++]);
@@ -133,17 +135,15 @@ void	print_map(char **mini_m)
 bool	manage_settings(t_map *map, char *line)
 {
 	// TODO add access_test for the path
-	if (access_test(get_identifier(line, "NO"), ".png"))
-	{
-		map->north = "Mabla";
-		// map->north = get_identifier(line, "NO");
-	}
-	// else if (access_test(get_identifier(line, "SO"), ".png"))
-	// 	map->south = get_identifier(line, "SO");
-	// else if (access_test(get_identifier(line, "WE"), ".png"))
-	// 	map->west = get_identifier(line, "WE");
-	// else if (access_test(get_identifier(line, "EA"), ".png"))
-	// 	map->east = get_identifier(line, "EA");
+	// printf("xpm: %p\n", map->north);
+	if (access_test(get_identifier(line, "NO"), ".xpm"))
+		map->north = mlx_load_xpm42(convert_path(get_identifier(line, "NO")));
+	else if (access_test(get_identifier(line, "SO"), ".xpm"))
+		map->south = mlx_load_xpm42(convert_path(get_identifier(line, "SO")));
+	else if (access_test(get_identifier(line, "WE"), ".xpm"))
+		map->west = mlx_load_xpm42(convert_path(get_identifier(line, "WE")));
+	else if (access_test(get_identifier(line, "EA"), ".xpm"))
+		map->east = mlx_load_xpm42(convert_path(get_identifier(line, "EA")));
 	// else if (get_identifier(line, "F")) // TODO add color check
 	// 	// map->floor = (UINT *)get_identifier(line, "F");
 	// 	// TODO convert the color to hex
@@ -152,7 +152,7 @@ bool	manage_settings(t_map *map, char *line)
 	// 	// 	map->ceil = (UINT *)get_identifier(line, "C");
 	// 	// TODO convert the color to hex
 	// 	load_color(&map->ceil, get_identifier(line, "C"));
-	// else
-	// 	return (false);
+	else
+		return (false);
 	return (true);
 }

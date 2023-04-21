@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/20 19:41:19 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/20 20:28:11 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ typedef struct s_map
 	char		**map;
 	char		**mini_map;
 	t_mini_m	*mini_m;
-	char *north; // TODO change to mlx_image_t once the image is loaded
-	char		*south;
-	char		*west;
-	char		*east;
+	xpm_t 		*north; // TODO change to mlx_image_t
+	xpm_t		*south;
+	xpm_t		*west;
+	xpm_t		*east;
 	UINT		floor;
 	UINT		ceil;
 	size_t		sq_size;

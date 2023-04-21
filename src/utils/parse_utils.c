@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/20 19:54:16 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/20 22:11:17 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*get_identifier(char *line_in, char *str)
 	int		i;
 	char	*line;
 
-	// printf("get shit!!\n");
+	// printf("line_in!! %s\n", line_in);
 	i = 0;
 	line = ft_strtrim(line_in, "\n");
 	while (line && line[i] && ft_iswhitespace(line[i]))
@@ -62,6 +62,8 @@ char	*get_identifier(char *line_in, char *str)
 		i += strlen(str);
 		while (ft_iswhitespace(line[i]))
 			i++;
+		printf("&line[i]!! |%s|\n", &line[i]);
+		// convert_path(&line[i]);
 		return (&line[i]);
 	}
 	else

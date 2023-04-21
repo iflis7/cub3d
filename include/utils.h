@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:24:08 by loadjou           #+#    #+#             */
-/*   Updated: 2023/02/07 13:39:38 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/20 20:23:30 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,6 @@ typedef struct s_mini_m
 /*                                 FUNCTIONS                                 */
 /* *************** ***************           *************** *************** */
 
-/* ***************  CAST_UTILS  *************** */
-// bool	get_p_angle(t_cub *cub, char c);
-
 /* ***************  LOGS  *************** */
 int ft_msg_err(char *error);
 
@@ -47,8 +44,6 @@ int is_map_line(char *line);
 /* ***************  PARSE_UTILS  *************** */
 void print_map_lines(t_mini_m *line);
 char *get_identifier(char *line, char *str);
-
-
 
 /* ***************  LST_OPS  *************** */
 t_mini_m *ft_mini_mnew(char *line);

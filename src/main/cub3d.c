@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/20 18:54:33 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/20 21:58:28 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	main(int argc, char **argv)
 			ft_msg_err("Bad Map Buddy!");
 		init_game(cub);
 		print_map_lines(cub->map->mini_m);
+		printf("xpm: %p\n", cub->map->north);
 		// mlx_loop_hook(cub->mlx, &main_hook, cub);
 		// mlx_loop_hook(cub->mlx, &move_p_hook, cub);
 		// mlx_loop(cub->mlx);
