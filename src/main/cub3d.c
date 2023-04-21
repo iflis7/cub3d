@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/20 21:58:28 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/21 14:38:09 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	main_hook(void *param)
 		while (j < cub->mlx->height)
 		{
 			if (j < cub->mlx->height / 2)
-				mlx_put_pixel(cub->win, i, j, get_rgba(0, 0, 255, 100));
+				mlx_put_pixel(cub->win, i, j, cub->map->ceil);
 			if (j > cub->mlx->height / 2)
-				mlx_put_pixel(cub->win, i, j, get_rgba(155, 055, 55, 255));
+				mlx_put_pixel(cub->win, i, j, cub->map->floor);
 			j++;
 		}
 		i++;
@@ -47,12 +47,10 @@ int	main(int argc, char **argv)
 		if(!parse_map(cub, argv[1]))
 			ft_msg_err("Bad Map Buddy!");
 		init_game(cub);
-		print_map_lines(cub->map->mini_m);
-		printf("xpm: %p\n", cub->map->north);
-		// mlx_loop_hook(cub->mlx, &main_hook, cub);
-		// mlx_loop_hook(cub->mlx, &move_p_hook, cub);
-		// mlx_loop(cub->mlx);
-		// mlx_terminate(cub->mlx);
+		mlx_loop_hook(cub->mlx, &main_hook, cub);
+		mlx_loop_hook(cub->mlx, &move_p_hook, cub);
+		mlx_loop(cub->mlx);
+		mlx_terminate(cub->mlx);
 		return (EXIT_SUCCESS);
 	}
 	else

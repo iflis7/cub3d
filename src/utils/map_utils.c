@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/20 22:31:45 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/21 14:39:50 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,6 @@ void	print_map(char **mini_m)
  */
 bool	manage_settings(t_map *map, char *line)
 {
-	// TODO add access_test for the path
-	// printf("xpm: %p\n", map->north);
 	if (access_test(get_identifier(line, "NO"), ".xpm"))
 		map->north = mlx_load_xpm42(convert_path(get_identifier(line, "NO")));
 	else if (access_test(get_identifier(line, "SO"), ".xpm"))
@@ -144,14 +142,10 @@ bool	manage_settings(t_map *map, char *line)
 		map->west = mlx_load_xpm42(convert_path(get_identifier(line, "WE")));
 	else if (access_test(get_identifier(line, "EA"), ".xpm"))
 		map->east = mlx_load_xpm42(convert_path(get_identifier(line, "EA")));
-	// else if (get_identifier(line, "F")) // TODO add color check
-	// 	// map->floor = (UINT *)get_identifier(line, "F");
-	// 	// TODO convert the color to hex
-	// 	load_color(&map->floor, get_identifier(line, "F"));
-	// else if (get_identifier(line, "C"))
-	// 	// 	map->ceil = (UINT *)get_identifier(line, "C");
-	// 	// TODO convert the color to hex
-	// 	load_color(&map->ceil, get_identifier(line, "C"));
+	else if (get_identifier(line, "F")) 
+		load_color(&map->floor, get_identifier(line, "F"));
+	else if (get_identifier(line, "C"))
+		load_color(&map->ceil, get_identifier(line, "C"));
 	else
 		return (false);
 	return (true);
