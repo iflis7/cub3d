@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 19:05:30 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 19:16:42 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ typedef struct s_cub
 	mlx_image_t	*win;
 	t_map		*map;
 	int			dest[2];
+	float		coord[2];
 	size_t		p_x;
 	size_t		p_y;
-	float		coord[2];
 	char		p_dir;
 	float		odo;
 	float		p_a;
@@ -92,7 +92,7 @@ void			init_game(t_cub *cub);
 bool			parse_map(t_cub *cub, char *file);
 t_cub			*init_cub(void);
 bool			flood_fill_check(t_cub *cub);
-bool			floodfill(t_cub *cub, bool **filled_map, int i, int j);
+bool			floodfill(t_cub *cub, char **filled_map, int i, int j);
 void			print_map(char **mini_m);
 bool			manage_settings(t_map *map, char *line);
 

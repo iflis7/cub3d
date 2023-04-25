@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/20 20:08:02 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/25 19:11:04 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ static void	increment(t_cub *cub, char *line)
  * @param fd The file descriptor of th`e map file
  * @return Bool Returns true if the map is valid, false if not
  */
-bool	store_map(t_cub *cub, int fd)
+bool	store_map(t_cub *cub, int fd) // TODO reduce to 25 lines
 {
-	char	*line;
+	char *line;
 
 	line = get_next_line(fd);
 	if (!line)

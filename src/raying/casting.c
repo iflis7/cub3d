@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 18:45:26 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 19:17:34 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	draw_wall(t_cub *cub, float ray_a, float dest[2], int pos_x)
 {
-	int		j;
-	float	dist;
-	uint32_t color;
+	int			j;
+	float		dist;
+	uint32_t	color;
 
 	dist = sqrtf((dest[X] - cub->coord[X]) * (dest[X] - cub->coord[X])
 			+ (dest[Y] - cub->coord[Y]) * (dest[Y] - cub->coord[Y]));
@@ -27,8 +27,10 @@ void	draw_wall(t_cub *cub, float ray_a, float dest[2], int pos_x)
 	j = HEIGHT / 2 - (dist / 2);
 	while (j < (HEIGHT / 2) + dist / 2)
 	{
-		color = get_px(&cub->map->east->texture, pos_x % cub->map->east->texture.width, j % cub->map->east->texture.height);
-			mlx_put_pixel(cub->win, pos_x, j, color);
+		color = get_px(&cub->map->east->texture, pos_x
+				% cub->map->east->texture.width, j
+				% cub->map->east->texture.height);
+		mlx_put_pixel(cub->win, pos_x, j, color);
 		j++;
 	}
 }
@@ -47,7 +49,8 @@ bool	cast_ray(t_cub *cub, float angle, int pos_x)
 	{
 		x = cub->coord[X] + cub->ray_x * i;
 		y = cub->coord[Y] + cub->ray_y * i;
-		if (is_wall(cub, x, y) && is_wall(cub, x + 1, y + 1) && is_wall(cub, x - 1, y - 1))
+		if (is_wall(cub, x, y) && is_wall(cub, x + 1, y + 1) && is_wall(cub, x
+				- 1, y - 1))
 		{
 			dest[X] = x;
 			dest[Y] = y;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/21 14:39:50 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/25 19:11:13 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	access_test(char *file, char *ext)
  * @param line The line to check
  * @return bool Returns true if the line is  empty, false if not
  */
-
 bool	is_empty_line(char *line)
 {
 	int	i;
@@ -142,7 +141,7 @@ bool	manage_settings(t_map *map, char *line)
 		map->west = mlx_load_xpm42(convert_path(get_identifier(line, "WE")));
 	else if (access_test(get_identifier(line, "EA"), ".xpm"))
 		map->east = mlx_load_xpm42(convert_path(get_identifier(line, "EA")));
-	else if (get_identifier(line, "F")) 
+	else if (get_identifier(line, "F"))
 		load_color(&map->floor, get_identifier(line, "F"));
 	else if (get_identifier(line, "C"))
 		load_color(&map->ceil, get_identifier(line, "C"));

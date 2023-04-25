@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 12:23:39 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/19 12:48:15 by loadjou          ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/04/25 19:10:18 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../include/cub3d.h"
 
@@ -55,4 +56,30 @@ bool	get_p_angle(t_cub *cub)
 		temp = temp->next;
 	}
 	return (true);
+}
+
+char	**duplicate_map(char **map)
+{
+	int		n;
+	char	**new_map;
+
+	n = 0;
+	while (map[n])
+		n++;
+	new_map = (char **)malloc((n + 1) * sizeof(char *));
+	memcpy(new_map, map, (n + 1) * sizeof(char *));
+	return (new_map);
+}
+
+void	free_map(char **map)
+{
+	int	n;
+
+	n = 0;
+	while (map[n])
+	{
+		free(map[n]);
+		n++;
+	}
+	free(map);
 }
