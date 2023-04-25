@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 18:00:08 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 19:05:30 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,11 @@
 # define PI 3.14159265359
 # define X 0
 # define Y 1
-// # define HEIGHT 1080
 
+# define WE 0
+# define SO 1
+# define EA 2
+# define NO 3
 
 /* *************** ***************           *************** *************** */
 /*                                   STRUCTS                                 */
@@ -63,9 +66,6 @@ typedef struct s_cub
 	mlx_t		*mlx;
 	mlx_image_t	*win;
 	t_map		*map;
-	mlx_image_t	*player;
-	mlx_image_t	*lhid;
-	mlx_image_t	*tagnit;
 	int			dest[2];
 	size_t		p_x;
 	size_t		p_y;
@@ -80,7 +80,6 @@ typedef struct s_cub
 	float		pdx;
 	float		pdy;
 	float		fov;
-
 }				t_cub;
 
 /* *************** ***************           *************** *************** */
@@ -89,11 +88,9 @@ typedef struct s_cub
 
 /* ***************  INIT  *************** */
 void			init_game(t_cub *cub);
-
 /* ***************  PARSING  *************** */
 bool			parse_map(t_cub *cub, char *file);
 t_cub			*init_cub(void);
-
 bool			flood_fill_check(t_cub *cub);
 bool			floodfill(t_cub *cub, bool **filled_map, int i, int j);
 void			print_map(char **mini_m);
@@ -126,6 +123,7 @@ bool			cast_ray(t_cub *cub, float angle, int pos_x);
 void			cast_fov(t_cub *cub);
 bool	fov(t_cub *cub, float angle);
 void	draw_fov(t_cub *cub);
+int get_text_dir(t_cub *cub, float angle);
 uint32_t    get_px(mlx_texture_t	*buff, int x, int y);
 bool			is_wall(t_cub *cub, float destx, float desty);
 void			get_pcoordinates(t_cub *cub);

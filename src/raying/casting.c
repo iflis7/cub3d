@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 18:24:24 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 18:45:26 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	draw_wall(t_cub *cub, float ray_a, float dest[2], int pos_x)
 	while (j < (HEIGHT / 2) + dist / 2)
 	{
 		color = get_px(&cub->map->east->texture, pos_x % cub->map->east->texture.width, j % cub->map->east->texture.height);
-		// if (j < HEIGHT)
 			mlx_put_pixel(cub->win, pos_x, j, color);
 		j++;
 	}

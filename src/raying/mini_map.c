@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:25:28 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 17:23:22 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 18:48:39 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	print_mini_map(t_cub *cub)
 			if (mini_m->line[i] == '1')
 				print_square(cub, i + dep, j, 0);
 			else if (mini_m->line[i] != '\n')
-				print_square(cub, i + dep, j, get_rgba(155, 055, 55, 255));
+				print_square(cub, i + dep, j, get_rgba(155, 55, 55, 255));
 			i++;
 		}
 		mini_m = mini_m->next;
