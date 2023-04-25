@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 15:39:18 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/25 19:10:07 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@
 /* *************** ***************           *************** *************** */
 /*                                   MACROS                                  */
 /* *************** ***************           *************** *************** */
-# define WIDTH 1920
+# define WIDTH 1920	
+# define HEIGHT 1080
 # define PI 3.14159265359
 # define X 0
 # define Y 1
 // # define HEIGHT 1080
 
-# define HEIGHT 1000
 
 /* *************** ***************           *************** *************** */
 /*                                   STRUCTS                                 */
@@ -54,7 +54,8 @@ typedef struct s_map
 	xpm_t		*east;
 	UINT		floor;
 	UINT		ceil;
-	size_t		sq_size;
+	float		sq_size;
+	float		cell_size;
 }				t_map;
 
 typedef struct s_cub
@@ -66,12 +67,13 @@ typedef struct s_cub
 	mlx_image_t	*lhid;
 	mlx_image_t	*tagnit;
 	int			dest[2];
+	float		coord[2];
 	size_t		p_x;
 	size_t		p_y;
-	float		coord[2];
 	char		p_dir;
 	float		odo;
 	float		p_a;
+	float		starting_a;
 	float		ray_x;
 	float		ray_y;
 	float		ray_a;
@@ -122,7 +124,10 @@ float			normalize_angle(float angle);
 float			deg_to_rad(float a);
 bool			cast_ray(t_cub *cub, float angle, int pos_x);
 void			cast_fov(t_cub *cub);
-bool			is_wall(t_cub *cub, int32_t destx, int32_t desty);
+bool	fov(t_cub *cub, float angle);
+void	draw_fov(t_cub *cub);
+uint32_t    get_px(mlx_texture_t	*buff, int x, int y);
+bool			is_wall(t_cub *cub, float destx, float desty);
 void			get_pcoordinates(t_cub *cub);
 void			print_mini_map(t_cub *cub);
 int				ft_msg_err_close(char *error, int *fd);

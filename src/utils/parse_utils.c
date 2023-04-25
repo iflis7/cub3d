@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/25 17:14:22 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/25 19:11:19 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,3 +158,4 @@ bool	floodfill(t_cub *cub, char **new_map, int i, int j)
 	is_surrounded &= floodfill(cub, new_map, i, j + 1);
 	return (is_surrounded);
 }
+

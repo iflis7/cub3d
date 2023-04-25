@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/25 16:16:33 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/25 19:10:58 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	init_game(t_cub *cub)
 	if (cub->map->sq_size < 1)
 		cub->map->sq_size = 1;
 	cub->map->mini_map = ft_calloc(cub->map->height + 1, sizeof(char *));
-	cub->fov = M_PI / 2;
+	cub->fov = M_PI / 3;
 	get_p_angle(cub);
 	get_pcoordinates(cub);
 	cub->win = mlx_new_image(cub->mlx, cub->mlx->width, cub->mlx->height);

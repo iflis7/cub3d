@@ -27,7 +27,7 @@ endif
 MAIN = cub3d init
 PARSING = parsing
 UTILS = utils logs map_utils list_ops parse_utils color cast_utils move_utils moves
-RAYING = casting fov mini_map
+RAYING = casting fov mini_map texture
 
 SRCS = $(addsuffix .c, $(addprefix src/main/, $(MAIN))) \
 	   $(addsuffix .c, $(addprefix src/parsing/, $(PARSING))) \
