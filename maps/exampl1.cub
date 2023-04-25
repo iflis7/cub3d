@@ -1,27 +1,14 @@
-WE assets/wolftextures1.png
-SO assets/wolftextures2.png
-EA assets/wolftextures.png
-NO assets/wolftextures3.png
+WE assets/wolftextures1.xpm
+SO assets/wolftextures2.xpm
+EA assets/wolftextures1.xpm
+NO assets/wolftextures1.xpm
 
 F 255,0,0
 C 255,255,0
 
-
-1111111
-1000101
-1000001
-1000001
-1000001
-1000001
-1000001
-1000001
-1000001
-1000001
-1000001
-1000001
-1000001
-1000001
-1000001
-1100001
-1W00001
-1111111
+11111
+10001
+10000
+10001
+10N01
+11111

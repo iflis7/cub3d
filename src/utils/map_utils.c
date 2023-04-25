@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/03/06 20:00:20 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 17:12:20 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	access_test(char *file, char *ext)
  * @param line The line to check
  * @return bool Returns true if the line is  empty, false if not
  */
-
 bool	is_empty_line(char *line)
 {
 	int	i;
@@ -112,6 +111,19 @@ void	print_map_lines(t_mini_m *mini_m)
 	printf("\n ----------- No More map motherfuckers ----------- \n\n");
 }
 
+void	print_map(char **mini_m)
+{
+	int	i;
+
+	printf("\n ----------- Here is the map motherfuckers ----------- \n\n");
+	i = 0;
+	while (mini_m && mini_m[i])
+	{
+		printf("%s\n", mini_m[i++]);
+	}
+	printf("\n ----------- No More map motherfuckers ----------- \n\n");
+}
+
 /**
  * @brief Nabage setting lines and store them in the map struct
  *
@@ -121,27 +133,19 @@ void	print_map_lines(t_mini_m *mini_m)
  */
 bool	manage_settings(t_map *map, char *line)
 {
-	// TODO add access_test for the path
-	if (access_test(get_identifier(line, "NO"), ".png"))
-	{
-		map->north = "Mabla";
-		// map->north = get_identifier(line, "NO");
-	}
-	// else if (access_test(get_identifier(line, "SO"), ".png"))
-	// 	map->south = get_identifier(line, "SO");
-	// else if (access_test(get_identifier(line, "WE"), ".png"))
-	// 	map->west = get_identifier(line, "WE");
-	// else if (access_test(get_identifier(line, "EA"), ".png"))
-	// 	map->east = get_identifier(line, "EA");
-	// else if (get_identifier(line, "F")) // TODO add color check
-	// 	// map->floor = (UINT *)get_identifier(line, "F");
-	// 	// TODO convert the color to hex
-	// 	load_color(&map->floor, get_identifier(line, "F"));
-	// else if (get_identifier(line, "C"))
-	// 	// 	map->ceil = (UINT *)get_identifier(line, "C");
-	// 	// TODO convert the color to hex
-	// 	load_color(&map->ceil, get_identifier(line, "C"));
-	// else
-	// 	return (false);
+	if (access_test(get_identifier(line, "NO"), ".xpm"))
+		map->north = mlx_load_xpm42(convert_path(get_identifier(line, "NO")));
+	else if (access_test(get_identifier(line, "SO"), ".xpm"))
+		map->south = mlx_load_xpm42(convert_path(get_identifier(line, "SO")));
+	else if (access_test(get_identifier(line, "WE"), ".xpm"))
+		map->west = mlx_load_xpm42(convert_path(get_identifier(line, "WE")));
+	else if (access_test(get_identifier(line, "EA"), ".xpm"))
+		map->east = mlx_load_xpm42(convert_path(get_identifier(line, "EA")));
+	else if (get_identifier(line, "F"))
+		load_color(&map->floor, get_identifier(line, "F"));
+	else if (get_identifier(line, "C"))
+		load_color(&map->ceil, get_identifier(line, "C"));
+	else
+		return (false);
 	return (true);
 }

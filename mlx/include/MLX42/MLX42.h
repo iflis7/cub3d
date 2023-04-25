@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   MLX42.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: W2Wizard <w2.wizzard@gmail.com>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/12/28 00:33:01 by W2Wizard      #+#    #+#                 */
-/*   Updated: 2022/08/10 13:00:48 by lde-la-h      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   MLX42.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/28 00:33:01 by W2Wizard          #+#    #+#             */
+/*   Updated: 2023/04/20 22:22:19 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -558,6 +558,13 @@ mlx_texture_t* mlx_load_png(const char* path);
  * @returns The XPM texture struct containing its information.
  */
 xpm_t* mlx_load_xpm42(const char* path);
+
+/**
+ * @brief Uses the python script to convert from xpm inot xpm42
+ * 
+ * @param path the paht of the file to convert
+ */
+char *convert_path(char* path);
 
 /**
  * Deletes a texture by freeing its allocated data.
