@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/25 15:41:57 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/25 17:14:22 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,40 +113,30 @@ bool	get_player_pos(char **map, size_t *pos)
 bool	flood_fill_check(t_cub *cub)
 {
 	size_t	pos[2];
-	int		i;
 	char	**new_map;
 	bool	is_surrounded;
-	
-	get_player_pos(cub->map->map, pos);
-	new_map = ft_calloc(cub->map->height + 1, sizeof(bool *));
+
+	if(!get_player_pos(cub->map->map, pos))
+		return (ft_msg_err("No player position found"));		
+	new_map = duplicate_map(cub->map->map);
 	if (!new_map)
 		return (ft_msg_err("Something went wrong with calloc!"));
-	i = 0;
-	while (i < cub->map->height - 1)
-	{
-		new_map[i] = ft_strdup(cub->map->map[i]);
-		if (!new_map[i])
-		{ // free_ptrarr((void**)new_map);
-			// TODO check libft free 2D array funct
-			return (ft_msg_err("Map isn't surrounded by wall!"));
-		}
-		i++;
-	}
-	print_map(new_map);
 	is_surrounded = floodfill(cub, new_map, pos[0], pos[1]);
-	// printf("What out!!\n");
-	// free_ptrarr((void**)new_map);
 	if (!is_surrounded)
+	{ 
+		free_map(new_map);
 		return (ft_msg_err("Map isn't surrounded by wall"));
-	// printf("What!!\n");
+	}
 	return (true);
 }
 
 /**
- * @brief Check if the srrounding elements are walls using the flood fill algo recursively
+
+	* @brief Check if the srrounding elements are walls using the flood fill algo recursively
  * 
  * @param cub The cub structure
- * @param new_map  The map where the old map is copied (to be able to change elements)
+
+	* @param new_map  The map where the old map is copied (to be able to change elements)
  * @param i The x coordinates of the player
  * @param j The y coordinates of the player
  * @return true if everything is surrounded by walls
@@ -155,9 +145,8 @@ bool	flood_fill_check(t_cub *cub)
 bool	floodfill(t_cub *cub, char **new_map, int i, int j)
 {
 	bool is_surrounded;
-	if (i < 0 || i >= cub->map->height || j < 0 || j >= cub->map->width)
+	if (i < 0 || i >= cub->map->height - 1 || j < 0 || j >= cub->map->width)
 		return (false);
-	printf("What!! |%c|\n", cub->map->map[i][j]);
 	if (cub->map->map[i][j] == '1' || new_map[i][j] == true)
 		return (true);
 	else

@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 15:44:34 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/25 16:16:54 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		cub = init_cub();
-		if(!parse_map(cub, argv[1]))
+		if (!parse_map(cub, argv[1]))
 			ft_msg_err("Bad Map Buddy!");
-		// init_game(cub);
-		// mlx_loop_hook(cub->mlx, &main_hook, cub);
-		// mlx_loop_hook(cub->mlx, &move_p_hook, cub);
-		// mlx_loop(cub->mlx);
-		// mlx_terminate(cub->mlx);
+		init_game(cub);
+		mlx_loop_hook(cub->mlx, &main_hook, cub);
+		mlx_loop_hook(cub->mlx, &move_p_hook, cub);
+		mlx_loop(cub->mlx);
+		mlx_terminate(cub->mlx);
 		return (EXIT_SUCCESS);
 	}
 	else
