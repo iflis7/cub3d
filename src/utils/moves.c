@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:24:10 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 16:09:24 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 16:50:43 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	adjust(t_cub *cub, float dx, float dy, unsigned char flag)
 {
+	dx *= 2;
+	dy *= 2;
 	if (flag == 'a')
 	{
 		if (!is_wall(cub, cub->coord[X] + cub->pdx, cub->coord[Y] + cub->pdy))
@@ -68,6 +70,7 @@ void	move_p_hook(void *param)
 	cub = (t_cub *)param;
 	apply_moves(cub);
 	rotate(cub);
-	// print_mini_map(cub);
 	cast_fov(cub);
+	print_mini_map(cub);
+	draw_fov(cub);
 }

@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 16:09:35 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 17:00:45 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,13 @@ bool	cast_ray(t_cub *cub, float angle, int pos_x)
 	{
 		x = cub->coord[X] + cub->ray_x * i;
 		y = cub->coord[Y] + cub->ray_y * i;
-		if (is_wall(cub, x, y) || is_wall(cub, x + 1, y + 1) || is_wall(cub, x
-				- 1, y - 1))
+		if (is_wall(cub, x, y) && is_wall(cub, x + 1, y + 1) && is_wall(cub, x - 1, y - 1))
 		{
 			dest[X] = x;
 			dest[Y] = y;
 			draw_wall(cub, angle, dest, pos_x);
 			return (false);
 		}
-		// mlx_put_pixel(cub->win, x, y, 0xffffffff);
 		i++;
 	}
 	return (true);

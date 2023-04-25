@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/25 16:07:29 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 16:17:05 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_cub	*init_cub(void)
  */
 void	init_game(t_cub *cub)
 {
-	cub->map->sq_size = fminf((0.2 * cub->mlx->width) / cub->map->width,
+	cub->map->cell_size = fminf((0.2 * cub->mlx->width) / cub->map->width,
 			(0.2 * cub->mlx->height) / cub->map->height);
 	cub->map->sq_size = 64;
 	if (cub->map->sq_size < 1)

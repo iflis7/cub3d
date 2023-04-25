@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 15:58:00 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 17:01:10 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define Y 1
 // # define HEIGHT 1080
 
-# define HEIGHT 1000
+# define HEIGHT 1080
 
 /* *************** ***************           *************** *************** */
 /*                                   STRUCTS                                 */
@@ -55,6 +55,7 @@ typedef struct s_map
 	UINT		floor;
 	UINT		ceil;
 	float		sq_size;
+	float		cell_size;
 }				t_map;
 
 typedef struct s_cub
@@ -72,6 +73,7 @@ typedef struct s_cub
 	char		p_dir;
 	float		odo;
 	float		p_a;
+	float		starting_a;
 	float		ray_x;
 	float		ray_y;
 	float		ray_a;
@@ -122,6 +124,8 @@ float			normalize_angle(float angle);
 float			deg_to_rad(float a);
 bool			cast_ray(t_cub *cub, float angle, int pos_x);
 void			cast_fov(t_cub *cub);
+bool	fov(t_cub *cub, float angle);
+void	draw_fov(t_cub *cub);
 bool			is_wall(t_cub *cub, float destx, float desty);
 void			get_pcoordinates(t_cub *cub);
 void			print_mini_map(t_cub *cub);
