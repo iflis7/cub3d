@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/20 21:04:13 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/25 16:07:29 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,11 @@ void	init_game(t_cub *cub)
 {
 	cub->map->sq_size = fminf((0.2 * cub->mlx->width) / cub->map->width,
 			(0.2 * cub->mlx->height) / cub->map->height);
+	cub->map->sq_size = 64;
 	if (cub->map->sq_size < 1)
 		cub->map->sq_size = 1;
 	cub->map->mini_map = ft_calloc(cub->map->height + 1, sizeof(char *));
-	cub->fov = M_PI / 2;
+	cub->fov = M_PI / 3;
 	get_p_angle(cub);
 	cub->coord[X] = 0;
 	cub->coord[Y] = 0;

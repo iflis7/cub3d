@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/20 20:28:11 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/25 15:58:00 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_map
 	xpm_t		*east;
 	UINT		floor;
 	UINT		ceil;
-	size_t		sq_size;
+	float		sq_size;
 }				t_map;
 
 typedef struct s_cub
@@ -122,7 +122,7 @@ float			normalize_angle(float angle);
 float			deg_to_rad(float a);
 bool			cast_ray(t_cub *cub, float angle, int pos_x);
 void			cast_fov(t_cub *cub);
-bool			is_wall(t_cub *cub, int32_t destx, int32_t desty);
+bool			is_wall(t_cub *cub, float destx, float desty);
 void			get_pcoordinates(t_cub *cub);
 void			print_mini_map(t_cub *cub);
 int				ft_msg_err_close(char *error, int *fd);

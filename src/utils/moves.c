@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:24:10 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/19 12:47:58 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 16:09:24 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ void	move_p_hook(void *param)
 	cub = (t_cub *)param;
 	apply_moves(cub);
 	rotate(cub);
-	print_mini_map(cub);
+	// print_mini_map(cub);
 	cast_fov(cub);
 }
