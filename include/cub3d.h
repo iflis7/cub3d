@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/20 20:28:11 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/25 15:39:18 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ bool			parse_map(t_cub *cub, char *file);
 t_cub			*init_cub(void);
 
 bool			flood_fill_check(t_cub *cub);
-bool			floodfill(t_cub *cub, bool **filled_map, int i, int j);
+bool			floodfill(t_cub *cub, char **filled_map, int i, int j);
 void			print_map(char **mini_m);
 bool			manage_settings(t_map *map, char *line);
 

@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/21 14:40:47 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/25 15:41:57 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,15 +114,17 @@ bool	flood_fill_check(t_cub *cub)
 {
 	size_t	pos[2];
 	int		i;
-	bool	**new_map;
+	char	**new_map;
 	bool	is_surrounded;
-
+	
 	get_player_pos(cub->map->map, pos);
 	new_map = ft_calloc(cub->map->height + 1, sizeof(bool *));
+	if (!new_map)
+		return (ft_msg_err("Something went wrong with calloc!"));
 	i = 0;
-	while (i < cub->map->height)
+	while (i < cub->map->height - 1)
 	{
-		new_map[i] = ft_calloc(cub->map->width, sizeof(bool));
+		new_map[i] = ft_strdup(cub->map->map[i]);
 		if (!new_map[i])
 		{ // free_ptrarr((void**)new_map);
 			// TODO check libft free 2D array funct
@@ -130,10 +132,13 @@ bool	flood_fill_check(t_cub *cub)
 		}
 		i++;
 	}
+	print_map(new_map);
 	is_surrounded = floodfill(cub, new_map, pos[0], pos[1]);
+	// printf("What out!!\n");
 	// free_ptrarr((void**)new_map);
 	if (!is_surrounded)
 		return (ft_msg_err("Map isn't surrounded by wall"));
+	// printf("What!!\n");
 	return (true);
 }
 
@@ -147,11 +152,12 @@ bool	flood_fill_check(t_cub *cub)
  * @return true if everything is surrounded by walls
  * @return false if not everything is surrounded by walls
  */
-bool	floodfill(t_cub *cub, bool **new_map, int i, int j)
+bool	floodfill(t_cub *cub, char **new_map, int i, int j)
 {
 	bool is_surrounded;
 	if (i < 0 || i >= cub->map->height || j < 0 || j >= cub->map->width)
 		return (false);
+	printf("What!! |%c|\n", cub->map->map[i][j]);
 	if (cub->map->map[i][j] == '1' || new_map[i][j] == true)
 		return (true);
 	else

@@ -6,7 +6,7 @@
 /*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/20 21:04:13 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/04/25 15:45:13 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,11 @@ t_cub	*init_cub(void)
 	if (!cub)
 		ft_msg_err("Error: malloc failed.");
 	cub->map = init_map();
-	cub->mlx = mlx_init(WIDTH, HEIGHT, "CUB3D", false);
-	if (!cub->mlx)
-		exit(EXIT_FAILURE);
+		cub->coord[X] = 0;
+	cub->coord[Y] = 0;
+	cub->pdx = 0;
+	cub->pdy = 0;
+	cub->odo = 0;
 	cub->p_dir = 0;
 	return (cub);
 }
@@ -87,6 +89,9 @@ t_cub	*init_cub(void)
  */
 void	init_game(t_cub *cub)
 {
+	cub->mlx = mlx_init(WIDTH, HEIGHT, "CUB3D", false);
+	if (!cub->mlx)
+		exit(EXIT_FAILURE);
 	cub->map->sq_size = fminf((0.2 * cub->mlx->width) / cub->map->width,
 			(0.2 * cub->mlx->height) / cub->map->height);
 	if (cub->map->sq_size < 1)
@@ -94,11 +99,7 @@ void	init_game(t_cub *cub)
 	cub->map->mini_map = ft_calloc(cub->map->height + 1, sizeof(char *));
 	cub->fov = M_PI / 2;
 	get_p_angle(cub);
-	cub->coord[X] = 0;
-	cub->coord[Y] = 0;
-	cub->pdx = 0;
-	cub->pdy = 0;
-	cub->odo = 0;
+
 	get_pcoordinates(cub);
 	cub->win = mlx_new_image(cub->mlx, cub->mlx->width, cub->mlx->height);
 	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_NORMAL);
