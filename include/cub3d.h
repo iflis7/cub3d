@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 17:01:10 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 18:00:08 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@
 /* *************** ***************           *************** *************** */
 /*                                   MACROS                                  */
 /* *************** ***************           *************** *************** */
-# define WIDTH 1920
+# define WIDTH 1920	
+# define HEIGHT 1080
 # define PI 3.14159265359
 # define X 0
 # define Y 1
 // # define HEIGHT 1080
 
-# define HEIGHT 1080
 
 /* *************** ***************           *************** *************** */
 /*                                   STRUCTS                                 */
@@ -126,6 +126,7 @@ bool			cast_ray(t_cub *cub, float angle, int pos_x);
 void			cast_fov(t_cub *cub);
 bool	fov(t_cub *cub, float angle);
 void	draw_fov(t_cub *cub);
+uint32_t    get_px(mlx_texture_t	*buff, int x, int y);
 bool			is_wall(t_cub *cub, float destx, float desty);
 void			get_pcoordinates(t_cub *cub);
 void			print_mini_map(t_cub *cub);

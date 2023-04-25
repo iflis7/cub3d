@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/25 16:17:05 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 18:27:35 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,3 @@ void	init_game(t_cub *cub)
 	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_NORMAL);
 	mlx_image_to_window(cub->mlx, cub->win, 0, 0);
 }
-
-/*
-
-*/
