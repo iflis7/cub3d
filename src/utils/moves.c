@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:24:10 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 16:50:43 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 18:37:08 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void	adjust(t_cub *cub, float dx, float dy, unsigned char flag)
 {
-	dx *= 2;
-	dy *= 2;
+	dx *= 4;
+	dy *= 4;
 	if (flag == 'a')
 	{
-		if (!is_wall(cub, cub->coord[X] + cub->pdx, cub->coord[Y] + cub->pdy))
+		if (!is_wall(cub, cub->coord[X] + cub->pdx * 4, cub->coord[Y] + cub->pdy * 4))
 		{
 			cub->coord[X] += dx;
 			cub->coord[Y] += dy;
@@ -26,7 +26,7 @@ static void	adjust(t_cub *cub, float dx, float dy, unsigned char flag)
 	}
 	if (flag == 's')
 	{
-		if (!is_wall(cub, cub->coord[X] - cub->pdx, cub->coord[Y] - cub->pdy))
+		if (!is_wall(cub, cub->coord[X] - cub->pdx * 4, cub->coord[Y] - cub->pdy * 4))
 		{
 			cub->coord[X] -= dx;
 			cub->coord[Y] -= dy;
