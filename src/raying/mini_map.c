@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:25:28 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 17:23:22 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 18:46:36 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,20 @@ void	print_square(t_cub *cub, uint32_t x, uint32_t y, uint32_t color)
 
 void	draw_bg(t_cub *cub)
 {
-	int i =0;
-	int j;
-	while(i < ((cub->map->height * cub->map->cell_size ) - 1))
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < ((cub->map->height * cub->map->cell_size) - 1))
 	{
 		j = 0;
-		while(j < ((cub->map->width * cub->map->cell_size) - 1))
+		while (j < ((cub->map->width * cub->map->cell_size) - 1))
 		{
 			mlx_put_pixel(cub->win, j, i, 0x888944);
 			j++;
 		}
 		i++;
 	}
-	
 }
 
 void	print_mini_map(t_cub *cub)
@@ -94,7 +95,6 @@ void	draw_fov(t_cub *cub)
 		i++;
 	}
 }
-
 
 void	cast_fov(t_cub *cub)
 {

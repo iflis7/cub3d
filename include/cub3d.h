@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 18:00:08 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 18:51:09 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ typedef struct s_cub
 	mlx_image_t	*lhid;
 	mlx_image_t	*tagnit;
 	int			dest[2];
+	float		coord[2];
 	size_t		p_x;
 	size_t		p_y;
-	float		coord[2];
 	char		p_dir;
 	float		odo;
 	float		p_a;
