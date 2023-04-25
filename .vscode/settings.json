@@ -6,6 +6,7 @@
     "utils.h": "c",
     "type_traits": "c",
     "cstring": "c",
-    "locale": "c"
+    "locale": "c",
+    "mlx42.h": "c"
   }
 }
