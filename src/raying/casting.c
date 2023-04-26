@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 19:17:34 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 20:05:55 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	draw_wall(t_cub *cub, float ray_a, float dest[2], int pos_x)
 	int			j;
 	float		dist;
 	uint32_t	color;
+	mlx_texture_t	*dir;
 
 	dist = sqrtf((dest[X] - cub->coord[X]) * (dest[X] - cub->coord[X])
 			+ (dest[Y] - cub->coord[Y]) * (dest[Y] - cub->coord[Y]));
@@ -27,9 +28,9 @@ void	draw_wall(t_cub *cub, float ray_a, float dest[2], int pos_x)
 	j = HEIGHT / 2 - (dist / 2);
 	while (j < (HEIGHT / 2) + dist / 2)
 	{
-		color = get_px(&cub->map->east->texture, pos_x
-				% cub->map->east->texture.width, j
-				% cub->map->east->texture.height);
+		dir = set_texture(cub);
+		if(dir)
+			color = get_px(dir, pos_x % dir->width, j % dir->height);
 		mlx_put_pixel(cub->win, pos_x, j, color);
 		j++;
 	}

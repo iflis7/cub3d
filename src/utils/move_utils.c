@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:37:43 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 18:49:55 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/04/25 20:04:20 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ float	fix_angle(t_cub *cub, float slice, int key)
 void	rotate(t_cub *cub)
 {
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
-		cub->p_a = fix_angle(cub, 0.05, MLX_KEY_RIGHT);
+		cub->p_a = fix_angle(cub, 0.08, MLX_KEY_RIGHT);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
-		cub->p_a = fix_angle(cub, 0.05, MLX_KEY_LEFT);
+		cub->p_a = fix_angle(cub, 0.08, MLX_KEY_LEFT);
 }

@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 19:16:42 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/25 19:52:46 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void			cast_fov(t_cub *cub);
 bool	fov(t_cub *cub, float angle);
 void	draw_fov(t_cub *cub);
 int get_text_dir(t_cub *cub, float angle);
+mlx_texture_t	*set_texture(t_cub *cub);
 uint32_t    get_px(mlx_texture_t	*buff, int x, int y);
 bool			is_wall(t_cub *cub, float destx, float desty);
 void			get_pcoordinates(t_cub *cub);
