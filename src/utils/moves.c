@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:24:10 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 20:01:41 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/26 00:14:01 by bylkus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,19 @@ static void	adjust(t_cub *cub, float dx, float dy, unsigned char flag)
 	cub->odo += 0.05;
 }
 
+
+void ft_log(int dir)
+{
+	if(dir == SO)
+		printf("SO\n");
+	else if(dir == NO)
+		printf("NO\n");
+	else if(dir == WE)
+		printf("WE\n");
+	else if(dir == EA)
+		printf("EA\n");
+}
+
 static void	apply_moves(t_cub *cub)
 {
 	if (mlx_is_key_down(cub->mlx, 265) || mlx_is_key_down(cub->mlx, 87))
@@ -63,6 +76,7 @@ static void	apply_moves(t_cub *cub)
 		cub->pdy = sinf((cub->p_a - deg_to_rad(90)));
 		adjust(cub, cub->pdx, cub->pdy, 's');
 	}
+	// ft_log(get_text_dir(cub, cub->p_a));
 }
 
 void	move_p_hook(void *param)
