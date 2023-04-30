@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:24:10 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/26 00:14:01 by bylkus           ###   ########.fr       */
+/*   Updated: 2023/04/29 22:58:44 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,15 @@ static void	adjust(t_cub *cub, float dx, float dy, unsigned char flag)
 	cub->odo += 0.05;
 }
 
-
-void ft_log(int dir)
+void	ft_log(int dir)
 {
-	if(dir == SO)
+	if (dir == SO)
 		printf("SO\n");
-	else if(dir == NO)
+	else if (dir == NO)
 		printf("NO\n");
-	else if(dir == WE)
+	else if (dir == WE)
 		printf("WE\n");
-	else if(dir == EA)
+	else if (dir == EA)
 		printf("EA\n");
 }
 
@@ -76,7 +75,6 @@ static void	apply_moves(t_cub *cub)
 		cub->pdy = sinf((cub->p_a - deg_to_rad(90)));
 		adjust(cub, cub->pdx, cub->pdy, 's');
 	}
-	// ft_log(get_text_dir(cub, cub->p_a));
 }
 
 void	move_p_hook(void *param)
@@ -89,4 +87,6 @@ void	move_p_hook(void *param)
 	cast_fov(cub);
 	print_mini_map(cub);
 	draw_fov(cub);
+	mlx_draw_texture(cub->win, &cub->map->north->texture, WIDTH * 0.5 - 32,
+			HEIGHT - 64);
 }

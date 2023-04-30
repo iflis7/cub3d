@@ -1,7 +1,7 @@
 WE assets/wolftextures1.xpm
-SO assets/wolftextures2.xpm
-EA assets/wolftextures2.xpm
-NO assets/wolftextures2.xpm
+SO assets/wall_1.xpm
+EA assets/wall_2.xpm
+NO assets/north.xpm
 
 F 255,0,0
 C 255,255,0
@@ -15,5 +15,5 @@ C 255,255,0
 100000001
 100000001
 101101101
-1010E0101
+1010E000101
 111111111

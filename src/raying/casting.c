@@ -3,23 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   casting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/26 00:07:22 by bylkus           ###   ########.fr       */
+/*   Updated: 2023/04/29 23:00:58 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-unsigned int get_color(t_cub *cub, float angle);
 
 void	draw_wall(t_cub *cub, float ray_a, float dest[2], int pos_x)
 {
 	int			j;
 	float		dist;
 	uint32_t	color;
-	// mlx_texture_t	*dir;
 
 	dist = sqrtf((dest[X] - cub->coord[X]) * (dest[X] - cub->coord[X])
 			+ (dest[Y] - cub->coord[Y]) * (dest[Y] - cub->coord[Y]));
@@ -30,11 +27,11 @@ void	draw_wall(t_cub *cub, float ray_a, float dest[2], int pos_x)
 	j = HEIGHT / 2 - (dist / 2);
 	while (j < (HEIGHT / 2) + dist / 2)
 	{
-		// dir = set_texture(cub);
-		// if(dir)
-		// 	color = get_px(dir, pos_x % dir->width, j % dir->height);
-		color = get_color(cub, ray_a);
-		// color = 0x00FF0000;
+		if (cub->texture)
+			color = get_px(cub->texture, pos_x % cub->texture->width, j
+					% cub->texture->height);
+		else
+			color = 0x00FF0000;
 		mlx_put_pixel(cub->win, pos_x, j, color);
 		j++;
 	}
@@ -54,11 +51,13 @@ bool	cast_ray(t_cub *cub, float angle, int pos_x)
 	{
 		x = cub->coord[X] + cub->ray_x * i;
 		y = cub->coord[Y] + cub->ray_y * i;
-		if (is_wall(cub, x, y) && is_wall(cub, x + 1, y + 1) && is_wall(cub, x
-				- 1, y - 1))
+		if (is_wall(cub, x, y))
 		{
 			dest[X] = x;
 			dest[Y] = y;
+			// printf("x = %f, y = %f\n", floorf(x), floorf(y));
+			cub->texture = get_texture(cub, dest);
+			// cub->texture = &cub->map->north->texture;
 			draw_wall(cub, angle, dest, pos_x);
 			return (false);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fov.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:51:31 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 18:46:32 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/04/29 21:35:08 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 bool	is_wall(t_cub *cub, float destx, float desty)
 {
-	return (cub->map->map[(int)(desty / cub->map->sq_size)][(int)(destx
-			/ cub->map->sq_size)] == '1');
+	int x;
+	int y;
+
+	x = (int)floorf(destx / cub->map->sq_size);
+	y = (int)floorf(desty / cub->map->sq_size);
+	return (cub->map->map[y][x] == '1');
 }
 
 bool	fov(t_cub *cub, float angle)
