@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 19:10:51 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/04/30 11:57:58 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	main_hook(void *param)
 		{
 			if (j < cub->mlx->height / 2)
 				mlx_put_pixel(cub->win, i, j, cub->map->ceil);
-			if (j > cub->mlx->height / 2)
+			else if (j > cub->mlx->height / 2)
 				mlx_put_pixel(cub->win, i, j, cub->map->floor);
 			j++;
 		}

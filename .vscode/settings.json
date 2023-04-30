@@ -7,6 +7,7 @@
     "type_traits": "c",
     "cstring": "c",
     "locale": "c",
-    "mlx42.h": "c"
+    "mlx42.h": "c",
+    "cmath": "c"
   }
 }

@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:39:38 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/29 23:00:20 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/04/30 12:13:11 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,42 @@ mlx_texture_t	*get_texture(t_cub *cub, float dest[2])
 
 	yes_x = is_multiple_of(dest[X], cub->map->sq_size);
 	yes_y = is_multiple_of(dest[Y], cub->map->sq_size);
-	dir = 0;
+	dir = -1;
 	if (cub->coord[X] > dest[X] && yes_x)
 		dir = WE;
+	else if (cub->coord[Y] < dest[Y] && yes_y)
+		dir = SO;
 	else if (cub->coord[X] < dest[X] && yes_x)
 		dir = EA;
 	else if (cub->coord[Y] > dest[Y] && yes_y)
 		dir = NO;
-	else if (cub->coord[Y] < dest[Y] && yes_y)
-		dir = SO;
+	// printf("dir = %s\n", ft_log(dir));
 	return (set_texture(cub, dir));
 }
+
+
+
+
+
+
+/*
+int	texture_selection(t_ray *ray)
+{
+	int			x;
+	int			y;
+	static int	texture = 0;
+
+	x = (int) floor(ray->x - ray->cos);
+	y = (int) floor(ray->y - ray->sin);
+	if (x < floor(ray->x) && y == floor(ray->y))
+		texture = 3;
+	else if (x > floor(ray->x) && y == floor(ray->y))
+		texture = 2;
+	else if (y < floor(ray->y) && x == floor(ray->x))
+		texture = 1;
+	else if (y > floor(ray->y) && x == floor(ray->x))
+		texture = 0;
+	return (texture);
+}
+
+*/
