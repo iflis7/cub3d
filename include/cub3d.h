@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/01 14:55:04 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/01 17:16:28 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,4 +132,9 @@ uint32_t			get_px(mlx_texture_t *buff, int x, int y);
 bool				is_wall(t_cub *cub, float destx, float desty);
 void				get_pcoordinates(t_cub *cub);
 bool				valid_elements(t_cub *cub, char c);
+
+
+void	print_map(char **mini_m);
+void	print_map_lines(t_mini_m *mini_m);
+
 #endif

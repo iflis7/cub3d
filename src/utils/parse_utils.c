@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/01 15:12:09 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/01 17:00:03 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,20 @@ char	*get_identifier(char *line_in, char *str)
 {
 	int		i;
 	char	*line;
+	char	*tmp;
 
 	i = 0;
-	line = ft_strtrim(line_in, "\n");
+	line = ft_strtrim(line_in, "	 \n");
 	while (line && line[i] && ft_iswhitespace(line[i]))
 		i++;
-	if (!strncmp(&line[i], str, strlen(str)))
+	if (!ft_strncmp(&line[i], str, strlen(str)))
 	{
 		i += strlen(str);
 		while (ft_iswhitespace(line[i]))
-			i++;
-		
-		return (&line[i]);
+			i++;		
+		tmp = ft_strdup(&line[i]);
+		free(line);
+		return (tmp);
 	}
 	else
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/01 15:50:31 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/01 17:39:23 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	is_empty_line(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i])
+	while (line && line[i])
 	{
 		if (!ft_iswhitespace(line[i]))
 			return (false);
@@ -102,21 +102,39 @@ int	is_map_line(char *line)
 	line and if the path is valid then store it in the map struct.
  * @return bool Returns true if the line is a map line, false if not
  */
+
 bool	manage_settings(t_map *map, char *line)
 {
+	char *idf = NULL;
 	if (access_test(get_identifier(line, "NO"), ".xpm42"))
-		map->north = mlx_load_xpm42(get_identifier(line, "NO"));
+	{
+		idf = get_identifier(line, "NO");
+		map->north = mlx_load_xpm42((idf));
+	}
 	else if (access_test(get_identifier(line, "SO"), ".xpm42"))
-		map->south = mlx_load_xpm42(get_identifier(line, "SO"));
+	{
+		idf = get_identifier(line, "SO");
+		map->south = mlx_load_xpm42(idf);
+	}
 	else if (access_test(get_identifier(line, "WE"), ".xpm42"))
-		map->west = mlx_load_xpm42(get_identifier(line, "WE"));
+	{
+		idf = get_identifier(line, "WE");
+		map->west = mlx_load_xpm42(idf);
+	}
 	else if (access_test(get_identifier(line, "EA"), ".xpm42"))
-		map->east = mlx_load_xpm42(get_identifier(line, "EA"));
+	{
+		idf = get_identifier(line, "EA");
+		map->east = mlx_load_xpm42(idf);
+	}
 	else if (get_identifier(line, "F"))
 		load_color(&map->floor, get_identifier(line, "F"));
 	else if (get_identifier(line, "C"))
 		load_color(&map->ceil, get_identifier(line, "C"));
 	else
+	{
+		free(idf);	
 		return (false);
+	}
+	free(idf);	
 	return (true);
 }
