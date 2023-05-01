@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:51:31 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/29 21:35:08 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/01 10:56:24 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ bool	fov(t_cub *cub, float angle)
 	{
 		x = cub->coord[X] + ray_coord[X] * i;
 		y = cub->coord[Y] + ray_coord[Y] * i;
-		if (is_wall(cub, x, y) && is_wall(cub, x + 1, y + 1) && is_wall(cub, x
-				- 1, y - 1))
+		if (is_wall(cub, x, y))
 			return (false);
 		mlx_put_pixel(cub->win, x * (cub->map->cell_size / cub->map->sq_size), y
 				* (cub->map->cell_size / cub->map->sq_size), 0xffffffff);

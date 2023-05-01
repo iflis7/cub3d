@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/30 11:32:45 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/01 13:06:06 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ bool				get_p_angle(t_cub *cub);
 
 /* ***************  MOVE_UTILS  *************** */
 void				rotate(t_cub *cub);
-char				*ft_log(int dir);
 /* ***************  RAYCASTING  *************** */
 
 void				draw_fov(t_cub *cub);

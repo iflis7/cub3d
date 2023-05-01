@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:22:56 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/30 11:31:57 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/01 13:04:52 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	draw_wall(t_cub *cub, float ray_a, float dest[2], int pos_x)
 	float		dist;
 	uint32_t	color;
 
-	dist = sqrtf(powf(dest[X] - cub->coord[X], 2) + powf(dest[Y] - cub->coord[Y], 2));
+	dist = sqrtf(powf(dest[X] - cub->coord[X], 2) + powf(dest[Y]
+				- cub->coord[Y], 2));
 	dist = dist * cosf(ray_a - cub->p_a);
 	dist = (cub->map->sq_size * HEIGHT / dist);
 	if (dist >= HEIGHT)
@@ -54,10 +55,7 @@ bool	cast_ray(t_cub *cub, float angle, int pos_x)
 		{
 			dest[X] = x;
 			dest[Y] = y;
-			// printf("x = %f, y = %f\n", floorf(x), floorf(y));
 			cub->texture = get_texture(cub, dest);
-			// printf("i = %d ", i);
-			// cub->texture = &cub->map->north->texture;
 			draw_wall(cub, angle, dest, pos_x);
 			return (false);
 		}

@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:24:10 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/30 12:17:17 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/01 11:06:02 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,16 @@ void	display_footer(t_cub *cub)
 		for (int j = HEIGHT - 100; j < HEIGHT; j++)
 			mlx_put_pixel(cub->win, i, j, 0x213AA9);
 	}
-	mlx_put_string(cub->mlx, "NORTH", WIDTH * 0.5 - 60, HEIGHT - 90);
+	// mlx_put_string(cub->mlx, "NORTH", WIDTH * 0.5 - 60, HEIGHT - 90);
 	mlx_draw_texture(cub->win, &cub->map->north->texture, WIDTH * 0.5 - 64,
 			HEIGHT - 70);
-	mlx_put_string(cub->mlx, "SOUTH", WIDTH * 0.5 + 4, HEIGHT - 90);
+	// mlx_put_string(cub->mlx, "SOUTH", WIDTH * 0.5 + 4, HEIGHT - 90);
 	mlx_draw_texture(cub->win, &cub->map->south->texture, WIDTH * 0.5, HEIGHT
 			- 70);
-	mlx_put_string(cub->mlx, "EAST", WIDTH * 0.5 + 76, HEIGHT - 90);
+	// mlx_put_string(cub->mlx, "EAST", WIDTH * 0.5 + 76, HEIGHT - 90);
 	mlx_draw_texture(cub->win, &cub->map->east->texture, WIDTH * 0.5 + 64,
 			HEIGHT - 70);
-	mlx_put_string(cub->mlx, "WEST", WIDTH * 0.5 + 140, HEIGHT - 90);
+	// mlx_put_string(cub->mlx, "WEST", WIDTH * 0.5 + 140, HEIGHT - 90);
 	mlx_draw_texture(cub->win, &cub->map->west->texture, WIDTH * 0.5 + 128,
 			HEIGHT - 70);
 }
