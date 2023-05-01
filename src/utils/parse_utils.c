@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/25 19:11:19 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/01 15:12:09 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ bool	valid_elements(t_cub *cub, char c)
 }
 
 /**
- * @brief Get the identifier object from the line like : "NO ./path/to/no.xpm"
+* @brief Get the identifier object from the line like : "NO ./path/to/no.xpm"
  * 
  * @param line The line to check
 
-	* @return Char*  Returns the path if the line is a valid map line or the RGB value
+* @return Char*  Returns the path if the line is a valid map line or
+		the RGB value
  * @return Null Returns NULL if the line is not a valid map line
  */
 char	*get_identifier(char *line_in, char *str)
@@ -61,6 +62,7 @@ char	*get_identifier(char *line_in, char *str)
 		i += strlen(str);
 		while (ft_iswhitespace(line[i]))
 			i++;
+		
 		return (&line[i]);
 	}
 	else
@@ -116,14 +118,14 @@ bool	flood_fill_check(t_cub *cub)
 	char	**new_map;
 	bool	is_surrounded;
 
-	if(!get_player_pos(cub->map->map, pos))
-		return (ft_msg_err("No player position found"));		
+	if (!get_player_pos(cub->map->map, pos))
+		return (ft_msg_err("No player position found"));
 	new_map = duplicate_map(cub->map->map);
 	if (!new_map)
 		return (ft_msg_err("Something went wrong with calloc!"));
 	is_surrounded = floodfill(cub, new_map, pos[0], pos[1]);
 	if (!is_surrounded)
-	{ 
+	{
 		free_map(new_map);
 		return (ft_msg_err("Map isn't surrounded by wall"));
 	}
@@ -132,19 +134,22 @@ bool	flood_fill_check(t_cub *cub)
 
 /**
 
-	* @brief Check if the srrounding elements are walls using the flood fill algo recursively
- * 
- * @param cub The cub structure
+* @brief Check if the srrounding elements are walls 
+	using the flood fill algo recursively
+* 
+* @param cub The cub structure
 
-	* @param new_map  The map where the old map is copied (to be able to change elements)
- * @param i The x coordinates of the player
- * @param j The y coordinates of the player
- * @return true if everything is surrounded by walls
- * @return false if not everything is surrounded by walls
- */
+* @param new_map  The map where the old map is copied
+	(to be able to change elements)
+* @param i The x coordinates of the player
+* @param j The y coordinates of the player
+* @return true if everything is surrounded by walls
+* @return false if not everything is surrounded by walls
+*/
 bool	floodfill(t_cub *cub, char **new_map, int i, int j)
 {
-	bool is_surrounded;
+	bool	is_surrounded;
+
 	if (i < 0 || i >= cub->map->height - 1 || j < 0 || j >= cub->map->width)
 		return (false);
 	if (cub->map->map[i][j] == '1' || new_map[i][j] == true)
@@ -158,4 +163,3 @@ bool	floodfill(t_cub *cub, char **new_map, int i, int j)
 	is_surrounded &= floodfill(cub, new_map, i, j + 1);
 	return (is_surrounded);
 }
-

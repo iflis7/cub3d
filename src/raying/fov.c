@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:51:31 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/01 10:56:24 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/01 13:43:03 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 bool	is_wall(t_cub *cub, float destx, float desty)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = (int)floorf(destx / cub->map->sq_size);
 	y = (int)floorf(desty / cub->map->sq_size);
@@ -41,7 +41,7 @@ bool	fov(t_cub *cub, float angle)
 		if (is_wall(cub, x, y))
 			return (false);
 		mlx_put_pixel(cub->win, x * (cub->map->cell_size / cub->map->sq_size), y
-				* (cub->map->cell_size / cub->map->sq_size), 0xffffffff);
+			* (cub->map->cell_size / cub->map->sq_size), 0xffffffff);
 		i++;
 	}
 	return (true);

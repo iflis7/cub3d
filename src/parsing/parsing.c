@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bylkus <bylkus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/25 22:48:35 by bylkus           ###   ########.fr       */
+/*   Updated: 2023/05/01 15:29:31 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,6 @@ bool	map_is_valid(t_cub *cub)
 }
 
 /**
- * @brief Add the last node and incremnt the width and the height 
- *(number of elements and lines)
- * @param cub The cub structure
- * @param line The line to check and add
- */
-static void	increment(t_cub *cub, char *line)
-{
-	ft_mini_m_add_back(&cub->map->mini_m, line);
-	cub->map->height++;
-	if ((int)strlen(line) > cub->map->width)
-		cub->map->width = strlen(line);
-}
-
-/**
  * @brief Store the map in a linked list
  * if is_map_line returns 1, the line is added to the map->line linked list.
  * if is_map_line returns 2, the line is added to the map struct.
@@ -70,9 +56,9 @@ static void	increment(t_cub *cub, char *line)
  * @param fd The file descriptor of th`e map file
  * @return Bool Returns true if the map is valid, false if not
  */
-bool	store_map(t_cub *cub, int fd) // TODO reduce to 25 lines
+bool	store_map(t_cub *cub, int fd)
 {
-	char *line;
+	char	*line;
 
 	line = get_next_line(fd);
 	if (!line)
@@ -80,20 +66,11 @@ bool	store_map(t_cub *cub, int fd) // TODO reduce to 25 lines
 	while (line)
 	{
 		if (!is_empty_line(line))
-		{
-			if (is_map_line(line) == 1)
-				increment(cub, line);
-			else if (is_map_line(line) == 2)
-				manage_settings(cub->map, line);
-			else if (is_map_line(line) == 3)
-			{
-				free(line);
-				return (false);
-			}
-		}
+			if(!store_map_cases(cub, line))	
+				return false;
+		// free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
 	return (true);
 }
 

@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 11:31:19 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/01 14:18:53 by loadjou          ###   ########.fr       */
+/*   Created: 2023/05/01 13:37:19 by loadjou           #+#    #+#             */
+/*   Updated: 2023/05/01 15:29:27 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../../include/cub3d.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+bool	store_map_cases(t_cub *cub, char *line)
 {
-	char	*str;
-	size_t	i;
-
-	if (!s)
-		return (NULL);
-	i = 0;
-	str = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
-	if (!str)
-		return (NULL);
-	while (s[i])
+	if (is_map_line(line) == 1)
 	{
-		str[i] = f(i, s[i]);
-		i++;
+		ft_mini_m_add_back(&cub->map->mini_m, line);
+		cub->map->height++;
+		if ((int)strlen(line) > cub->map->width)
+			cub->map->width = strlen(line);
 	}
-	str[i] = '\0';
-	return (str);
+	else if (is_map_line(line) == 2)
+		manage_settings(cub->map, line);
+	else if (is_map_line(line) == 3)
+	{
+		free(line);
+		return (false);
+	}
+	return (true);
 }

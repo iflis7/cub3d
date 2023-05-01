@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:37:43 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/30 11:03:00 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/01 14:12:59 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,4 @@ void	rotate(t_cub *cub)
 		cub->p_a = fix_angle(cub, 0.08, MLX_KEY_RIGHT);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		cub->p_a = fix_angle(cub, 0.08, MLX_KEY_LEFT);
-}
-
-char	*ft_log(int dir)
-{
-	char *str;
-
-	str = malloc(sizeof(char) * 3);
-	str = "**";
-	if (dir == SO)
-		str = "SO";
-	else if (dir == NO)
-		str = "NO";
-	else if (dir == WE)
-		str = "WE";
-	else if (dir == EA)
-		str = "EA";
-	return str;
 }

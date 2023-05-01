@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/01 13:26:40 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/01 14:55:04 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@
 # define X 0
 # define Y 1
 
+# define VOID 2604087295
+# define WALLS 0
+# define BG 0x213AA9
+
 # define WE 0
 # define SO 1
 # define EA 2
@@ -51,7 +55,7 @@ typedef struct s_map
 	char			**map;
 	char			**mini_map;
 	t_mini_m		*mini_m;
-	xpm_t *north; // TODO change to mlx_image_t
+	xpm_t			*north;
 	xpm_t			*south;
 	xpm_t			*west;
 	xpm_t			*east;
@@ -90,16 +94,15 @@ typedef struct s_cub
 
 /* ***************  INIT  *************** */
 void				init_game(t_cub *cub);
+
 /* ***************  PARSING  *************** */
 bool				parse_map(t_cub *cub, char *file);
 t_cub				*init_cub(void);
 bool				flood_fill_check(t_cub *cub);
 bool				floodfill(t_cub *cub, char **filled_map, int i, int j);
-void				print_map(char **mini_m);
 bool				manage_settings(t_map *map, char *line);
+bool				store_map_cases(t_cub *cub, char *line);
 
-// TODO move to utils.h
-void				print_mini_map(t_cub *cub);
 /* ***************  COLOR  *************** */
 void				load_color(UINT *c, char *line);
 
@@ -108,7 +111,6 @@ void				moves_hook(void *param);
 void				print_mini_map(t_cub *cub);
 void				print_square(t_cub *cub, uint32_t x, uint32_t y,
 						uint32_t color);
-
 UINT				get_rgba(int r, int g, int b, int a);
 void				move_p_hook(void *param);
 bool				get_p_angle(t_cub *cub);
@@ -129,7 +131,5 @@ mlx_texture_t		*get_texture(t_cub *cub, float dest[2]);
 uint32_t			get_px(mlx_texture_t *buff, int x, int y);
 bool				is_wall(t_cub *cub, float destx, float desty);
 void				get_pcoordinates(t_cub *cub);
-void				print_mini_map(t_cub *cub);
-int					ft_msg_err_close(char *error, int *fd);
 bool				valid_elements(t_cub *cub, char c);
 #endif

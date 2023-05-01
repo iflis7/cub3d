@@ -1,4 +1,4 @@
-// /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:39:38 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/01 11:41:57 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/01 13:43:30 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ uint32_t	get_px(mlx_texture_t *buff, int x, int y)
 
 bool	is_multiple_of(float pos, int x)
 {
-	int coord;
+	int	coord;
 
 	coord = (int)floorf(pos);
-	if((coord % x) == 0 || (coord - 1) % x == 0 || (coord + 1) % x == 0)
-		return true;
+	if ((coord % x) == 0 || (coord - 1) % x == 0 || (coord + 1) % x == 0)
+		return (true);
 	return (false);
 }
 

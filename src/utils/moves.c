@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:24:10 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/01 13:27:22 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/01 15:57:05 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,25 +65,40 @@ static void	apply_moves(t_cub *cub)
 	}
 }
 
+void	print_legend(t_cub *cub)
+{
+	static mlx_image_t	*img;
+
+	mlx_delete_image(cub->mlx, img);
+	img = mlx_put_string(cub->mlx, "NORTH  SOUTH  EAST   WEST", WIDTH * 0.5
+			- 60, HEIGHT - 96);
+	mlx_draw_texture(cub->win, &cub->map->north->texture, WIDTH * 0.5 - 64,
+		HEIGHT - 74);
+	mlx_draw_texture(cub->win, &cub->map->south->texture, WIDTH * 0.5, HEIGHT
+		- 74);
+	mlx_draw_texture(cub->win, &cub->map->east->texture, WIDTH * 0.5 + 64,
+		HEIGHT - 74);
+	mlx_draw_texture(cub->win, &cub->map->west->texture, WIDTH * 0.5 + 128,
+		HEIGHT - 74);
+}
+
 void	display_footer(t_cub *cub)
 {
-	for (int i = 0; i < WIDTH; i++)
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < WIDTH)
 	{
-		for (int j = HEIGHT - 100; j < HEIGHT; j++)
-			mlx_put_pixel(cub->win, i, j, 0x213AA9);
+		j = HEIGHT - 100;
+		while (j < HEIGHT)
+		{
+			mlx_put_pixel(cub->win, i, j, BG);
+			j++;
+		}
+		i++;
 	}
-	mlx_put_string(cub->mlx, "NORTH", WIDTH * 0.5 - 60, HEIGHT - 90);
-	mlx_draw_texture(cub->win, &cub->map->north->texture, WIDTH * 0.5 - 64,
-			HEIGHT - 70);
-	mlx_put_string(cub->mlx, "SOUTH", WIDTH * 0.5 + 4, HEIGHT - 90);
-	mlx_draw_texture(cub->win, &cub->map->south->texture, WIDTH * 0.5, HEIGHT
-			- 70);
-	mlx_put_string(cub->mlx, "EAST", WIDTH * 0.5 + 76, HEIGHT - 90);
-	mlx_draw_texture(cub->win, &cub->map->east->texture, WIDTH * 0.5 + 64,
-			HEIGHT - 70);
-	mlx_put_string(cub->mlx, "WEST", WIDTH * 0.5 + 140, HEIGHT - 90);
-	mlx_draw_texture(cub->win, &cub->map->west->texture, WIDTH * 0.5 + 128,
-			HEIGHT - 70);
+	print_legend(cub);
 }
 
 void	move_p_hook(void *param)

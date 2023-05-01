@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:24:08 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 19:10:44 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/01 14:54:47 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef struct s_mini_m
 {
-	char *line; // map line
+	char			*line;
 	struct s_mini_m	*next;
 	struct s_mini_m	*prev;
 	int				coord[4];
@@ -35,6 +35,7 @@ typedef struct s_mini_m
 
 /* ***************  LOGS  *************** */
 int					ft_msg_err(char *error);
+int					ft_msg_err_close(char *error, int *fd);
 
 /* ***************  MAP_UTILS  *************** */
 int					access_test(char *file, char *ext);
@@ -42,7 +43,6 @@ bool				is_empty_line(char *line);
 int					is_map_line(char *line);
 
 /* ***************  PARSE_UTILS  *************** */
-void				print_map_lines(t_mini_m *line);
 char				*get_identifier(char *line, char *str);
 char				**duplicate_map(char **map);
 void				free_map(char **map);

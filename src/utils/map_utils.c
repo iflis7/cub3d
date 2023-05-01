@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/29 21:25:44 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/01 15:50:31 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,35 +96,6 @@ int	is_map_line(char *line)
 }
 
 /**
- * @brief print the map lines
- *
- * @param line The first line (node) of the map
- */
-void	print_map_lines(t_mini_m *mini_m)
-{
-	printf("\n ----------- Here is the map motherfuckers ----------- \n\n");
-	while (mini_m)
-	{
-		printf("%s\n", mini_m->line);
-		mini_m = mini_m->next;
-	}
-	printf("\n ----------- No More map motherfuckers ----------- \n\n");
-}
-
-void	print_map(char **mini_m)
-{
-	int	i;
-
-	printf("\n ----------- Here is the map motherfuckers ----------- \n\n");
-	i = 0;
-	while (mini_m && mini_m[i])
-	{
-		printf("%s\n", mini_m[i++]);
-	}
-	printf("\n ----------- No More map motherfuckers ----------- \n\n");
-}
-
-/**
  * @brief Nabage setting lines and store them in the map struct
  *
 * @param line The line to check and store. Check if it's a setting
@@ -133,14 +104,14 @@ void	print_map(char **mini_m)
  */
 bool	manage_settings(t_map *map, char *line)
 {
-	if (access_test(get_identifier(line, "NO"), ".xpm"))
-		map->north = mlx_load_xpm42(convert_path(get_identifier(line, "NO")));
-	else if (access_test(get_identifier(line, "SO"), ".xpm"))
-		map->south = mlx_load_xpm42(convert_path(get_identifier(line, "SO")));
-	else if (access_test(get_identifier(line, "WE"), ".xpm"))
-		map->west = mlx_load_xpm42(convert_path(get_identifier(line, "WE")));
-	else if (access_test(get_identifier(line, "EA"), ".xpm"))
-		map->east = mlx_load_xpm42(convert_path(get_identifier(line, "EA")));
+	if (access_test(get_identifier(line, "NO"), ".xpm42"))
+		map->north = mlx_load_xpm42(get_identifier(line, "NO"));
+	else if (access_test(get_identifier(line, "SO"), ".xpm42"))
+		map->south = mlx_load_xpm42(get_identifier(line, "SO"));
+	else if (access_test(get_identifier(line, "WE"), ".xpm42"))
+		map->west = mlx_load_xpm42(get_identifier(line, "WE"));
+	else if (access_test(get_identifier(line, "EA"), ".xpm42"))
+		map->east = mlx_load_xpm42(get_identifier(line, "EA"));
 	else if (get_identifier(line, "F"))
 		load_color(&map->floor, get_identifier(line, "F"));
 	else if (get_identifier(line, "C"))

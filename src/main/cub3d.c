@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/30 11:57:58 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/01 16:03:45 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,23 @@ void	main_hook(void *param)
 		mlx_close_window(cub->mlx);
 }
 
+void	free_game(t_cub *cub)
+{
+	free_map(cub->map->mini_map);
+	free_map(cub->map->map);
+	mlx_delete_xpm42(cub->map->east);
+	mlx_delete_xpm42(cub->map->north);
+	mlx_delete_xpm42(cub->map->south);
+	mlx_delete_xpm42(cub->map->west);
+
+
+	
+	if(cub->map)
+		free(cub->map);
+	if(cub)
+		free(cub);
+}
+
 int	main(int argc, char **argv)
 {
 	t_cub	*cub;
@@ -51,6 +68,7 @@ int	main(int argc, char **argv)
 		mlx_loop_hook(cub->mlx, &move_p_hook, cub);
 		mlx_loop(cub->mlx);
 		mlx_terminate(cub->mlx);
+		free_game(cub);
 		return (EXIT_SUCCESS);
 	}
 	else
