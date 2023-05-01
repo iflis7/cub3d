@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/01 13:06:06 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/01 13:26:40 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void				print_mini_map(t_cub *cub);
 void				load_color(UINT *c, char *line);
 
 /* ***************  MINI_MAP  *************** */
-// bool			img_init(t_cub *cub);
 void				moves_hook(void *param);
 void				print_mini_map(t_cub *cub);
 void				print_square(t_cub *cub, uint32_t x, uint32_t y,
