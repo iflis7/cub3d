@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 17:10:04 by eardingh          #+#    #+#             */
-/*   Updated: 2023/01/30 11:19:21 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/01 14:19:15 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int					ft_intlen(int *arr);
 char				*get_next_line(int fd);
 int					ft_str_chr_num(char *str, int c);
 char				*ft_strjoin_free(char *s1, char *s2);
-int	ft_iswhitespace(int c);
+int					ft_iswhitespace(int c);
 
 /***		*Functions*		***/
 int					ft_isalpha(int c);

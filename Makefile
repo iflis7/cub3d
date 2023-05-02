@@ -25,7 +25,7 @@ endif
 
 # Sources and objects
 MAIN = cub3d init
-PARSING = parsing
+PARSING = parsing parsing_utils
 UTILS = utils logs map_utils list_ops parse_utils color cast_utils move_utils moves
 RAYING = casting fov mini_map texture
 
@@ -56,7 +56,7 @@ clean:
 
 
 fclean: clean
-	-@$(RM) $(NAME) $(LIBFT) $(NAME).dSYM
+	-@$(RM) -rf $(NAME) $(LIBFT) $(NAME).dSYM
 
 re:		fclean all
 
@@ -81,3 +81,6 @@ summary:
 
 valgrind:
 	valgrind --leak-check=full --trace-children=yes --track-fds=yes ./$(NAME)
+
+full:
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)

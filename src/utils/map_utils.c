@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/25 19:11:13 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/02 07:49:48 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	is_empty_line(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i])
+	while (line && line[i])
 	{
 		if (!ft_iswhitespace(line[i]))
 			return (false);
@@ -96,32 +96,26 @@ int	is_map_line(char *line)
 }
 
 /**
- * @brief print the map lines
+ * @brief Assign the path to the right identifier
  *
- * @param line The first line (node) of the map
+ * @param line The line to check
+ * @return char** Returns an array of strings containing the path to the
+ * different identifiers
  */
-void	print_map_lines(t_mini_m *mini_m)
+char	**assign_path(char *line)
 {
-	printf("\n ----------- Here is the map motherfuckers ----------- \n\n");
-	while (mini_m)
-	{
-		printf("%s\n", mini_m->line);
-		mini_m = mini_m->next;
-	}
-	printf("\n ----------- No More map motherfuckers ----------- \n\n");
-}
+	char	**idfs;
 
-void	print_map(char **mini_m)
-{
-	int	i;
-
-	printf("\n ----------- Here is the map motherfuckers ----------- \n\n");
-	i = 0;
-	while (mini_m && mini_m[i])
-	{
-		printf("%s\n", mini_m[i++]);
-	}
-	printf("\n ----------- No More map motherfuckers ----------- \n\n");
+	idfs = malloc(6 * sizeof(char *));
+	if (!idfs)
+		ft_msg_err("Malloc error");
+	idfs[0] = get_identifier(line, "NO");
+	idfs[1] = get_identifier(line, "SO");
+	idfs[2] = get_identifier(line, "WE");
+	idfs[3] = get_identifier(line, "EA");
+	idfs[4] = get_identifier(line, "F");
+	idfs[5] = get_identifier(line, "C");
+	return (idfs);
 }
 
 /**
@@ -133,19 +127,51 @@ void	print_map(char **mini_m)
  */
 bool	manage_settings(t_map *map, char *line)
 {
-	if (access_test(get_identifier(line, "NO"), ".xpm"))
-		map->north = mlx_load_xpm42(convert_path(get_identifier(line, "NO")));
-	else if (access_test(get_identifier(line, "SO"), ".xpm"))
-		map->south = mlx_load_xpm42(convert_path(get_identifier(line, "SO")));
-	else if (access_test(get_identifier(line, "WE"), ".xpm"))
-		map->west = mlx_load_xpm42(convert_path(get_identifier(line, "WE")));
-	else if (access_test(get_identifier(line, "EA"), ".xpm"))
-		map->east = mlx_load_xpm42(convert_path(get_identifier(line, "EA")));
-	else if (get_identifier(line, "F"))
-		load_color(&map->floor, get_identifier(line, "F"));
-	else if (get_identifier(line, "C"))
-		load_color(&map->ceil, get_identifier(line, "C"));
+	char	**idfs;
+
+	idfs = assign_path(line);
+	if (idfs[0] != NULL && access_test(idfs[0], ".png"))
+		map->north = mlx_load_png(idfs[0]);
+	else if (idfs[1] != NULL && access_test(idfs[1], ".png"))
+		map->south = mlx_load_png(idfs[1]);
+	else if (idfs[2] != NULL && access_test(idfs[2], ".png"))
+		map->west = mlx_load_png(idfs[2]);
+	else if (idfs[3] != NULL && access_test(idfs[3], ".png"))
+		map->east = mlx_load_png(idfs[3]);
+	else if (idfs[4] != NULL)
+		load_color(&map->floor, idfs[4]);
+	else if (idfs[5] != NULL)
+		load_color(&map->ceil, idfs[5]);
 	else
+	{
+		assign_free(idfs);
 		return (false);
+	}
+	assign_free(idfs);
 	return (true);
 }
+
+// bool	manage_settings(t_map *map, char *line)
+// {
+// 	char	**idfs;
+// 	idfs = assign_path(line);
+// 	if (idfs[0] != NULL && access_test(idfs[0], ".xpm42"))
+// 		map->north = mlx_load_xpm42(idfs[0]);
+// 	else if (idfs[1] != NULL && access_test(idfs[1], ".xpm42"))
+// 		map->south = mlx_load_xpm42(idfs[1]);
+// 	else if (idfs[2] != NULL && access_test(idfs[2], ".xpm42"))
+// 		map->west = mlx_load_xpm42(idfs[2]);
+// 	else if (idfs[3] != NULL && access_test(idfs[3], ".xpm42"))
+// 		map->east = mlx_load_xpm42(idfs[3]);
+// 	else if (idfs[4] != NULL)
+// 		load_color(&map->floor, idfs[4]);
+// 	else if (idfs[5] != NULL)
+// 		load_color(&map->ceil, idfs[5]);
+// 	else
+// 	{
+// 		assign_free(idfs);
+// 		return (false);
+// 	}
+// 	assign_free(idfs);
+// 	return (true);
+// }

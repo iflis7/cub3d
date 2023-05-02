@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:48:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/04/25 18:48:27 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/02 06:48:56 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ void	load_color(UINT *c, char *line)
 	status = true;
 	tmp = ft_substr(line, 0, 3);
 	r = atoi(tmp);
+	free(tmp);
 	tmp = ft_substr(line, 4, 3);
 	g = atoi(tmp);
+	free(tmp);
 	tmp = ft_substr(line, 8, 3);
 	b = atoi(tmp);
 	*c = get_rgba(r, g, b, 255);
