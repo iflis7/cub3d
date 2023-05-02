@@ -1,6 +1,22 @@
-# cub3D
+<h1 align="center">
+	42cursus' cub3D 
+</h1>
 
-## My first RayCaster with miniLibX
+<p align="center">
+	<b><i>Development repo for 42cursus Cub3D project</i></b><br>
+
+</p>
+
+<p align="center">
+    <a href="https://www.Cprogramming.com/"><img alt="Made with C" src="https://img.shields.io/badge/Made%20with-C-1f425f.svg"/></a>
+    <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/iflis7/cub3d?color=lightblue" />
+    <img alt="Number of lines of code" src="https://img.shields.io/tokei/lines/github/iflis7/cub3d?color=critical" />
+    <img alt="Code language count" src="https://img.shields.io/github/languages/count/iflis7/cub3d?color=yellow" />
+    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/iflis7/cub3d?color=blue" />
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/iflis7/cub3d?color=green" />
+</p>
+
+## Our first RayCaster with miniLibX
 
 _Summary: This project is inspired by the world-famous Wolfenstein 3D game, which
 was the first FPS ever. It will enable you to explore ray-casting. Your goal will be to
