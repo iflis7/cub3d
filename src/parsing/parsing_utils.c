@@ -6,35 +6,11 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 13:37:19 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/02 07:51:24 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/02 08:15:37 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-void	print_map_lines(t_mini_m *mini_m) // TODO delete 
-{
-	printf("\n ----------- Here is the map motherfuckers ----------- \n\n");
-	while (mini_m)
-	{
-		printf("%s\n", mini_m->line);
-		mini_m = mini_m->next;
-	}
-	printf("\n ----------- No More map motherfuckers ----------- \n\n");
-}
-
-void	print_map(char **mini_m) // TODO delete
-{
-	int	i;
-
-	printf("\n ----------- Here is the map motherfuckers ----------- \n\n");
-	i = 0;
-	while (mini_m && mini_m[i])
-	{
-		printf("%s\n", mini_m[i++]);
-	}
-	printf("\n ----------- No More map motherfuckers ----------- \n\n");
-}
 
 bool	store_map_cases(t_cub *cub, char *line)
 {

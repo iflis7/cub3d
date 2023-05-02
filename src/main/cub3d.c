@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/02 07:56:30 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/02 08:15:19 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	free_game(t_cub *cub)
 	mlx_delete_texture(cub->map->north);
 	mlx_delete_texture(cub->map->south);
 	mlx_delete_texture(cub->map->west);
+	mlx_delete_texture(cub->map->cool);
 	if (cub->map)
 		free(cub->map);
 	if (cub)

@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/02 07:51:42 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/02 08:15:42 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,6 @@ typedef struct s_map
 	char			**map;
 	char			**mini_map;
 	t_mini_m		*mini_m;
-	// xpm_t			*north; // TODO delete
-	// xpm_t			*south;
-	// xpm_t			*west;
-	// xpm_t			*east;
-	// xpm_t			*cool;
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
@@ -137,8 +132,5 @@ uint32_t			get_px(mlx_texture_t *buff, int x, int y);
 bool				is_wall(t_cub *cub, float destx, float desty);
 void				get_pcoordinates(t_cub *cub);
 bool				valid_elements(t_cub *cub, char c);
-
-void				print_map(char **mini_m);	// TODO delete
-void				print_map_lines(t_mini_m *mini_m);	// TODO delete
 
 #endif
