@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/01 17:00:03 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/02 07:49:56 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ char	*get_identifier(char *line_in, char *str)
 	char	*tmp;
 
 	i = 0;
-	line = ft_strtrim(line_in, "	 \n");
+	line = ft_strtrim(line_in, "		\n");
 	while (line && line[i] && ft_iswhitespace(line[i]))
 		i++;
 	if (!ft_strncmp(&line[i], str, strlen(str)))
 	{
 		i += strlen(str);
 		while (ft_iswhitespace(line[i]))
-			i++;		
+			i++;
 		tmp = ft_strdup(&line[i]);
 		free(line);
 		return (tmp);
@@ -131,6 +131,7 @@ bool	flood_fill_check(t_cub *cub)
 		free_map(new_map);
 		return (ft_msg_err("Map isn't surrounded by wall"));
 	}
+	free(new_map);
 	return (true);
 }
 

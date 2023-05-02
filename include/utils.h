@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:24:08 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/01 14:54:47 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/02 07:50:45 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ t_mini_m			*ft_mini_mnew(char *line);
 t_mini_m			*ft_last_mini_m(t_mini_m *lst);
 void				ft_mini_m_add_back(t_mini_m **lst, char *line);
 
+void				assign_free(char **idfs);
 #endif

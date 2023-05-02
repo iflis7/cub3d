@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/01 17:48:38 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/02 07:54:24 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,32 +37,32 @@ void	main_hook(void *param)
 		mlx_close_window(cub->mlx);
 }
 
-void free_map_line(t_mini_m *mini_m) 
+void	free_map_line(t_mini_m *mini_m)
 {
-    t_mini_m *temp;
+	t_mini_m	*temp;
 
-    while (mini_m) {
-        temp = mini_m;
-        mini_m = mini_m->next;
-        free(temp->line);
-        free(temp);
-    }
+	while (mini_m)
+	{
+		temp = mini_m;
+		mini_m = mini_m->next;
+		free(temp->line);
+		free(temp);
+	}
 }
 
 void	free_game(t_cub *cub)
 {
+	free_map_line(cub->map->mini_m);
 	free_map(cub->map->mini_map);
 	free_map(cub->map->map);
-	mlx_delete_xpm42(cub->map->east);
-	mlx_delete_xpm42(cub->map->north);
-	mlx_delete_xpm42(cub->map->south);
-	mlx_delete_xpm42(cub->map->west);
-	free(cub->map);
-	free_map_line(cub->map->mini_m);
-
-	if(cub)
+	mlx_delete_texture(cub->map->east);
+	mlx_delete_texture(cub->map->north);
+	mlx_delete_texture(cub->map->south);
+	mlx_delete_texture(cub->map->west);
+	if (cub->map)
+		free(cub->map);
+	if (cub)
 		free(cub);
-	// exit(1);
 }
 
 int	main(int argc, char **argv)
@@ -80,7 +80,6 @@ int	main(int argc, char **argv)
 		mlx_loop(cub->mlx);
 		mlx_terminate(cub->mlx);
 		free_game(cub);
-	
 		return (EXIT_SUCCESS);
 	}
 	else

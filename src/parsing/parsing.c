@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/01 17:35:37 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/02 07:49:15 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,19 @@ bool	store_map(t_cub *cub, int fd)
 	char	*line;
 
 	line = get_next_line(fd);
-	printf("Amenzu! %s \n", line);
 	if (!line)
 		ft_msg_err_close("Something went wrong while using malloc!", &fd);
 	while (line)
 	{
-		// free(line);
 		if (!is_empty_line(line))
-			if(!store_map_cases(cub, line))	
-				return false;
-		// printf("Something! \n");
-		free(line);
-		printf("FREEEEEEEEE! %s \n", line);
+		{
+			if (!store_map_cases(cub, line))
+				return (false);
+		}
+		else
+			free(line);
 		line = get_next_line(fd);
-		printf("Ih nidhen! %s \n", line);
 	}
-	// free(line);
 	return (true);
 }
 
@@ -123,7 +120,6 @@ bool	parse_map(t_cub *cub, char *file)
 	if (!store_map(cub, fd))
 		ft_msg_err_close("Invalid map.", &fd);
 	close(fd);
-	print_map_lines(cub->map->mini_m);
 	if (!map_is_valid(cub))
 		return (ft_msg_err("Invalid map!!!!"));
 	cub->map->map = switch_toarray(cub->map);

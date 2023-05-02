@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:39:38 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/01 13:43:30 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/02 07:53:26 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ mlx_texture_t	*get_texture(t_cub *cub, float dest[2])
 	yes_x = is_multiple_of(dest[X], cub->map->sq_size);
 	yes_y = is_multiple_of(dest[Y], cub->map->sq_size);
 	if ((yes_x && !yes_y) && cub->coord[X] > dest[X])
-		return (&cub->map->west->texture);
+		return (cub->map->west);
 	else if ((yes_y && !yes_x) && (cub->coord[Y] < dest[Y]))
-		return (&cub->map->south->texture);
+		return (cub->map->south);
 	else if (cub->coord[X] < dest[X] && (yes_x && !yes_y))
-		return (&cub->map->east->texture);
+		return (cub->map->east);
 	else if (cub->coord[Y] > dest[Y] && (yes_y && !yes_x))
-		return (&cub->map->north->texture);
+		return (cub->map->north);
 	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 14:18:34 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/01 14:18:36 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/02 07:50:22 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,24 @@ char	**duplicate_map(char **map)
 
 void	free_map(char **map)
 {
-	int	n;
+	char	**p;
 
-	n = 0;
-	while (map[n])
+	if (map == NULL)
+		return ;
+	p = map;
+	while (*p)
 	{
-		free(map[n]);
-		n++;
+		free(*p++);
 	}
 	free(map);
+}
+
+void	assign_free(char **idfs)
+{
+	int	i;
+
+	i = 0;
+	while (i < 6)
+		free(idfs[i++]);
+	free(idfs);
 }
