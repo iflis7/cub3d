@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 14:18:34 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/02 07:50:22 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/02 14:13:15 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,9 @@ void	assign_free(char **idfs)
 
 	i = 0;
 	while (i < 6)
-		free(idfs[i++]);
+	{
+		free(idfs[i]);
+		i++;
+	}
 	free(idfs);
 }

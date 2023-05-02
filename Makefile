@@ -77,10 +77,10 @@ COMMIT = $(shell date "+%d %B %T")
 
 # valgrind
 summary:
-	valgrind --leak-check=summary --trace-children=yes --track-fds=yes ./$(NAME)
+	valgrind --leak-check=summary --trace-children=yes --track-fds=yes ./$(NAME) $m
 
 valgrind:
-	valgrind --leak-check=full --trace-children=yes --track-fds=yes ./$(NAME)
+	valgrind --leak-check=full --trace-children=yes --track-fds=yes ./$(NAME) $m
 
 full:
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=definite ./$(NAME) $m

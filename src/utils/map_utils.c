@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/02 07:49:48 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/02 14:03:51 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,37 @@ char	**assign_path(char *line)
 	idfs[5] = get_identifier(line, "C");
 	return (idfs);
 }
+/**
+ * @brief 
+ * 
+ * @param map 
+ * @param idfs 
+ * @param line 
+ * @return true 
+ * @return false 
+ */
+static bool	manage_colors(t_map *map, char **idfs, int line)
+{
+	if (line == 4)
+	{
+		if (!load_color(&map->floor, idfs[4]))
+		{
+			free(idfs[4]);
+			return (false);
+		}
+		assign_free(idfs);
+	}
+	else if (line == 5)
+	{
+		if (!load_color(&map->ceil, idfs[5]))
+		{
+			free(idfs[5]);
+			return (false);
+		}
+		assign_free(idfs);
+	}
+	return (true);
+}
 
 /**
  * @brief Nabage setting lines and store them in the map struct
@@ -139,9 +170,9 @@ bool	manage_settings(t_map *map, char *line)
 	else if (idfs[3] != NULL && access_test(idfs[3], ".png"))
 		map->east = mlx_load_png(idfs[3]);
 	else if (idfs[4] != NULL)
-		load_color(&map->floor, idfs[4]);
+		return (manage_colors(map, idfs, 4));
 	else if (idfs[5] != NULL)
-		load_color(&map->ceil, idfs[5]);
+		return (manage_colors(map, idfs, 5));
 	else
 	{
 		assign_free(idfs);
@@ -150,28 +181,3 @@ bool	manage_settings(t_map *map, char *line)
 	assign_free(idfs);
 	return (true);
 }
-
-// bool	manage_settings(t_map *map, char *line)
-// {
-// 	char	**idfs;
-// 	idfs = assign_path(line);
-// 	if (idfs[0] != NULL && access_test(idfs[0], ".xpm42"))
-// 		map->north = mlx_load_xpm42(idfs[0]);
-// 	else if (idfs[1] != NULL && access_test(idfs[1], ".xpm42"))
-// 		map->south = mlx_load_xpm42(idfs[1]);
-// 	else if (idfs[2] != NULL && access_test(idfs[2], ".xpm42"))
-// 		map->west = mlx_load_xpm42(idfs[2]);
-// 	else if (idfs[3] != NULL && access_test(idfs[3], ".xpm42"))
-// 		map->east = mlx_load_xpm42(idfs[3]);
-// 	else if (idfs[4] != NULL)
-// 		load_color(&map->floor, idfs[4]);
-// 	else if (idfs[5] != NULL)
-// 		load_color(&map->ceil, idfs[5]);
-// 	else
-// 	{
-// 		assign_free(idfs);
-// 		return (false);
-// 	}
-// 	assign_free(idfs);
-// 	return (true);
-// }

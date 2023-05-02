@@ -1,5 +1,6 @@
-WE ./textures/wall_1.xpm
-SO ./textures/wall_2.xpm
-NO ./textures/wall_4.xpm
+WE assets/wood.png
+SO assets/grey.png
+EA assets/brick.png
+NO assets/blue.png
 
 C 100,100,100

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/02 08:15:42 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/02 13:41:46 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,17 @@
 # define EA 2
 # define NO 3
 
+/* ***** COLORS ***** */
+# define RESET "\e[0m"
+# define BBLK "\e[1;30m"
+# define BRED "\e[1;31m"
+# define BGREEN "\e[1;32m"
+# define BYEL "\e[1;33m"
+# define BBLUE "\e[1;34m"
+# define BMAG "\e[1;35m"
+# define BCYAN "\e[1;36m"
+# define BWHT "\e[1;37m"
+
 /* *************** ***************           *************** *************** */
 /*                                   STRUCTS                                 */
 /* *************** ***************           *************** *************** */
@@ -53,13 +64,11 @@ typedef struct s_map
 	int				width;
 	int				height;
 	char			**map;
-	char			**mini_map;
 	t_mini_m		*mini_m;
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
 	mlx_texture_t	*east;
-	mlx_texture_t	*cool;
 	UINT			floor;
 	UINT			ceil;
 	float			sq_size;
@@ -102,9 +111,10 @@ bool				flood_fill_check(t_cub *cub);
 bool				floodfill(t_cub *cub, char **filled_map, int i, int j);
 bool				manage_settings(t_map *map, char *line);
 bool				store_map_cases(t_cub *cub, char *line);
+char				*normalize_chars(char *line);
 
 /* ***************  COLOR  *************** */
-void				load_color(UINT *c, char *line);
+bool				load_color(UINT *c, char *line);
 
 /* ***************  MINI_MAP  *************** */
 void				moves_hook(void *param);
@@ -133,4 +143,8 @@ bool				is_wall(t_cub *cub, float destx, float desty);
 void				get_pcoordinates(t_cub *cub);
 bool				valid_elements(t_cub *cub, char c);
 
+
+
+
+void				ptr_addr(char* var_name, void *ptr);
 #endif
