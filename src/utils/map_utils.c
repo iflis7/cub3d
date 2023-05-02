@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/02 14:03:51 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/02 18:11:54 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,25 +71,29 @@ bool	is_empty_line(char *line)
  * @param line The line to check
  * @return int returns 1 if the line is a map line, 2 if it's a setting line
  */
-int	is_map_line(char *line)
+int	is_map_line(t_cub *cub, char *line)
 {
-	int			i;
-	static int	check[1];
+	int	i;
 
 	i = 0;
 	while (line && line[i])
 	{
-		while (ft_iswhitespace(line[i]))
-			i++;
 		if (ft_isdigit(line[i]))
 		{
-			check[0] = 1;
+			cub->check = 1;
+			// printf("line map_line 1: %s\n", line);
 			return (1);
 		}
-		else if (ft_isalpha(line[i]) && !check[0])
+		else if (ft_isalpha(line[i]) && !cub->check)
+		{
+			// printf("line map_line 2: %s\n", line);
 			return (2);
-		else
+		}
+		else if (!ft_iswhitespace(line[i]))
+		{
+			// printf("line map_line 3: %s\n", line);
 			return (3);
+		}
 		i++;
 	}
 	return (0);
@@ -115,6 +119,7 @@ char	**assign_path(char *line)
 	idfs[3] = get_identifier(line, "EA");
 	idfs[4] = get_identifier(line, "F");
 	idfs[5] = get_identifier(line, "C");
+	
 	return (idfs);
 }
 /**

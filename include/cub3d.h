@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/02 13:41:46 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/02 17:57:24 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ typedef struct s_map
 	int				width;
 	int				height;
 	char			**map;
-	t_mini_m		*mini_m;
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
@@ -95,6 +94,7 @@ typedef struct s_cub
 	float			pdx;
 	float			pdy;
 	float			fov;
+	int 			check;
 }					t_cub;
 
 /* *************** ***************           *************** *************** */
@@ -144,7 +144,10 @@ void				get_pcoordinates(t_cub *cub);
 bool				valid_elements(t_cub *cub, char c);
 
 
-
+int	count_lines(t_cub *cub, char *file);
+int					is_map_line(t_cub *cub, char *line);
 
 void				ptr_addr(char* var_name, void *ptr);
+void print_map(char **map);
+
 #endif

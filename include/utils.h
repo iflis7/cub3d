@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:24:08 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/02 14:25:09 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/02 17:13:31 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int					ft_msg_err_close(char *error, int *fd);
 /* ***************  MAP_UTILS  *************** */
 int					access_test(char *file, char *ext);
 bool				is_empty_line(char *line);
-int					is_map_line(char *line);
+
 
 /* ***************  PARSE_UTILS  *************** */
 char				*get_identifier(char *line, char *str);

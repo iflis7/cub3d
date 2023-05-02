@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:25:28 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/01 14:51:16 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/02 18:04:50 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,27 @@ void	draw_bg(t_cub *cub)
 
 void	print_mini_map(t_cub *cub)
 {
-	t_mini_m	*mini_m;
+
 	int			i;
 	int			j;
 	int			dep;
 
 	dep = 0;
-	mini_m = cub->map->mini_m;
-	j = 0;
+
+	i = 0;
 	draw_bg(cub);
-	while (mini_m)
+	while (cub->map->map[i])
 	{
-		i = 0;
-		while (mini_m->line[i])
+		j = 0;
+		while (cub->map->map[i][j])
 		{
-			if (mini_m->line[i] == '1')
-				print_square(cub, i + dep, j, WALLS);
+			if (cub->map->map[i][j] == '1')
+				print_square(cub, j, i + dep, WALLS);
 			else
-				print_square(cub, i + dep, j, VOID);
-			i++;
+				print_square(cub,j, i + dep, VOID);
+			j++;
 		}
-		mini_m = mini_m->next;
-		j++;
+		i++;
 	}
 }
 

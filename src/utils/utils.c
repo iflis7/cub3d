@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 14:18:34 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/02 14:13:15 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/02 17:58:23 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,41 @@
 
 void	get_pcoordinates(t_cub *cub)
 {
-	t_mini_m	*mini_m;
 	int			i;
 	int			j;
 
-	mini_m = cub->map->mini_m;
 	j = 0;
-	while (mini_m)
+	while (cub->map->map && cub->map->map[i])
 	{
 		i = 0;
-		while (mini_m->line[i])
+		while (cub->map->map[i] && cub->map->map[i][j])
 		{
-			if (strchr("NEWS", mini_m->line[i]))
+			if (strchr("NEWS", cub->map->map[i][j]))
 			{
 				cub->coord[X] = (i * cub->map->sq_size) + cub->map->sq_size / 2;
 				cub->coord[Y] = j * cub->map->sq_size + cub->map->sq_size / 2;
 			}
 			i++;
 		}
-		mini_m = mini_m->next;
 		j++;
 	}
 }
 
 bool	get_p_angle(t_cub *cub)
 {
-	t_mini_m	*temp;
 
-	temp = cub->map->mini_m;
-	while (temp->next)
+	int i = 0;
+	while (cub->map->map[i])
 	{
-		if (strchr(temp->line, 'E'))
+		if (strchr(cub->map->map[i], 'E'))
 			cub->p_a = deg_to_rad(0);
-		else if (strchr(temp->line, 'W'))
+		else if (strchr(cub->map->map[i], 'W'))
 			cub->p_a = deg_to_rad(180);
-		else if (strchr(temp->line, 'N'))
+		else if (strchr(cub->map->map[i], 'N'))
 			cub->p_a = deg_to_rad(90);
-		else if (strchr(temp->line, 'S'))
+		else if (strchr(cub->map->map[i], 'S'))
 			cub->p_a = deg_to_rad(270);
-		temp = temp->next;
+		i++;
 	}
 	return (true);
 }

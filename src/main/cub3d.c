@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/02 14:41:58 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/02 18:05:51 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	free_map_line(t_mini_m *mini_m)
 		free(temp->line);
 		free(temp);
 	}
+	free(mini_m);
 }
 
 
@@ -80,17 +81,18 @@ void	ptr_addr(char *var_name, void *ptr)
 
 void	free_game(t_cub *cub)
 {
-	free_map_line(cub->map->mini_m);
+	// free_map_line(cub->map->mini_m);
 	free_map(cub->map->map);
+
 	mlx_delete_texture(cub->map->east);
 	mlx_delete_texture(cub->map->north);
 	mlx_delete_texture(cub->map->south);
 	mlx_delete_texture(cub->map->west);
+	
 	if (cub->map)
 		free(cub->map);
 	if (cub)
 		free(cub);
-	ptr_addr("cub", (void *)cub);
 	printf("freed\n");
 }
 
@@ -106,9 +108,10 @@ int	main(int argc, char **argv)
 		init_game(cub);
 		mlx_loop_hook(cub->mlx, &main_hook, cub);
 		mlx_loop_hook(cub->mlx, &move_p_hook, cub);
+		// printf("DAGI!! \n");
 		mlx_loop(cub->mlx);
 		mlx_terminate(cub->mlx);
-		free_game(cub);
+		// free_game(cub);
 		return (EXIT_SUCCESS);
 	}
 	else

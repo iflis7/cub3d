@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:49:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/02 13:57:53 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/02 17:54:11 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
  */
 bool	valid_elements(t_cub *cub, char c)
 {
+	// printf("Inside! %c\n", c);
 	if ((c == '0' || c == '1') || ((c == 'N' || c == 'E' || c == 'W'
 				|| c == 'S') && cub->p_dir == 0))
 	{
@@ -152,8 +153,8 @@ bool	flood_fill_check(t_cub *cub)
 bool	floodfill(t_cub *cub, char **new_map, int i, int j)
 {
 	bool	is_surrounded;
-
-	if (i < 0 || i >= cub->map->height - 1 || j < 0 || j >= cub->map->width)
+	
+	if (i < 0 || i >= cub->map->height|| j < 0 || j >= cub->map->width)
 		return (false);
 	if (cub->map->map[i][j] == '1' || new_map[i][j] == true)
 		return (true);
@@ -165,4 +166,16 @@ bool	floodfill(t_cub *cub, char **new_map, int i, int j)
 	is_surrounded &= floodfill(cub, new_map, i, j - 1);
 	is_surrounded &= floodfill(cub, new_map, i, j + 1);
 	return (is_surrounded);
+}
+
+
+void print_map(char **map)
+{
+	int i = 0;
+	while (map && map[i])
+	{
+		printf("**** %s ****\n", map[i]);
+		i++;
+	}
+	printf("oas de sfv\n");
 }

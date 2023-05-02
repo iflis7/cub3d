@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/02 14:08:09 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/02 18:21:38 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,24 @@
  */
 bool	map_is_valid(t_cub *cub)
 {
-	t_mini_m	*mini_m;
-	int			i;
+	int	i;
+	int	j;
 
-	mini_m = cub->map->mini_m;
-	while (mini_m)
+	i = 0;
+	while (cub->map->map && cub->map->map[i])
 	{
-		if (mini_m->prev && mini_m->next)
+		j = 0;
+		while (cub->map->map[i] && cub->map->map[i][j])
 		{
-			i = 0;
-			while (mini_m->line && mini_m->line[i])
-			{
-				if (!valid_elements(cub, mini_m->line[i])
-					&& !ft_iswhitespace(mini_m->line[i]))
-					return (false);
-				i++;
-			}
+			if (!valid_elements(cub, cub->map->map[i][j])
+				&& !ft_iswhitespace(cub->map->map[i][j]))
+				return (false);
+			j++;
 		}
-		mini_m = mini_m->next;
+		i++;
 	}
 	if (cub->p_dir == 0)
-		ft_msg_err("No Player Bitch!");
+		ft_msg_err("No Player Bitch!!");
 	return (true);
 }
 
@@ -59,22 +56,32 @@ bool	map_is_valid(t_cub *cub)
 bool	store_map(t_cub *cub, int fd)
 {
 	char	*line;
+	// char *trim;
+	int		i;
 
+	i = 0;
 	line = get_next_line(fd);
 	if (!line)
 		ft_msg_err_close("Empty file", &fd);
 	while (line)
 	{
-		if (!is_empty_line(line))
+		if (!is_empty_line(line) && is_map_line(cub, line) == 1)
 		{
-			if (!store_map_cases(cub, line))
-				return (false);
+			// trim = ft_strtrim(line, "	 \n");
+			// cub->map->map[i] = trim;
+			cub->map->map[i] = line;
+			i++;
+			cub->map->height++;
+			if ((int)strlen(line) > cub->map->width)
+				cub->map->width = strlen(line);
 		}
+		else if (!is_empty_line(line) && !store_map_cases(cub, line))
+			return (false);
 		else
 			free(line);
 		line = get_next_line(fd);
 	}
-	ptr_addr("line: ", line);
+	print_map(cub->map->map);
 	return (true);
 }
 
@@ -84,27 +91,26 @@ bool	store_map(t_cub *cub, int fd)
  * @param *mini_map The map linked list
  * @return char** Returns the map as an array
  */
-char	**switch_toarray(t_map *mini_map)
-{
-	t_mini_m	*mini_m;
-	char		**map;
-	int			i;
+// char	**switch_toarray(t_map *mini_map)
+// {
+// 	t_mini_m	*mini_m;
+// 	char		**map;
+// 	int			i;
+// 	i = 0;
+// 	map = ft_calloc(mini_map->height, sizeof(char *));
+// 	if (!map)
+// 		return (NULL);
+// 	mini_m = mini_map->mini_m;
+// 	while (mini_m)
+// 	{
+// 		map[i] = ft_strdup(mini_m->line);
+// 		mini_m = mini_m->next;
+// 		i++;
+// 	}
+// 	return (map);
+// }
 
-	i = 0;
-	map = ft_calloc(mini_map->height, sizeof(char *));
-	if (!map)
-		return (NULL);
-	mini_m = mini_map->mini_m;
-	while (mini_m)
-	{
-		map[i] = ft_strdup(mini_m->line);
-		mini_m = mini_m->next;
-		i++;
-	}
-	return (map);
-}
-
-static bool	correct_map(t_cub *cub)
+bool	correct_map(t_cub *cub)
 {
 	int	i;
 
@@ -133,13 +139,11 @@ bool	parse_map(t_cub *cub, char *file)
 	if (!access_test(file, ".cub"))
 		return (ft_msg_err("Map file not found."));
 	fd = open(file, O_RDONLY);
+	cub->map->map = ft_calloc(sizeof(char *), count_lines(cub, file) + 1);
 	if (!store_map(cub, fd))
-		ft_msg_err_close("Invalid map!", &fd);
+		ft_msg_err_close("Invalid map <store>!", &fd);
 	close(fd);
 	if (!map_is_valid(cub))
-		return (false);
-	cub->map->map = switch_toarray(cub->map);
-	if (!cub->map->map)
 		return (false);
 	if (!flood_fill_check(cub) || !correct_map(cub))
 		return (false);

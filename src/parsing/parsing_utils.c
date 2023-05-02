@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 13:37:19 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/02 12:40:52 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/02 18:09:08 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,48 @@ char	*normalize_chars(char *line)
 	return (line);
 }
 
+int	count_lines(t_cub *cub, char *file)
+{
+	int		fd;
+	char	*line;
+	int		i;
+
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	i = 0;
+	line = get_next_line(fd);
+	if (!line)
+		return (0);
+	while (line)
+	{
+		if(is_map_line(cub, line) == 1)
+			i++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	cub->check = 0;
+	printf("i %d\n\n\n", i);
+	return (i);
+}
+
 bool	store_map_cases(t_cub *cub, char *line)
 {
-	if (is_map_line(line) == 1)
+	// printf("line manage : %s\n", line);
+	if (is_map_line(cub, line) == 2)
 	{
-		ft_mini_m_add_back(&cub->map->mini_m, line);
-		cub->map->height++;
-		if ((int)strlen(line) > cub->map->width)
-			cub->map->width = strlen(line);
-	}
-	else if (is_map_line(line) == 2)
-	{
+		// printf("line IN NEMMI 2: %s\n", line);
 		if (!manage_settings(cub->map, line))
 		{
 			free(line);
 			return (false);
 		}
-	free(line);
+		// free(line);
 	}
-	else if (is_map_line(line) == 3)
+	else if (is_map_line(cub, line) == 3)
 	{
+		// printf("line IN NEMMI 3: %s\n", line);
 		free(line);
 		return (false);
 	}

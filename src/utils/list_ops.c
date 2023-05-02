@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_ops.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:49:37 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/02 14:25:54 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/02 15:28:32 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ void	ft_mini_m_add_back(t_mini_m **mini_m, char *line)
 		new->prev = last;
 		(*mini_m)->place++;
 	}
+	
 }
