@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:25:28 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 18:46:36 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/01 14:51:16 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	draw_bg(t_cub *cub)
 	int	j;
 
 	i = 0;
-	while (i < ((cub->map->height * cub->map->cell_size) - 1))
+	while (i < ((cub->map->height - 1) * cub->map->cell_size))
 	{
 		j = 0;
-		while (j < ((cub->map->width * cub->map->cell_size) - 1))
+		while (j < (cub->map->width * cub->map->cell_size))
 		{
-			mlx_put_pixel(cub->win, j, i, 0x888944);
+			mlx_put_pixel(cub->win, j, i, BG);
 			j++;
 		}
 		i++;
@@ -67,9 +67,9 @@ void	print_mini_map(t_cub *cub)
 		while (mini_m->line[i])
 		{
 			if (mini_m->line[i] == '1')
-				print_square(cub, i + dep, j, 0);
-			else if (mini_m->line[i] != '\n')
-				print_square(cub, i + dep, j, get_rgba(155, 055, 55, 255));
+				print_square(cub, i + dep, j, WALLS);
+			else
+				print_square(cub, i + dep, j, VOID);
 			i++;
 		}
 		mini_m = mini_m->next;

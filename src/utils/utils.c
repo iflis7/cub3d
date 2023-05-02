@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/25 19:10:18 by hsaadi           ###   ########.fr       */
+/*   Created: 2023/05/01 14:18:34 by loadjou           #+#    #+#             */
+/*   Updated: 2023/05/02 07:50:22 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/cub3d.h"
 
@@ -73,13 +72,24 @@ char	**duplicate_map(char **map)
 
 void	free_map(char **map)
 {
-	int	n;
+	char	**p;
 
-	n = 0;
-	while (map[n])
+	if (map == NULL)
+		return ;
+	p = map;
+	while (*p)
 	{
-		free(map[n]);
-		n++;
+		free(*p++);
 	}
 	free(map);
+}
+
+void	assign_free(char **idfs)
+{
+	int	i;
+
+	i = 0;
+	while (i < 6)
+		free(idfs[i++]);
+	free(idfs);
 }

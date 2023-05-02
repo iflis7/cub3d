@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:24:10 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 18:49:59 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/02 07:53:01 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,42 @@ static void	apply_moves(t_cub *cub)
 	}
 }
 
+void	print_legend(t_cub *cub)
+{
+	static mlx_image_t	*img;
+
+	mlx_delete_image(cub->mlx, img);
+	img = mlx_put_string(cub->mlx, "NORTH  SOUTH  EAST   WEST", WIDTH * 0.5
+			- 60, HEIGHT - 96);
+	mlx_draw_texture(cub->win, cub->map->north, WIDTH * 0.5 - 64,
+		HEIGHT - 74);
+	mlx_draw_texture(cub->win, cub->map->south, WIDTH * 0.5, HEIGHT
+		- 74);
+	mlx_draw_texture(cub->win, cub->map->east, WIDTH * 0.5 + 64,
+		HEIGHT - 74);
+	mlx_draw_texture(cub->win, cub->map->west, WIDTH * 0.5 + 128,
+		HEIGHT - 74);
+}
+
+void	display_footer(t_cub *cub)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < WIDTH)
+	{
+		j = HEIGHT - 100;
+		while (j < HEIGHT)
+		{
+			mlx_put_pixel(cub->win, i, j, BG);
+			j++;
+		}
+		i++;
+	}
+	print_legend(cub);
+}
+
 void	move_p_hook(void *param)
 {
 	t_cub	*cub;
@@ -75,4 +111,5 @@ void	move_p_hook(void *param)
 	cast_fov(cub);
 	print_mini_map(cub);
 	draw_fov(cub);
+	display_footer(cub);
 }

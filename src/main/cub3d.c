@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/04/25 19:10:51 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/02 08:15:19 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	main_hook(void *param)
 		{
 			if (j < cub->mlx->height / 2)
 				mlx_put_pixel(cub->win, i, j, cub->map->ceil);
-			if (j > cub->mlx->height / 2)
+			else if (j > cub->mlx->height / 2)
 				mlx_put_pixel(cub->win, i, j, cub->map->floor);
 			j++;
 		}
@@ -35,6 +35,35 @@ void	main_hook(void *param)
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub->mlx);
+}
+
+void	free_map_line(t_mini_m *mini_m)
+{
+	t_mini_m	*temp;
+
+	while (mini_m)
+	{
+		temp = mini_m;
+		mini_m = mini_m->next;
+		free(temp->line);
+		free(temp);
+	}
+}
+
+void	free_game(t_cub *cub)
+{
+	free_map_line(cub->map->mini_m);
+	free_map(cub->map->mini_map);
+	free_map(cub->map->map);
+	mlx_delete_texture(cub->map->east);
+	mlx_delete_texture(cub->map->north);
+	mlx_delete_texture(cub->map->south);
+	mlx_delete_texture(cub->map->west);
+	mlx_delete_texture(cub->map->cool);
+	if (cub->map)
+		free(cub->map);
+	if (cub)
+		free(cub);
 }
 
 int	main(int argc, char **argv)
@@ -51,6 +80,7 @@ int	main(int argc, char **argv)
 		mlx_loop_hook(cub->mlx, &move_p_hook, cub);
 		mlx_loop(cub->mlx);
 		mlx_terminate(cub->mlx);
+		free_game(cub);
 		return (EXIT_SUCCESS);
 	}
 	else
