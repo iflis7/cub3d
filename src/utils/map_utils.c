@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/03 07:45:56 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/03 13:48:38 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,20 @@ bool	is_empty_line(char *line)
 	return (true);
 }
 
+bool	is_id(char *line, char *str)
+{
+	char	*tmp;
+
+	tmp = get_identifier(line, str);
+	if (tmp)
+	{
+		free(tmp);
+		return (true);
+	}
+	free(tmp);
+	return (false);
+}
+
 /**
  * @brief Assign the path to the right identifier
  *
@@ -72,20 +86,21 @@ bool	is_empty_line(char *line)
  * @return char** Returns an array of strings containing the path to the
  * different identifiers
  */
-char	**assign_path(char *line)
+void	assign_path(t_map *map, char *line)
 {
-	char	**idfs;
-
-	idfs = malloc(6 * sizeof(char *));
-	if (!idfs)
-		ft_msg_err("Malloc error");
-	idfs[0] = get_identifier(line, "NO");
-	idfs[1] = get_identifier(line, "SO");
-	idfs[2] = get_identifier(line, "WE");
-	idfs[3] = get_identifier(line, "EA");
-	idfs[4] = get_identifier(line, "F");
-	idfs[5] = get_identifier(line, "C");
-	return (idfs);
+	
+	if (is_id(line, "NO"))
+		map->idfs[0] = get_identifier(line, "NO");
+	if (is_id(line, "SO"))
+		map->idfs[1] = get_identifier(line, "SO");
+	if (is_id(line, "WE"))
+		map->idfs[2] = get_identifier(line, "WE");
+	if (is_id(line, "EA"))
+		map->idfs[3] = get_identifier(line, "EA");
+	if (is_id(line, "F"))
+		map->idfs[4] = get_identifier(line, "F");
+	if (is_id(line, "C"))
+		map->idfs[5] = get_identifier(line, "C");
 }
 
 /**
@@ -97,26 +112,20 @@ char	**assign_path(char *line)
  * @return true 
  * @return false 
  */
-static bool	manage_colors(t_map *map, char **idfs, int line)
+static bool	manage_colors(t_map *map, int line)
 {
-	if (line == 4)
+
+	if (line == 4 && map->idfs[4])
 	{
-		if (!load_color(&map->floor, idfs[4]))
-		{
-			free(idfs[4]);
+		if (!load_color(&map->floor, map->idfs[4]))
 			return (false);
-		}
-		assign_free(idfs);
 	}
-	else if (line == 5)
+	else if (line == 5 && map->idfs[5])
 	{
-		if (!load_color(&map->ceil, idfs[5]))
-		{
-			free(idfs[5]);
+		if (!load_color(&map->ceil, map->idfs[5]))
 			return (false);
-		}
-		assign_free(idfs);
 	}
+
 	return (true);
 }
 
@@ -129,26 +138,34 @@ static bool	manage_colors(t_map *map, char **idfs, int line)
  */
 bool	manage_settings(t_map *map, char *line)
 {
-	char	**idfs;
-
-	idfs = assign_path(line);
-	if (idfs[0] != NULL && access_test(idfs[0], ".png"))
-		map->north = mlx_load_png(idfs[0]);
-	else if (idfs[1] != NULL && access_test(idfs[1], ".png"))
-		map->south = mlx_load_png(idfs[1]);
-	else if (idfs[2] != NULL && access_test(idfs[2], ".png"))
-		map->west = mlx_load_png(idfs[2]);
-	else if (idfs[3] != NULL && access_test(idfs[3], ".png"))
-		map->east = mlx_load_png(idfs[3]);
-	else if (idfs[4] != NULL)
-		return (manage_colors(map, idfs, 4));
-	else if (idfs[5] != NULL)
-		return (manage_colors(map, idfs, 5));
+	map->mxln++;
+	assign_path(map, line);
+	if (is_id(line, "NO") && access_test(map->idfs[0], ".png"))
+		map->north = mlx_load_png(map->idfs[0]);
+	else if (is_id(line, "SO") && access_test(map->idfs[1], ".png"))
+		map->south = mlx_load_png(map->idfs[1]);
+	else if (is_id(line, "WE") && access_test(map->idfs[2], ".png"))
+		map->west = mlx_load_png(map->idfs[2]);
+	else if (is_id(line, "EA") && access_test(map->idfs[3], ".png"))
+		map->east = mlx_load_png(map->idfs[3]);
+	else if (is_id(line, "F"))
+		return (manage_colors(map, 4));
+	else if (is_id(line, "C"))
+		return (manage_colors(map, 5));
 	else
-	{
-		assign_free(idfs);
 		return (false);
-	}
-	assign_free(idfs);
 	return (true);
+}
+
+
+
+
+void	print_map(char **map) //TODO delete
+{
+	int i = 0;
+	while (map[i])
+	{
+		printf("%s\n", map[i]);
+		i++;
+	}
 }

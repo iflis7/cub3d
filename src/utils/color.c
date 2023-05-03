@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:48:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/03 07:44:20 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/03 13:51:38 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ bool	load_color(UINT *c, char *line)
 	int		b;
 	char	**colors;
 
+	
 	colors = ft_split(line, ',');
 	if (!colors)
 		return (false);

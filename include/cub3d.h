@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/03 07:46:22 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/03 11:50:17 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_map
 	int				width;
 	int				height;
 	char			**map;
+	char			**idfs;
 	t_mini_m		*mini_m;
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
@@ -73,6 +74,7 @@ typedef struct s_map
 	UINT			ceil;
 	float			sq_size;
 	float			cell_size;
+	int				mxln;
 }					t_map;
 
 typedef struct s_cub
@@ -144,4 +146,6 @@ bool				is_wall(t_cub *cub, float destx, float desty);
 void				get_pcoordinates(t_cub *cub);
 bool				valid_elements(t_cub *cub, char c);
 
+
+void print_map(char **map);
 #endif

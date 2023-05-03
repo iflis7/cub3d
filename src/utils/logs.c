@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:49:45 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/03 10:24:00 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/03 13:07:48 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	free_game(t_cub *cub)
 {
 	free_map_line(cub->map->mini_m);
 	free_map(cub->map->map);
+	free_map(cub->map->idfs);
 	mlx_delete_texture(cub->map->east);
 	mlx_delete_texture(cub->map->north);
 	mlx_delete_texture(cub->map->south);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/03 07:48:16 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/03 13:49:30 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,16 @@ bool	map_is_valid(t_cub *cub)
 	mini_m = cub->map->mini_m;
 	while (mini_m)
 	{
-		if (mini_m->prev && mini_m->next)
+		i = 0;
+		while (mini_m->line && mini_m->line[i])
 		{
-			i = 0;
-			while (mini_m->line && mini_m->line[i])
-			{
-				if (!valid_elements(cub, mini_m->line[i])
-					&& !ft_iswhitespace(mini_m->line[i]))
-					return (false);
-				i++;
-			}
+			if (!valid_elements(cub, mini_m->line[i])
+				&& !ft_iswhitespace(mini_m->line[i]))
+				return (false);
+
+			i++;
 		}
+
 		mini_m = mini_m->next;
 	}
 	if (cub->p_dir == 0)
@@ -73,6 +72,13 @@ bool	store_map(t_cub *cub, int fd)
 		else
 			free(line);
 		line = get_next_line(fd);
+	}
+	if (cub->map->mxln != 6 || !cub->map->idfs[0] || !cub->map->idfs[1]
+		|| !cub->map->idfs[2] || !cub->map->idfs[3] || !cub->map->idfs[4]
+		|| !cub->map->idfs[5])
+	{
+		assign_free(cub->map->idfs);
+		return (false);
 	}
 	return (true);
 }
@@ -128,10 +134,10 @@ static bool	correct_map(t_cub *cub)
 bool	parse_map(t_cub *cub, char *file)
 {
 	int	fd;
-
 	if (!access_test(file, ".cub"))
 		return (ft_msg_err("Map file not found."));
 	fd = open(file, O_RDONLY);
+
 	if (!store_map(cub, fd))
 		ft_msg_err_close("Invalid map!", &fd);
 	close(fd);
