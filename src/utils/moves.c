@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:24:10 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/03 14:34:53 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/03 14:51:30 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	print_legend(t_cub *cub)
 	char				*unity;
 
 	str = ft_itoa((int)cub->odo);
-	tmp = ft_strjoin("NORTH  SOUTH  EAST   WEST                  STEPS: ", str);
+	tmp = ft_strjoin("NORTH  SOUTH  EAST   WEST                    ODO: ", str);
 	unity = ft_strjoin(tmp, "m");
 	mlx_delete_image(cub->mlx, img);
 	img = mlx_put_string(cub->mlx, unity, WIDTH * 0.5 - 60, HEIGHT - 96);
