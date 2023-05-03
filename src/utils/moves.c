@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:24:10 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/02 07:53:01 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/03 10:24:07 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,10 @@ void	print_legend(t_cub *cub)
 	mlx_delete_image(cub->mlx, img);
 	img = mlx_put_string(cub->mlx, "NORTH  SOUTH  EAST   WEST", WIDTH * 0.5
 			- 60, HEIGHT - 96);
-	mlx_draw_texture(cub->win, cub->map->north, WIDTH * 0.5 - 64,
-		HEIGHT - 74);
-	mlx_draw_texture(cub->win, cub->map->south, WIDTH * 0.5, HEIGHT
-		- 74);
-	mlx_draw_texture(cub->win, cub->map->east, WIDTH * 0.5 + 64,
-		HEIGHT - 74);
-	mlx_draw_texture(cub->win, cub->map->west, WIDTH * 0.5 + 128,
-		HEIGHT - 74);
+	mlx_draw_texture(cub->win, cub->map->north, WIDTH * 0.5 - 64, HEIGHT - 74);
+	mlx_draw_texture(cub->win, cub->map->south, WIDTH * 0.5, HEIGHT - 74);
+	mlx_draw_texture(cub->win, cub->map->east, WIDTH * 0.5 + 64, HEIGHT - 74);
+	mlx_draw_texture(cub->win, cub->map->west, WIDTH * 0.5 + 128, HEIGHT - 74);
 }
 
 void	display_footer(t_cub *cub)

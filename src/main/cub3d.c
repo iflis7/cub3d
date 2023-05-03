@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/03 07:43:14 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/03 10:24:12 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ void	main_hook(void *param)
 		i++;
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
-	{
 		mlx_close_window(cub->mlx);
-	}
 }
 
 int	main(int argc, char **argv)
