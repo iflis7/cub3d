@@ -86,3 +86,6 @@ valgrind:
 
 full:
 	valgrind --leak-check=full --show-leak-kinds=definite ./$(NAME) $m
+
+leak:
+	leaks --atExit -- ./$(NAME) $m
