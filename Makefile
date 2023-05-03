@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g 
@@ -42,6 +42,8 @@ all: $(NAME)
 	-@$(MAKE) -C $(MLX) 
 
 $(NAME): $(OBJS)
+#	-@norminette $(SRCS) include/
+#	@echo "\n$(GREEN)NORMINETTE OK✅$(DEFAULT)"
 	-@$(MAKE) -C $(LIBFT_PATH)
 	-@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT) $(CLIBS)
 

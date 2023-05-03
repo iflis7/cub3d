@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/03 07:43:36 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/03 13:30:40 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ t_map	*init_map(void)
 	map->height = 0;
 	map->ceil = 0;
 	map->floor = 0;
+	map->mxln = 0;
+	map->idfs = ft_calloc(7, sizeof(char *));
+	if (!map->idfs)
+		ft_msg_err("Error: malloc failed.");
 	map->north = NULL;
 	map->south = NULL;
 	map->west = NULL;
