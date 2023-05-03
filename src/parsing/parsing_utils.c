@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 13:37:19 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/03 13:47:45 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/03 14:19:09 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,22 @@ bool	store_map_cases(t_cub *cub, char *line)
 	return (true);
 }
 
-void	print_line_map(t_mini_m *map)
+/**
+ * @brief Check if the line is empty
+ *
+ * @param line The line to check
+ * @return bool Returns true if the line is  empty, false if not
+ */
+bool	is_empty_line(char *line)
 {
-	t_mini_m	*temp;
+	int	i;
 
-	temp = map;
-	while (temp)
+	i = 0;
+	while (line && line[i])
 	{
-		printf("%s\n", temp->line);
-		temp = temp->next;
+		if (!ft_iswhitespace(line[i]))
+			return (false);
+		i++;
 	}
+	return (true);
 }

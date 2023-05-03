@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/03 11:50:17 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/03 14:19:52 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,4 @@ bool				is_wall(t_cub *cub, float destx, float desty);
 void				get_pcoordinates(t_cub *cub);
 bool				valid_elements(t_cub *cub, char c);
 
-
-void print_map(char **map);
 #endif

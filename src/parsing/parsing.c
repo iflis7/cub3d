@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/03 13:49:30 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/03 14:17:51 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,8 @@ bool	map_is_valid(t_cub *cub)
 			if (!valid_elements(cub, mini_m->line[i])
 				&& !ft_iswhitespace(mini_m->line[i]))
 				return (false);
-
 			i++;
 		}
-
 		mini_m = mini_m->next;
 	}
 	if (cub->p_dir == 0)
@@ -134,10 +132,10 @@ static bool	correct_map(t_cub *cub)
 bool	parse_map(t_cub *cub, char *file)
 {
 	int	fd;
+
 	if (!access_test(file, ".cub"))
 		return (ft_msg_err("Map file not found."));
 	fd = open(file, O_RDONLY);
-
 	if (!store_map(cub, fd))
 		ft_msg_err_close("Invalid map!", &fd);
 	close(fd);

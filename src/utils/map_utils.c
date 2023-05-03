@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/03 13:48:38 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/03 14:18:57 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,6 @@ int	access_test(char *file, char *ext)
 	return (1);
 }
 
-/**
- * @brief Check if the line is empty
- *
- * @param line The line to check
- * @return bool Returns true if the line is  empty, false if not
- */
-bool	is_empty_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line && line[i])
-	{
-		if (!ft_iswhitespace(line[i]))
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
 bool	is_id(char *line, char *str)
 {
 	char	*tmp;
@@ -88,7 +68,6 @@ bool	is_id(char *line, char *str)
  */
 void	assign_path(t_map *map, char *line)
 {
-	
 	if (is_id(line, "NO"))
 		map->idfs[0] = get_identifier(line, "NO");
 	if (is_id(line, "SO"))
@@ -114,7 +93,6 @@ void	assign_path(t_map *map, char *line)
  */
 static bool	manage_colors(t_map *map, int line)
 {
-
 	if (line == 4 && map->idfs[4])
 	{
 		if (!load_color(&map->floor, map->idfs[4]))
@@ -125,7 +103,6 @@ static bool	manage_colors(t_map *map, int line)
 		if (!load_color(&map->ceil, map->idfs[5]))
 			return (false);
 	}
-
 	return (true);
 }
 
@@ -155,17 +132,4 @@ bool	manage_settings(t_map *map, char *line)
 	else
 		return (false);
 	return (true);
-}
-
-
-
-
-void	print_map(char **map) //TODO delete
-{
-	int i = 0;
-	while (map[i])
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
 }

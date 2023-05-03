@@ -6,7 +6,7 @@
 /*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/03 13:09:59 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/03 14:15:31 by loadjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ int	main(int argc, char **argv)
 		return (EXIT_SUCCESS);
 	}
 	else
-		ft_msg_err("No map given.");
+		ft_msg_err("Bad args!");
 }
