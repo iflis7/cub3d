@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/03 03:28:16 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/05/03 07:46:22 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_cub
 
 /* ***************  INIT  *************** */
 void				init_game(t_cub *cub);
+void				free_game(t_cub *cub);
 
 /* ***************  PARSING  *************** */
 bool				parse_map(t_cub *cub, char *file);
@@ -143,8 +144,4 @@ bool				is_wall(t_cub *cub, float destx, float desty);
 void				get_pcoordinates(t_cub *cub);
 bool				valid_elements(t_cub *cub, char c);
 
-
-
-void print_line_map(t_mini_m *map);
-void				ptr_addr(char* var_name, void *ptr);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:48:10 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/02 12:32:42 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/03 07:44:20 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	ft_arraylen(char **array)
 		i++;
 	return (i);
 }
+
 bool	load_color(UINT *c, char *line)
 {
 	int		r;

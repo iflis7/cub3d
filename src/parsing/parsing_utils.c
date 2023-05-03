@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 13:37:19 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/03 04:13:44 by bylkode          ###   ########.fr       */
+/*   Updated: 2023/05/03 07:43:50 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ bool	store_map_cases(t_cub *cub, char *line)
 
 void	print_line_map(t_mini_m *map)
 {
-	t_mini_m *temp;
+	t_mini_m	*temp;
 
 	temp = map;
 	while (temp)

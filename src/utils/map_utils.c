@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:45:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/02 14:03:51 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/03 07:45:56 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,36 +66,6 @@ bool	is_empty_line(char *line)
 }
 
 /**
- * @brief Checks if the line is a map line
- *
- * @param line The line to check
- * @return int returns 1 if the line is a map line, 2 if it's a setting line
- */
-int	is_map_line(char *line)
-{
-	int			i;
-	static int	check[1];
-
-	i = 0;
-	while (line && line[i])
-	{
-		while (ft_iswhitespace(line[i]))
-			i++;
-		if (ft_isdigit(line[i]))
-		{
-			check[0] = 1;
-			return (1);
-		}
-		else if (ft_isalpha(line[i]) && !check[0])
-			return (2);
-		else
-			return (3);
-		i++;
-	}
-	return (0);
-}
-
-/**
  * @brief Assign the path to the right identifier
  *
  * @param line The line to check
@@ -117,6 +87,7 @@ char	**assign_path(char *line)
 	idfs[5] = get_identifier(line, "C");
 	return (idfs);
 }
+
 /**
  * @brief 
  * 

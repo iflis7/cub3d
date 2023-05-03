@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/02 14:08:09 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/03 07:48:16 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool	map_is_valid(t_cub *cub)
 		mini_m = mini_m->next;
 	}
 	if (cub->p_dir == 0)
-		ft_msg_err("No Player Bitch!");
+		ft_msg_err("No Player!");
 	return (true);
 }
 
@@ -74,7 +74,6 @@ bool	store_map(t_cub *cub, int fd)
 			free(line);
 		line = get_next_line(fd);
 	}
-	ptr_addr("line: ", line);
 	return (true);
 }
 
