@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/01 16:03:56 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/03 07:43:36 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_mini_m	*init_map_line(void)
 {
 	t_mini_m	*mini_m;
 
-	mini_m = malloc(sizeof(t_mini_m));
+	mini_m = ft_calloc(sizeof(t_mini_m), 1);
 	if (!mini_m)
 		ft_msg_err("Error: malloc failed.");
 	mini_m->line = NULL;
@@ -40,7 +40,6 @@ t_map	*init_map(void)
 {
 	t_map	*map;
 
-	map = NULL;
 	map = malloc(sizeof(t_map));
 	if (!map)
 		ft_msg_err("Error: malloc failed.");
@@ -63,7 +62,6 @@ t_cub	*init_cub(void)
 {
 	t_cub	*cub;
 
-	cub = NULL;
 	cub = malloc(sizeof(t_cub));
 	if (!cub)
 		ft_msg_err("Error: malloc failed.");
@@ -92,7 +90,6 @@ void	init_game(t_cub *cub)
 	cub->map->sq_size = 64;
 	if (cub->map->sq_size < 1)
 		cub->map->sq_size = 1;
-	cub->map->mini_map = ft_calloc(cub->map->height + 1, sizeof(char *));
 	cub->fov = M_PI / 3;
 	get_p_angle(cub);
 	get_pcoordinates(cub);

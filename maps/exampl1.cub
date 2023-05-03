@@ -1,14 +1,14 @@
-WE assets/wolftextures1.xpm
-SO assets/wolftextures2.xpm
-EA assets/wolftextures1.xpm
-NO assets/wolftextures1.xpm
+WE assets/wood.png
+SO assets/grey.png
+EA assets/brick.png
+NO assets/blue.png
 
 F 255,0,0
 C 255,255,0
 
 11111
 10001
-10000
+10001
 10001
 10N01
 11111

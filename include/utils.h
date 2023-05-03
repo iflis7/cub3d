@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:24:08 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/02 07:50:45 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/03 07:46:39 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_mini_m
 /* ***************  LOGS  *************** */
 int					ft_msg_err(char *error);
 int					ft_msg_err_close(char *error, int *fd);
+void				free_map_line(t_mini_m *mini_m);
 
 /* ***************  MAP_UTILS  *************** */
 int					access_test(char *file, char *ext);

@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 22:03:42 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/02 07:49:15 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/03 07:48:16 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool	map_is_valid(t_cub *cub)
 		mini_m = mini_m->next;
 	}
 	if (cub->p_dir == 0)
-		ft_msg_err("No Player Bitch!");
+		ft_msg_err("No Player!");
 	return (true);
 }
 
@@ -62,7 +62,7 @@ bool	store_map(t_cub *cub, int fd)
 
 	line = get_next_line(fd);
 	if (!line)
-		ft_msg_err_close("Something went wrong while using malloc!", &fd);
+		ft_msg_err_close("Empty file", &fd);
 	while (line)
 	{
 		if (!is_empty_line(line))
@@ -103,6 +103,21 @@ char	**switch_toarray(t_map *mini_map)
 	return (map);
 }
 
+static bool	correct_map(t_cub *cub)
+{
+	int	i;
+
+	if (!cub->map->map)
+		return (false);
+	i = 0;
+	while (i < cub->map->height)
+	{
+		cub->map->map[i] = normalize_chars(cub->map->map[i]);
+		i++;
+	}
+	return (true);
+}
+
 /**
  * @brief Parse the map file
  * 
@@ -118,14 +133,14 @@ bool	parse_map(t_cub *cub, char *file)
 		return (ft_msg_err("Map file not found."));
 	fd = open(file, O_RDONLY);
 	if (!store_map(cub, fd))
-		ft_msg_err_close("Invalid map.", &fd);
+		ft_msg_err_close("Invalid map!", &fd);
 	close(fd);
 	if (!map_is_valid(cub))
-		return (ft_msg_err("Invalid map!!!!"));
+		return (false);
 	cub->map->map = switch_toarray(cub->map);
 	if (!cub->map->map)
 		return (false);
-	if (!flood_fill_check(cub))
+	if (!flood_fill_check(cub) || !correct_map(cub))
 		return (false);
 	return (true);
 }

@@ -1,15 +1,16 @@
-WE ./textures/wall_1.xpm
-SO ./textures/wall_2.xpm
-SO ./textures/wall_2.xpm
-EA ./textures/wall_3.xpm
-NO ./textures/wall_2.xpm
+WE assets/wood.png
+SO assets/grey.png
+EA assets/brick.png
+NO assets/blue.png
 
 F 200,200,200
 C 255,00,0
 
-111
-101
-111
+11111
+10001
+10001
+10001
+11111
 
 
 

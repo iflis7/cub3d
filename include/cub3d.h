@@ -6,7 +6,7 @@
 /*   By: hsaadi <hsaadi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:57:03 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/02 08:15:42 by hsaadi           ###   ########.fr       */
+/*   Updated: 2023/05/03 07:46:22 by hsaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,17 @@
 # define EA 2
 # define NO 3
 
+/* ***** COLORS ***** */
+# define RESET "\e[0m"
+# define BBLK "\e[1;30m"
+# define BRED "\e[1;31m"
+# define BGREEN "\e[1;32m"
+# define BYEL "\e[1;33m"
+# define BBLUE "\e[1;34m"
+# define BMAG "\e[1;35m"
+# define BCYAN "\e[1;36m"
+# define BWHT "\e[1;37m"
+
 /* *************** ***************           *************** *************** */
 /*                                   STRUCTS                                 */
 /* *************** ***************           *************** *************** */
@@ -53,13 +64,11 @@ typedef struct s_map
 	int				width;
 	int				height;
 	char			**map;
-	char			**mini_map;
 	t_mini_m		*mini_m;
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
 	mlx_texture_t	*east;
-	mlx_texture_t	*cool;
 	UINT			floor;
 	UINT			ceil;
 	float			sq_size;
@@ -94,6 +103,7 @@ typedef struct s_cub
 
 /* ***************  INIT  *************** */
 void				init_game(t_cub *cub);
+void				free_game(t_cub *cub);
 
 /* ***************  PARSING  *************** */
 bool				parse_map(t_cub *cub, char *file);
@@ -102,9 +112,10 @@ bool				flood_fill_check(t_cub *cub);
 bool				floodfill(t_cub *cub, char **filled_map, int i, int j);
 bool				manage_settings(t_map *map, char *line);
 bool				store_map_cases(t_cub *cub, char *line);
+char				*normalize_chars(char *line);
 
 /* ***************  COLOR  *************** */
-void				load_color(UINT *c, char *line);
+bool				load_color(UINT *c, char *line);
 
 /* ***************  MINI_MAP  *************** */
 void				moves_hook(void *param);

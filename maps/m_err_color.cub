@@ -1,10 +1,9 @@
-WE ./textures/wall_1.xpm
-SO ./textures/wall_2.xpm
-SO ./textures/wall_2.xpm
-EA ./textures/wall_3.xpm
-NO ./textures/wall_2.xpm
+WE assets/wood.png
+SO assets/grey.png
+EA assets/brick.png
+NO assets/blue.png
 
-F 300,200,200
+F 10,200,200
 C 255,00
 
 111
