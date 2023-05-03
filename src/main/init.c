@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:01:34 by hsaadi            #+#    #+#             */
-/*   Updated: 2023/05/02 14:28:12 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/03 04:02:19 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_mini_m	*init_map_line(void)
 	t_mini_m	*mini_m;
 
 	mini_m = ft_calloc(sizeof(t_mini_m), 1);
-	// ptr_addr("mini_m lqehba", (void *)mini_m);
 	if (!mini_m)
 		ft_msg_err("Error: malloc failed.");
 	mini_m->line = NULL;
@@ -56,7 +55,6 @@ t_map	*init_map(void)
 	map->height = 1;
 	map->width = 0;
 	map->mini_m = init_map_line();
-	ptr_addr("mini_m lqehba", (void *)map->mini_m);
 	return (map);
 }
 
@@ -74,6 +72,7 @@ t_cub	*init_cub(void)
 	cub->pdy = 0;
 	cub->odo = 0;
 	cub->p_dir = 0;
+
 	return (cub);
 }
 

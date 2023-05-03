@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loadjou <loadjou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bylkode <bylkode@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:41:44 by loadjou           #+#    #+#             */
-/*   Updated: 2023/05/02 14:41:58 by loadjou          ###   ########.fr       */
+/*   Updated: 2023/05/03 03:49:03 by bylkode          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,17 @@ void	free_map_line(t_mini_m *mini_m)
 	}
 }
 
+// void	free_map_M_line(t_mini_m *mini_m)
+// {
+// 	t_mini_m	*next;
 
-
-
-
-
-
-// void free_map_line(t_mini_m *mini_m) {
-//     if (mini_m == NULL) {
-//         return;
-//     }
-//     free_map_line(mini_m->next); // free the rest of the list
-//     free(mini_m->line); // free the string in this node
-//     free(mini_m); // free this node
-// 	// if (mini_m->prev != NULL) {
-//     //     mini_m->prev->next = NULL; // set the next pointer of the previous node to NULL
-//     //     free(mini_m->prev); // free the previous node itself
-//     // }
+// 	while (mini_m)
+// 	{
+// 		next = mini_m->next;
+// 		free(mini_m->line);
+// 		free(mini_m);
+// 		mini_m = next;
+// 	}
 // }
 
 void	ptr_addr(char *var_name, void *ptr)
@@ -80,6 +74,7 @@ void	ptr_addr(char *var_name, void *ptr)
 
 void	free_game(t_cub *cub)
 {
+	ptr_addr("mini map: desk", cub->map->mini_m);
 	free_map_line(cub->map->mini_m);
 	free_map(cub->map->map);
 	mlx_delete_texture(cub->map->east);
@@ -90,7 +85,7 @@ void	free_game(t_cub *cub)
 		free(cub->map);
 	if (cub)
 		free(cub);
-	ptr_addr("cub", (void *)cub);
+	// ptr_addr("cub", (void *)cub);
 	printf("freed\n");
 }
 
@@ -101,8 +96,10 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		cub = init_cub();
+		ptr_addr("mini map map desk: ", cub->map->mini_m);
 		if (!parse_map(cub, argv[1]))
 			ft_msg_err("Bad Map Buddy!");
+		ptr_addr("mini map init desk: ", cub->map->mini_m);
 		init_game(cub);
 		mlx_loop_hook(cub->mlx, &main_hook, cub);
 		mlx_loop_hook(cub->mlx, &move_p_hook, cub);
